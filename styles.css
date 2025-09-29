@@ -779,12 +779,17 @@ img {
     
     .new_dzn-footer-right {
         width: 100%;
-        align-items: center;
+        align-items: flex-start;
+    }
+    .new_dzn-footer-contacts{
+        display: flex;
+        align-items: flex-start;
     }
     .new_dzn-logo{
         display: flex;
         justify-content: space-between;
          padding: 0px 0;
+         gap: 155px;
     border-bottom: 1px solid #e5e7eb;
   
     }
@@ -795,6 +800,9 @@ img {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+    }
+    .new_dzn-footer-right{
+        order: -1;
     }
 }
 
