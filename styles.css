@@ -1,4 +1,346 @@
-/* Стили для отдельного экрана подменю */
+
+.new_dzn-credit {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #181c23;
+    overflow: hidden;
+}
+.new_dzn-credit-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new_dzn-credit-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+.new_dzn-credit-bg-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(24,28,35,0.7) 60%, rgba(24,28,35,0.1) 100%);
+    z-index: 2;
+}
+.new_dzn-credit-card {
+    position: relative;
+    z-index: 3;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(24,28,35,0.12);
+    padding: 40px 32px;
+    max-width: 420px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new_dzn-credit-card-content {
+    width: 100%;
+}
+.new_dzn-credit-card-title {
+    margin-bottom: 24px;
+}
+.new_dzn-credit-card-sale {
+    color: #ff6600;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: block;
+}
+.new_dzn-credit-card-title h2 {
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0;
+    color: #222;
+}
+.new_dzn-credit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.new_dzn-credit-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 18px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.new_dzn-credit-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: #222;
+}
+.new_dzn-credit-checkbox {
+    margin-top: 3px;
+}
+.new_dzn-credit-btn {
+    background: #fff;
+    color: #3b82f6;
+    font-size: 17px;
+    font-weight: 700;
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+    padding: 14px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+.new_dzn-credit-btn:hover {
+    background: #3b82f6;
+    color: #fff;
+}
+.new_dzn-credit-btn-arrow {
+    font-size: 22px;
+    margin-left: 6px;
+}
+
+.new_dzn-features {
+    background: #f4f4f6;
+    padding: 32px 0;
+    width: 100%;
+}
+.new_dzn-features-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.new_dzn-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.new_dzn-feature-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+.new_dzn-feature-title {
+    font-size: 18px;
+    color: #222;
+    font-weight: 500;
+    text-align: center;
+}
+
+.new_dzn-test-drive {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #181c23;
+    overflow: hidden;
+}
+.new_dzn-test-drive-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60vw;
+    height: 100%;
+    background: rgba(24,28,35,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new_dzn-test-drive-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+.new_dzn-test-drive-timer {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.new_dzn-test-drive-timer-title {
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+.new_dzn-test-drive-timer-values {
+    font-size: 38px;
+    font-weight: 700;
+    color: #3b82f6;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+.new_dzn-test-drive-timer-num {
+    margin: 0 6px;
+}
+.new_dzn-test-drive-timer-labels {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #fff;
+}
+.new_dzn-test-drive-card {
+    position: relative;
+    z-index: 3;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(24,28,35,0.12);
+    padding: 40px 32px;
+    max-width: 420px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+-card-content {
+    width: 100%;
+}
+.new_dzn-test-drive-card-title {
+    margin-bottom: 24px;
+}
+-card-sale {
+    color: #ff6600;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: block;
+}
+.new_dzn-test-drive-card-title h2 {
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0;
+    color: #222;
+}
+-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.new_dzn-test-drive-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 18px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: #222;
+}
+-checkbox {
+    margin-top: 3px;
+}
+.new_dzn-test-drive-btn {
+    background: #3b82f6;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+-btn:hover {
+    background: #2563eb;
+}
+.new_dzn-test-drive-btn-arrow {
+    font-size: 22px;
+    margin-left: 6px;
+}
+ 
+.new_dzn-testdrive-block {
+    display: none !important;
+}
+@media (max-width: 375px) {
+    .new_dzn-testdrive-block {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+ 
+.new_dzn-hotline-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+.new_dzn-hotline-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.new_dzn-testdrive-block {
+    display: block;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.new_dzn-testdrive-label {
+    color: #222;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+}
+.new_dzn-testdrive-blue {
+    color: #3b82f6;
+    font-size: 15px;
+    text-decoration: none;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+
+}
+@media (max-width: 375px) {
+    .new_dzn-hotline-flex {
+        flex-direction: row;
+        gap: 100px;
+    }
+    .new_dzn-testdrive-block {
+        align-items: flex-end;
+    }
+}
+
 .new_dzn-mobile-submenu {
     display: none;
     flex-direction: column;
@@ -47,7 +389,7 @@
     display: flex;
     flex-direction: column;
 }
-/* Мобильное меню - стилизация под картинку */
+
 .new_dzn-mobile-menu-header {
     display: flex;
     align-items: center;
@@ -138,7 +480,7 @@
     font-size: 22px;
     margin-left: 8px;
 }
-/* Мобильное меню */
+
 .new_dzn-mobile-menu {
     display: none;
     position: fixed;
@@ -180,7 +522,7 @@
         background: #fff;
         z-index: 9999;
         overflow-y: auto;
-        padding: 80px 20px 20px 20px;
+        padding: 29px 20px 20px 20px;
     }
     
     .new_dzn-mobile-menu.active {
@@ -190,7 +532,7 @@
 body.menu-open {
     overflow: hidden;
 }
-/* Горизонтальное расположение телефона и ссылки */
+
 .new_dzn-hotline-row {
     display: flex;
     align-items: center;
@@ -209,16 +551,17 @@ body.menu-open {
         display: inline-block;
     }
 }
-/* Скрыть ссылку по умолчанию */
+
 .new_dzn-testdrive-link {
     display: none;
     margin-left: 10px;
     font-size: 16px;
+    width: 83px;
     color: #e30613;
     text-decoration: underline;
 }
 
-/* Показать только на мобильных 375px */
+
 @media (max-width: 375px) {
     .new_dzn-testdrive-link {
         display: inline-block;
@@ -235,7 +578,7 @@ body {
     line-height: 1.6;
     color: #222222;
     background-color: #ffffff;
-    padding-top: 160px; /* Высота хедера + дополнительное пространство */
+    padding-top: 160px;
 }
 
 img {
@@ -482,8 +825,6 @@ img {
     flex-direction: column;
     align-items: flex-start;
     gap: 59px;
-    flex: 1;
-    width: 1200px;
     height: 480px;
     justify-content: flex-end;
 }
@@ -518,7 +859,7 @@ img {
 
 .new_dzn-test-drive {
     height: 900px;
-    background: url('public/test-drive-contact.png') 50% 50% / cover, linear-gradient(0deg, rgba(253,253,253,1) 0%, rgba(253,253,253,1) 100%);
+    background: url('image/Timer.svg') 50% 50% / cover, linear-gradient(0deg, rgba(253,253,253,1) 0%, rgba(253,253,253,1) 100%);
     display: flex;
     align-items: center;
     padding: 140px 120px;
@@ -560,9 +901,9 @@ img {
 
 
 
-/* Dropdown Menu Styles - Full Width */
+
 .new_dzn-nav-item-with-dropdown {
-    position: static; /* Изменяем на static для полной ширины */
+    position: static;
     cursor: pointer;
     
 }
@@ -585,7 +926,7 @@ img {
     position: absolute;
     top: 101%;
     left: 0;
-    right: 0; /* Добавляем right: 0 для полной ширины */
+    right: 0;
     background: var(--white);
     opacity: 0;
     visibility: hidden;
@@ -594,11 +935,11 @@ img {
     z-index: 1000;
     border: 1px solid #e5e7eb;
     border-top: none;
-    width: 100% !important; /* Принудительно устанавливаем 100% ширину */
-    max-width: 100vw; /* Ограничиваем максимальную ширину */
+    width: 100% !important;
+    max-width: 100vw;
 }
 
-/* Убираем индивидуальные ширины для всех меню */
+
 .new_dzn-nav-item-with-dropdown .new_dzn-dropdown-menu {
     width: 100% !important;
 }
@@ -609,7 +950,7 @@ img {
     transform: translateY(0);
 }
 
-/* Active state for nav items */
+
 .new_dzn-nav-item-with-dropdown:hover {
     background-color: #f9fafb;
 }
@@ -618,20 +959,20 @@ img {
     color: var(--primary-blue);
 }
 
-/* Dropdown columns - центрируем контент */
+
 .new_dzn-dropdown-column {
     padding: 30px 120px;
     display: flex;
     flex-direction: column;
     gap: 16px;
    
-    margin: 0 auto; /* Центрируем контент */
+    margin: 0 auto;
 }
 
 .new_dzn-dropdown-columns {
     display: flex;
     padding: 24px;
-    margin: 0 auto; /* Центрируем контент */
+    margin: 0 auto;
 }
 
 .new_dzn-dropdown-columns .new_dzn-dropdown-column {
@@ -675,7 +1016,7 @@ img {
     transform: translateX(5px);
 }
 
-/* Active state for dropdown links */
+
 .new_dzn-dropdown-link:not(.new_dzn-dropdown-header):hover::before {
     content: '';
     position: absolute;
@@ -688,11 +1029,11 @@ img {
     border-radius: 0 2px 2px 0;
 }
 
-/* Mobile dropdown styles */
+
 @media (max-width: 768px) {
     .new_dzn-nav-item-with-dropdown {
         width: 100%;
-        position: relative; /* Возвращаем relative для мобильной версии */
+    position: relative;
     }
     
     .new_dzn-dropdown-menu {
@@ -706,7 +1047,7 @@ img {
         border-radius: 0;
         display: none;
         background: #f9fafb;
-        max-width: none; /* Убираем ограничение для мобильной версии */
+    max-width: none;
     }
     
     .new_dzn-nav-item-with-dropdown.active .new_dzn-dropdown-menu {
@@ -720,8 +1061,8 @@ img {
     .new_dzn-dropdown-column,
     .new_dzn-dropdown-columns {
         padding: 16px 20px;
-        max-width: none; /* Убираем ограничение для мобильной версии */
-        margin: 0; /* Убираем центрирование для мобильной версии */
+    max-width: none;
+    margin: 0;
     }
     
     .new_dzn-dropdown-columns {
@@ -749,7 +1090,7 @@ img {
         left: -20px;
     }
 }
-/* Footer */
+
 .new_dzn-footer {
     background-color: var(--white);
 }
@@ -1208,5 +1549,11 @@ img {
     }
     .new_dzn-btn-outline-header{
         display: none;
+    }
+    .new_dzn-contact-phone{
+        font-size: 15px;
+    }
+    .new_dzn-header-top{
+        border-bottom: 0px;
     }
 }
