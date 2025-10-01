@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- Header -->
 <header class="new_dzn-header">
     <div class="new_dzn-header-top">
         <div class="new_dzn-container">
@@ -27,18 +26,21 @@
             
             <div class="new_dzn-logo">
                 <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-                 <button class="new_dzn-mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+                <button class="new_dzn-mobile-menu-btn" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
              
             
             <div class="new_dzn-hotline">
                 <div class="new_dzn-contact-item">
                     <div class="new_dzn-contact-label">Горячая линия</div>
-                    <div class="new_dzn-contact-phone new_dzn-hotline-phone">+ 7 (906) 834-11-82</div>
+                    <div class="new_dzn-hotline-row">
+                        <div class="new_dzn-contact-phone new_dzn-hotline-phone">+ 7 (906) 834-11-82</div>
+                        <a href="#" class="new_dzn-testdrive-link">Записаться на Тест-драйв</a>
+                    </div>
                 </div>
                 <img src="image/Telegram.svg" alt="Телеграм" class="new_dzn-tg">
                 <img src="image/VK Ontakte.svg" alt="ВКонтакте" class="new_dzn-wk">
@@ -48,8 +50,8 @@
     
     <div class="new_dzn-header-nav">
         <div class="new_dzn-container">
-            <nav class="new_dzn-navigation">
-                <!-- Автомобили -->
+                <nav class="new_dzn-navigation">
+ 
                 <div class="new_dzn-nav-item new_dzn-nav-item-with-dropdown">
                     <span>Автомобили</span>
                    
@@ -62,7 +64,6 @@
                     </div>
                 </div>
                 
-                <!-- Покупателям -->
                 <div class="new_dzn-nav-item new_dzn-nav-item-with-dropdown">
                     <span>Покупателям</span>
                    
@@ -77,7 +78,6 @@
                     </div>
                 </div>
                 
-                <!-- Владельцам -->
                 <div class="new_dzn-nav-item new_dzn-nav-item-with-dropdown">
                     <span>Владельцам</span>
                    
@@ -91,8 +91,7 @@
                     </div>
                 </div>
                 
-                <!-- О компании -->
-                <div class="new_dzn-nav-item new_dzn-nav-item-with-dropdown">
+=                <div class="new_dzn-nav-item new_dzn-nav-item-with-dropdown">
                     <span>О компании</span>
                    
                     <div class="new_dzn-dropdown-menu">
@@ -112,7 +111,6 @@
                     </div>
                 </div>
                 
-                <!-- Спецпредложения -->
                 <div class="new_dzn-nav-item new_dzn-nav-item-with-dropdown">
                     <span>Спецпредложения</span>
                    
@@ -133,7 +131,7 @@
                     <img src="image/ozon.svg" alt="Социальная сеть" class="new_dzn-social-icon">
                     <img src="image/wb.svg" alt="Социальная сеть" class="new_dzn-social-icon">
                 </div>
-                <button class="new_dzn-btn new_dzn-btn-outline">
+                <button class="new_dzn-btn new_dzn-btn-outline-header">
                     Хочу тест-драйв
                     <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -147,7 +145,6 @@
 </header>
 
 
-    <!-- Footer -->
     <footer class="new_dzn-footer">
         <div class="new_dzn-container">
             <div class="new_dzn-footer-content">
@@ -238,7 +235,68 @@
             </div>
         </div>
     </footer>
-
+   <!-- Мобильное меню в самом конце body -->
+    <div id="mobileMenu" class="new_dzn-mobile-menu">
+        <div class="new_dzn-mobile-menu-header">
+            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-mobile-logo">
+            <button id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню">&times;</button>
+        </div>
+        <nav class="new_dzn-mobile-navigation">
+            <div id="mobileMainMenu">
+                <div class="new_dzn-nav-item" data-menu="cars">Автомобили <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="buyers">Покупателям <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="owners">Владельцам <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="company">О компании <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="offers">Спецпредложения <span class="new_dzn-arrow">&rarr;</span></div>
+            </div>
+            <div id="mobileSubMenu-cars" class="new_dzn-mobile-submenu">
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Автомобили</div>
+                <a href="#" class="new_dzn-mobile-submenu-link">Новые автомобили CHERY</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Автомобили с пробегом</a>
+            </div>
+            <div id="mobileSubMenu-buyers" class="new_dzn-mobile-submenu">
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Покупателям</div>
+                <a href="#" class="new_dzn-mobile-submenu-link">Trade-in</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Кредит</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Лизинг</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Запись на тест-драйв</a>
+            </div>
+            <div id="mobileSubMenu-owners" class="new_dzn-mobile-submenu">
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Владельцам</div>
+                <a href="#" class="new_dzn-mobile-submenu-link">Сервис и обслуживание</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Страхование</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Запись на сервис</a>
+            </div>
+            <div id="mobileSubMenu-company" class="new_dzn-mobile-submenu">
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> О компании</div>
+                <a href="#" class="new_dzn-mobile-submenu-link">О нас</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Новости</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Блог</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Контакты</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">Вакансии</a>
+            </div>
+            <div id="mobileSubMenu-offers" class="new_dzn-mobile-submenu">
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Спецпредложения</div>
+                <a href="#" class="new_dzn-mobile-submenu-link">Все акции</a>
+                <a href="#" class="new_dzn-mobile-submenu-link">На новые авто</a>
+            </div>
+        </nav>
+        <div class="new_dzn-mobile-menu-footer">
+            <div class="new_dzn-mobile-phones">
+                <div class="new_dzn-mobile-label">Горячая линия</div>
+                <div class="new_dzn-mobile-phone hotline">+ 7 (906) 834-11-82</div>
+                <div class="new_dzn-mobile-label">Продажи</div>
+                <div class="new_dzn-mobile-phone">+7 (353) 232-52-20</div>
+                <div class="new_dzn-mobile-label">Сервис</div>
+                <div class="new_dzn-mobile-phone">+7 (3532) 32-52-30</div>
+            </div>
+            <div class="new_dzn-mobile-socials">
+                <img src="image/ozon.png" alt="Ozon" class="new_dzn-mobile-social">
+                <img src="image/wb.svg" alt="WB" class="new_dzn-mobile-social">
+            </div>
+            <a href="#" class="new_dzn-mobile-testdrive-btn">Хочу тест-драйв <span class="new_dzn-arrow-btn">&rarr;</span></a>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 </body>
