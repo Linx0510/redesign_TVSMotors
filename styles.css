@@ -1091,6 +1091,58 @@ img {
     }
 }
 
+.new_cards_content{
+    display: flex;
+    gap: 24px;
+    padding-top: 140px;
+    padding-bottom: 120px;
+}
+.new_cards_cart{
+    width: 400px;
+    height: 520px;
+    border-radius: 20px;
+    padding: 32px;
+}
+.new_news_premer{
+    background-image: url(image/news_premer.svg);
+}
+.new_news_action{
+    background-image: url(image/action.svg);
+}
+.new_model{
+    background-image: url(image/model.svg);
+}
+.new_cards_cart_content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.new_cards_cart_content>h3{
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #FDFDFD;
+}
+.new_cards_cart_content_btn{
+    display: flex;
+    gap: 8px;
+}
+.new_cards_cart_content_btn>p{
+   font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #FDFDFD;
+}
+@media (max-width: 768px){
+    .new_cards_content{
+    display: flex;
+    gap: 24px;
+    padding-top: 140px;
+    padding-bottom: 120px;
+}
+}
+
 
 .new_ozon_Wildberries_content{
     display: flex;
