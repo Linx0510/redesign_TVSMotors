@@ -1091,6 +1091,120 @@ img {
     }
 }
 
+
+.new_ozon_Wildberries_content{
+    display: flex;
+    gap: 32px;
+    padding: 80px 0;
+}
+.new_cart{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 64px;
+    border-radius: 20px;
+}
+.new_cart_ozon{
+    border-width: 1px #005AFD;
+}
+.new_cart_wilberries{
+    border-width: 1px #E313BF;
+}
+.new_cart_content{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+.new_cart_content_header{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.new_cart_content_header>h6{
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    color: #222222;
+}
+.new_span_cherry{
+    font-weight: 700;
+}
+.new_span_ozon{
+    color: #005AFD;
+    font-weight: 700;
+}
+.new_span_Wildberries{
+    color: #E313BF;
+    font-weight: 700;
+}
+.new_cart_content_header>p{
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #222222;
+}
+.new_cart_btn_ozon{
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    background-color: #005AFD;
+    color: #FDFDFD;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    border: none;
+    width: max-content;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.new_cart_btn_wildberries{
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    background-color: #E313BF;
+    color: #FDFDFD;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    border: none;
+    width: max-content;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px){
+    .new_ozon_Wildberries_content{
+        display: flex;
+        flex-direction: column;
+    }
+    .new_cart{
+        padding: 16px;
+    }
+    .new_cart_content_header>h6{
+        font-size: 24px;
+    }
+    .new_span_cherry{
+        font-weight: 700;
+    }
+    .new_span_ozon{
+        color: #005AFD;
+        font-weight: 700;
+    }
+    .new_span_Wildberries{
+        color: #E313BF;
+        font-weight: 700;
+    }
+    .new_cart_content_header>p{
+        font-size: 14px;
+    }
+}
+
+
+
 .new_news_content{
     display: flex;
     flex-direction: column;
@@ -1133,13 +1247,17 @@ img {
     gap: 16px;
     text-decoration: none;
 }
-.new_news_main_clm_news_context{
+.new_news_main_clm_news_context,
+.new_news_main_clm_news_context1{
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+.new_news_main_clm_news_context1{
     width: 272px;
 }
-.new_news_main_clm_news_context>h4{
+.new_news_main_clm_news_context>h4,
+.new_news_main_clm_news_context1>h4{
    color: #222222;
    font-size: 20px;
    font-weight: 400;
@@ -1205,7 +1323,7 @@ img {
         position: top;
         border-radius: 20px;
     }
-    .new_news_main_clm_news_context{
+    .new_news_main_clm_news_context1{
         width: 100%;
     }
     .new_hr0{
