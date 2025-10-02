@@ -239,9 +239,9 @@
 </section>
 
 <section class="new_cards">
-        <div class="new_dzn-container">
+        <div class="new_cards-container">
             <div class="new_cards_content">
-                <a class="new_cards_cart new_news_premer">
+                <a href="" class="new_cards_cart new_news_premer">
                     <div class="new_cards_cart_content">
                         <h3>Новости <hr style="border: none;">и премьеры</h3>
                         <div class="new_cards_cart_content_btn">
@@ -250,7 +250,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="new_cards_cart new_news_action">
+                <a href="" class="new_cards_cart new_news_action">
                     <div class="new_cards_cart_content">
                         <h3>Акции <hr style="border: none;">и спецпредложения</h3>
                         <div class="new_cards_cart_content_btn">
@@ -259,7 +259,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="new_cards_cart new_model">
+                <a href="" class="new_cards_cart new_model">
                     <div class="new_cards_cart_content">
                         <h3>Модельный ряд</h3>
                         <div class="new_cards_cart_content_btn">
@@ -268,6 +268,10 @@
                         </div>
                     </div>
                 </a>
+            </div>
+            <div class="new_arrow">
+                <img src="image/cta-arrow-left.svg" alt="">
+                <img src="image/cta-arrow-right.svg" alt="">
             </div>
         </div>
     </section>
@@ -533,5 +537,59 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            var $cards = $('.new_cards_cart');
+            var $leftArrow = $('.new_arrow img').first();
+            var $rightArrow = $('.new_arrow img').last();
+            var currentIndex = 0;
+            var isAnimating = false;
+
+            $cards.removeClass('active previous').css({left: '100%', opacity: 0});
+            $cards.eq(currentIndex).addClass('active').css({left: 0, opacity: 1});
+
+            function showSlide(newIndex, direction) {
+                if (isAnimating || newIndex === currentIndex) return;
+                isAnimating = true;
+
+                var $current = $cards.eq(currentIndex);
+                var $next = $cards.eq(newIndex);
+
+                $next.removeClass('previous').css({
+                    left: direction === 'next' ? '100%' : '-100%',
+                    opacity: 0,
+                    zIndex: 3
+                });
+
+                setTimeout(function(){
+                    $current.removeClass('active').addClass('previous').css({
+                        left: direction === 'next' ? '-100%' : '100%',
+                        opacity: 0,
+                        zIndex: 2
+                    });
+                    $next.addClass('active').css({
+                        left: 0,
+                        opacity: 1
+                    });
+                }, 20);
+
+                setTimeout(function() {
+                    $current.removeClass('previous').css({zIndex: '', left: '100%'});
+                    currentIndex = newIndex;
+                    isAnimating = false;
+                }, 520);
+            }
+
+            $leftArrow.click(function() {
+                var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
+                showSlide(newIndex, 'prev');
+            });
+
+            $rightArrow.click(function() {
+                var newIndex = (currentIndex + 1) % $cards.length;
+                showSlide(newIndex, 'next');
+            });
+        });
+    </script>
 </body>
 </html>
