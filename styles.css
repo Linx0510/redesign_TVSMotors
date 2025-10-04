@@ -1344,6 +1344,7 @@ align-self: stretch;
 .new_arrow{
     display: none;
 }
+
 @media (max-width: 768px){
     .new_cards_content{
         display: flex;
@@ -1354,7 +1355,7 @@ align-self: stretch;
     }
     .new_cards_content{
         display: flex;
-        flex-direction: column;
+        gap: 0;
     }
     .new_cards_cart{
         width: 343px;
@@ -1376,7 +1377,14 @@ align-self: stretch;
     
 
 }
-
+@media (min-width: 769px) {
+    .new_cards_cart {
+        display: block !important;
+        position: static !important;
+        opacity: 1 !important;
+        left: 0 !important;
+    }
+}
 
 .new_ozon_Wildberries_content{
     display: flex;
@@ -1391,10 +1399,14 @@ align-self: stretch;
     border-radius: 20px;
 }
 .new_cart_ozon{
-    border-width: 1px #005AFD;
+   border-radius: 20px;
+    border: 1px solid rgba(0, 90, 253, 0.30);
+    background: linear-gradient(216deg, #E3EDFF 8.49%, #FDFDFD 62.6%);
 }
 .new_cart_wilberries{
-    border-width: 1px #E313BF;
+    border-radius: 20px;
+    border: 1px solid rgba(227, 19, 191, 0.30);
+    background: linear-gradient(216deg, #FFE5FB 8.49%, #FDFDFD 62.6%);
 }
 .new_cart_content{
     display: flex;

@@ -601,58 +601,171 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
     <script>
-        $(document).ready(function() {
-            var $cards = $('.new_cards_cart');
-            var $leftArrow = $('.new_arrow img').first();
-            var $rightArrow = $('.new_arrow img').last();
-            var currentIndex = 0;
-            var isAnimating = false;
+         $(document).ready(function() {
+        var $cards = $('.new_cards_cart');
+        var $leftArrow = $('.new_arrow img').first();
+        var $rightArrow = $('.new_arrow img').last();
+        var $sliderContainer = $('.new_cards_content');
+        var currentIndex = 0;
+        var isAnimating = false;
+        var startX = 0;
+        var isDragging = false;
+        var swipeThreshold = 50;
 
-            $cards.removeClass('active previous').css({left: '100%', opacity: 0});
-            $cards.eq(currentIndex).addClass('active').css({left: 0, opacity: 1});
-
-            function showSlide(newIndex, direction) {
-                if (isAnimating || newIndex === currentIndex) return;
-                isAnimating = true;
-
-                var $current = $cards.eq(currentIndex);
-                var $next = $cards.eq(newIndex);
-
-                $next.removeClass('previous').css({
-                    left: direction === 'next' ? '100%' : '-100%',
-                    opacity: 0,
-                    zIndex: 3
+        function initSlider() {
+            if ($(window).width() <= 768) {
+                $cards.removeClass('active').css({
+                    transform: 'translateX(100%)',
+                    display: 'none'
                 });
+                
+                $cards.eq(currentIndex).addClass('active').css({
+                    transform: 'translateX(0)',
+                    display: 'block'
+                });
+            }
+        }
 
-                setTimeout(function(){
-                    $current.removeClass('active').addClass('previous').css({
-                        left: direction === 'next' ? '-100%' : '100%',
-                        opacity: 0,
-                        zIndex: 2
-                    });
-                    $next.addClass('active').css({
-                        left: 0,
-                        opacity: 1
-                    });
-                }, 20);
+        function showSlide(newIndex, direction) {
+            if (isAnimating || newIndex === currentIndex) return;
+            isAnimating = true;
 
-                setTimeout(function() {
-                    $current.removeClass('previous').css({zIndex: '', left: '100%'});
-                    currentIndex = newIndex;
-                    isAnimating = false;
-                }, 520);
+            var $current = $cards.eq(currentIndex);
+            var $next = $cards.eq(newIndex);
+
+            if (direction === 'next') {
+                $next.css({
+                    transform: 'translateX(100%)',
+                    display: 'block'
+                });
+            } else {
+                $next.css({
+                    transform: 'translateX(-100%)',
+                    display: 'block'
+                });
             }
 
-            $leftArrow.click(function() {
-                var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
-                showSlide(newIndex, 'prev');
-            });
+            setTimeout(function() {
+                $current.css({
+                    transform: direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)',
+                    transition: 'transform 0.4s ease-in-out'
+                });
 
-            $rightArrow.click(function() {
+                $next.css({
+                    transform: 'translateX(0)',
+                    transition: 'transform 0.4s ease-in-out'
+                });
+            }, 10);
+
+            setTimeout(function() {
+                $current.removeClass('active').css({
+                    display: 'none',
+                    transform: 'translateX(100%)',
+                    transition: 'none'
+                });
+                
+                $next.addClass('active').css({
+                    transition: 'none'
+                });
+                
+                currentIndex = newIndex;
+                isAnimating = false;
+            }, 400);
+        }
+
+        function nextSlide() {
+            if ($(window).width() <= 768 && !isAnimating) {
                 var newIndex = (currentIndex + 1) % $cards.length;
                 showSlide(newIndex, 'next');
-            });
+            }
+        }
+
+        function prevSlide() {
+            if ($(window).width() <= 768 && !isAnimating) {
+                var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
+                showSlide(newIndex, 'prev');
+            }
+        }
+
+        $leftArrow.click(prevSlide);
+        $rightArrow.click(nextSlide);
+
+        $sliderContainer.on('touchstart', function(e) {
+            if ($(window).width() <= 768 && !isAnimating) {
+                startX = e.originalEvent.touches[0].clientX;
+                isDragging = true;
+            }
         });
+
+        $sliderContainer.on('touchend', function(e) {
+            if ($(window).width() <= 768 && isDragging && !isAnimating) {
+                var endX = e.originalEvent.changedTouches[0].clientX;
+                var diffX = startX - endX;
+                
+                if (Math.abs(diffX) > swipeThreshold) {
+                    if (diffX > 0) {
+                        nextSlide(); 
+                    } else {
+                        prevSlide();
+                    }
+                }
+                isDragging = false;
+            }
+        });
+
+        $(document).on('keydown', function(e) {
+            if ($(window).width() <= 768 && !isAnimating) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        prevSlide();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        nextSlide();
+                        break;
+                }
+            }
+        });
+
+        var autoSlideInterval;
+        
+        function startAutoSlide() {
+            if ($(window).width() <= 768) {
+                autoSlideInterval = setInterval(function() {
+                    if (!isAnimating && !isDragging) {
+                        nextSlide();
+                    }
+                }, 3000); 
+            }
+        }
+        
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+        
+        startAutoSlide();
+        
+        $sliderContainer.add($leftArrow).add($rightArrow).on('touchstart mouseenter', stopAutoSlide);
+        $sliderContainer.add($leftArrow).add($rightArrow).on('touchend mouseleave', startAutoSlide);
+
+        $(window).resize(function() {
+            if ($(window).width() > 768) {
+                $cards.removeClass('active').css({
+                    position: '',
+                    transform: '',
+                    display: 'block',
+                    transition: ''
+                });
+                stopAutoSlide();
+            } else {
+                initSlider();
+                startAutoSlide();
+            }
+        });
+
+        initSlider();
+    });
     </script>
 </body>
 </html>
