@@ -307,46 +307,6 @@ $(document).ready(function() {
             successContent.style.display = 'flex';
             successContent.classList.add('fade-in');
         }
-        // --- form3: Тест-драйв ---
-$(document).ready(function() {
-    $('#testDrivePhoneInput').on('input', function(e) {
-        let x = $(this).val().replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-        $(this).val('+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : ''));
-    });
-
-    $('#testDriveForm').on('submit', function(e) {
-        e.preventDefault();
-
-        const phoneInput = $('#testDrivePhoneInput');
-        const agreementCheckbox = $('#testDriveAgreement');
-        const phoneError = $('#testDrivePhoneError');
-        const agreementError = $('#testDriveAgreementError');
-        let isValid = true;
-
-        const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
-        if (!phoneRegex.test(phoneInput.val())) {
-            phoneInput.addClass('error');
-            phoneError.show();
-            isValid = false;
-        } else {
-            phoneInput.removeClass('error');
-            phoneError.hide();
-        }
-
-        if (!agreementCheckbox.is(':checked')) {
-            agreementError.show();
-            isValid = false;
-        } else {
-            agreementError.hide();
-        }
-
-        if (isValid) {
-            $('#testDriveFormContent').hide();
-            $('#testDriveSuccessContent').show().addClass('fade-in');
-        }
-    });
-});
-
 
             // Взаимодействие с вкладками моделей (первая секция)
             const modelTabs = document.querySelectorAll('.model-tab');
@@ -393,7 +353,18 @@ $(document).ready(function() {
             });
     
             // Функции для обновления информации (заглушки)
-           // --- Данные для моделей ---
+            function updateModelInfo(modelId) {
+                // В реальном приложении здесь будет логика загрузки данных о модели
+                console.log('Выбрана модель:', modelId);
+            }
+    
+            function changeCarColor(color) {
+                // В реальном приложении здесь будет логика изменения цвета автомобиля на изображении
+                console.log('Выбран цвет:', color);
+            }
+            // Добавьте этот код в существующий script.js после остального кода
+
+// Данные для моделей с цветами
 const modelsData = {
     "tiggo-4-pro": {
         title: "CHERY TIGGO 4 PRO",
@@ -402,9 +373,59 @@ const modelsData = {
         secondaryLeft: "./images/tiggo-4-pro-left.png",
         secondaryRight: "./images/tiggo-4-pro-right.png",
         colors: {
-            white: "./images/tiggo-4-pro-white.png",
-            red: "./images/tiggo-4-pro-red.png",
-            gray: "./images/tiggo-4-pro-gray.png"
+            white: { 
+                main: "./images/tiggo-4-pro-white.png",
+                left: "./images/tiggo-4-pro-left.png", 
+                right: "./images/tiggo-4-pro-right.png"
+            },
+            red: { 
+                main: "./images/tiggo-4-pro-red.png",
+                left: "./images/tiggo-4-pro-red-left.png", 
+                right: "./images/tiggo-4-pro-red-right.png"
+            },
+            gray: { 
+                main: "./images/tiggo-4-pro-gray.png",
+                left: "./images/tiggo-4-pro-gray-left.png", 
+                right: "./images/tiggo-4-pro-gray-right.png"
+            }
+        }
+    },
+    "tiggo-4-new": {
+        title: "CHERY TIGGO 4 NEW",
+        price: "2 300 000 ₽",
+        mainImage: "./images/tiggo-4-new-white.png",
+        secondaryLeft: "./images/tiggo-4-new-left.png",
+        secondaryRight: "./images/tiggo-4-new-right.png",
+        colors: {
+            white: { 
+                main: "./images/tiggo-4-new-white.png",
+                left: "./images/tiggo-4-new-left.png", 
+                right: "./images/tiggo-4-new-right.png"
+            },
+            black: { 
+                main: "./images/tiggo-4-new-black.png",
+                left: "./images/tiggo-4-new-black-left.png", 
+                right: "./images/tiggo-4-new-black-right.png"
+            }
+        }
+    },
+    "tiggo-7-pro-max": {
+        title: "CHERY TIGGO 7 PRO MAX",
+        price: "3 200 000 ₽",
+        mainImage: "./images/tiggo-7-pro-max-white.png",
+        secondaryLeft: "./images/tiggo-7-pro-max-left.png",
+        secondaryRight: "./images/tiggo-7-pro-max-right.png",
+        colors: {
+            white: { 
+                main: "./images/tiggo-7-pro-max-white.png",
+                left: "./images/tiggo-7-pro-max-left.png", 
+                right: "./images/tiggo-7-pro-max-right.png"
+            },
+            blue: { 
+                main: "./images/tiggo-7-pro-max-blue.png",
+                left: "./images/tiggo-7-pro-max-blue-left.png", 
+                right: "./images/tiggo-7-pro-max-blue-right.png"
+            }
         }
     },
     "tiggo-7l": {
@@ -414,42 +435,201 @@ const modelsData = {
         secondaryLeft: "./images/Rectangle 12.png",
         secondaryRight: "./images/Rectangle 13.png",
         colors: {
-            white: "./images/22 1.png",
-            black: "./images/tiggo-7l-black.png",
-            blue: "./images/tiggo-7l-blue.png"
+            white: { 
+                main: "./images/22 1.png",
+                left: "./images/Rectangle 12.png", 
+                right: "./images/Rectangle 13.png"
+            },
+            black: { 
+                main: "./images/tiggo-7l-black.png",
+                left: "./images/tiggo-7l-black-left.png", 
+                right: "./images/tiggo-7l-black-right.png"
+            },
+            blue: { 
+                main: "./images/tiggo-7l-blue.png",
+                left: "./images/tiggo-7l-blue-left.png", 
+                right: "./images/tiggo-7l-blue-right.png"
+            },
+            red: { 
+                main: "./images/tiggo-7l-red.png",
+                left: "./images/tiggo-7l-red-left.png", 
+                right: "./images/tiggo-7l-red-right.png"
+            },
+            gray: { 
+                main: "./images/tiggo-7l-gray.png",
+                left: "./images/tiggo-7l-gray-left.png", 
+                right: "./images/tiggo-7l-gray-right.png"
+            },
+            "dark-gray": { 
+                main: "./images/tiggo-7l-dark-gray.png",
+                left: "./images/tiggo-7l-dark-gray-left.png", 
+                right: "./images/tiggo-7l-dark-gray-right.png"
+            },
+            silver: { 
+                main: "./images/tiggo-7l-silver.png",
+                left: "./images/tiggo-7l-silver-left.png", 
+                right: "./images/tiggo-7l-silver-right.png"
+            }
+        }
+    },
+    "tiggo-8-pro-max": {
+        title: "CHERY TIGGO 8 PRO MAX",
+        price: "3 500 000 ₽",
+        mainImage: "./images/tiggo-8-pro-max-white.png",
+        secondaryLeft: "./images/tiggo-8-pro-max-left.png",
+        secondaryRight: "./images/tiggo-8-pro-max-right.png",
+        colors: {
+            white: { 
+                main: "./images/tiggo-8-pro-max-white.png",
+                left: "./images/tiggo-8-pro-max-left.png", 
+                right: "./images/tiggo-8-pro-max-right.png"
+            },
+            black: { 
+                main: "./images/tiggo-8-pro-max-black.png",
+                left: "./images/tiggo-8-pro-max-black-left.png", 
+                right: "./images/tiggo-8-pro-max-black-right.png"
+            }
+        }
+    },
+    "tiggo-9": {
+        title: "CHERY TIGGO 9",
+        price: "4 200 000 ₽",
+        mainImage: "./images/tiggo-9-white.png",
+        secondaryLeft: "./images/tiggo-9-left.png",
+        secondaryRight: "./images/tiggo-9-right.png",
+        colors: {
+            white: { 
+                main: "./images/tiggo-9-white.png",
+                left: "./images/tiggo-9-left.png", 
+                right: "./images/tiggo-9-right.png"
+            },
+            blue: { 
+                main: "./images/tiggo-9-blue.png",
+                left: "./images/tiggo-9-blue-left.png", 
+                right: "./images/tiggo-9-blue-right.png"
+            }
+        }
+    },
+    "arrizo-8": {
+        title: "CHERY ARRIZO 8",
+        price: "2 600 000 ₽",
+        mainImage: "./images/arrizo-8-white.png",
+        secondaryLeft: "./images/arrizo-8-left.png",
+        secondaryRight: "./images/arrizo-8-right.png",
+        colors: {
+            white: { 
+                main: "./images/arrizo-8-white.png",
+                left: "./images/arrizo-8-left.png", 
+                right: "./images/arrizo-8-right.png"
+            },
+            gray: { 
+                main: "./images/arrizo-8-gray.png",
+                left: "./images/arrizo-8-gray-left.png", 
+                right: "./images/arrizo-8-gray-right.png"
+            }
         }
     }
-    // Добавь остальные модели по аналогии
 };
 
-// --- Обновление модели ---
-function updateModelInfo(modelId) {
+// Текущая модель и цвет
+let currentModel = "tiggo-7l";
+let currentColor = "white";
+
+// Инициализация модельного ряда
+document.addEventListener('DOMContentLoaded', function() {
+    initModelSection();
+});
+
+function initModelSection() {
+    const modelTabs = document.querySelectorAll('.model-tab');
+    
+    // Обработчики для вкладок моделей
+    modelTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const modelId = this.dataset.model;
+            switchModel(modelId);
+        });
+    });
+
+    // Обработчики для выбора цвета
+    const colorCircles = document.querySelectorAll('.color-circle');
+    colorCircles.forEach(circle => {
+        circle.addEventListener('click', function() {
+            const color = this.dataset.color;
+            switchColor(color);
+        });
+    });
+
+    // Инициализация первой модели
+    switchModel(currentModel);
+}
+
+function switchModel(modelId) {
     const model = modelsData[modelId];
     if (!model) return;
 
+    currentModel = modelId;
+    
+    // Обновляем активную вкладку
+    document.querySelectorAll('.model-tab').forEach(tab => {
+        tab.classList.remove('active', 'semi-inactive', 'inactive');
+        if (tab.dataset.model === modelId) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.add('inactive');
+        }
+    });
+
+    // Обновляем информацию о модели
     document.getElementById("modelTitle").textContent = model.title;
     document.getElementById("modelPrice").textContent = model.price;
-    document.getElementById("modelMainImage").src = model.mainImage;
-    document.getElementById("modelSecondaryImageLeft").src = model.secondaryLeft;
-    document.getElementById("modelSecondaryImageRight").src = model.secondaryRight;
 
-    // обновление цветов
-    const circles = document.querySelectorAll(".color-circle");
-    circles.forEach(circle => {
+    // Переключаем на белый цвет по умолчанию для новой модели
+    currentColor = "white";
+    switchColor(currentColor);
+
+    // Обновляем доступные цвета
+    updateColorCircles(model.colors);
+}
+
+function switchColor(color) {
+    const model = modelsData[currentModel];
+    if (!model || !model.colors[color]) return;
+
+    currentColor = color;
+    
+    // Обновляем изображения
+    const colorData = model.colors[color];
+    document.getElementById("modelMainImage").src = colorData.main;
+    document.getElementById("modelSecondaryImageLeft").src = colorData.left;
+    document.getElementById("modelSecondaryImageRight").src = colorData.right;
+
+    // Обновляем активный цвет
+    document.querySelectorAll('.color-circle').forEach(circle => {
+        circle.classList.remove('active');
+        if (circle.dataset.color === color) {
+            circle.classList.add('active');
+        }
+    });
+
+    // Обновляем название цвета
+    document.getElementById("selectedColorName").textContent = 
+        document.querySelector(`.color-circle[data-color="${color}"]`).dataset.name;
+}
+
+function updateColorCircles(availableColors) {
+    const colorCircles = document.querySelectorAll('.color-circle');
+    colorCircles.forEach(circle => {
         const color = circle.dataset.color;
-        circle.dataset.colorImage = model.colors[color] || "";
+        if (availableColors[color]) {
+            circle.style.display = 'block';
+        } else {
+            circle.style.display = 'none';
+        }
     });
 }
 
-// --- Смена цвета авто ---
-function changeCarColor(color) {
-    const activeCircle = document.querySelector(`.color-circle[data-color="${color}"]`);
-    const imgPath = activeCircle.dataset.colorImage;
-    if (imgPath) {
-        document.getElementById("modelMainImage").src = imgPath;
-    }
-}
-
+// Инициализация второй секции
     
             // Данные отзывов (вторая секция)
             const reviews = [
@@ -582,4 +762,27 @@ function changeCarColor(color) {
                     }, { passive: false });
                 }
             });
+    // Фикс для мобильной прокрутки
+document.addEventListener('DOMContentLoaded', function() {
+    // Убираем любые трансформации, мешающие прокрутке
+    document.body.style.transform = 'none';
+    document.documentElement.style.transform = 'none';
     
+    // Фикс для высоты секций на мобильных
+    if (window.innerWidth <= 768) {
+        const sections = document.querySelectorAll('section, .new_dzn-commets, .video-comments-container');
+        sections.forEach(section => {
+            section.style.height = 'auto';
+            section.style.minHeight = 'auto';
+            section.style.transform = 'none';
+        });
+    }
+});
+
+// Ресайз обработчик для мобильных
+window.addEventListener('resize', function() {
+    if (window.innerWidth <= 768) {
+        document.body.style.transform = 'none';
+        document.documentElement.style.transform = 'none';
+    }
+});

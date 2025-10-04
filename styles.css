@@ -575,6 +575,7 @@
             background: #181c23;
             overflow: hidden;
             padding: 140px 120px;
+            background: url(image/Credit\ contact.svg) no-repeat center / cover;
         }
 
         .new_dzn-credit-bg-img {
@@ -723,11 +724,10 @@ max-height: 48px;
 
         /* ===== СТИЛИ ДЛЯ ТРЕТЬЕЙ ФОРМЫ ===== */
         .new_dzn2-test-drive-section {
-            background: #181c23;
+            background: url(image/Test\ drive\ contact.svg) no-repeat center center / cover;
             display: flex;
             min-height: 800px;
             padding: 140px 120px;
-            justify-content: center;
             align-items: center;
             gap: 52px;
             position: relative;
@@ -3624,4 +3624,442 @@ max-height: 48px;
             line-height: 20px;
             letter-spacing: -0.3px;
         }
-   
+   /* ===== ФИКС ДЛЯ МОБИЛЬНОЙ ПРОКРУТКИ ===== */
+@media (max-width: 1200px) {
+    body {
+        transform: none !important;
+        padding: 20px 0 0 0 !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        width: 100% !important;
+        position: static !important;
+    }
+    
+    .new_dzn-commets,
+    .new_dzn_model-item,
+    .new_dzn-hero,
+    .new_dzn-test-drive,
+    .new_dzn-credit,
+    .new_dzn2-test-drive-section {
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+}
+
+/* ===== АДАПТИВ 375px ДЛЯ ФОРМ ===== */
+@media (max-width: 375px) {
+    /* Общие стили для форм */
+    .new_dzn-test-drive,
+    .new_dzn-credit,
+    .new_dzn2-test-drive-section {
+        padding: 40px 16px !important;
+        min-height: auto !important;
+        flex-direction: column;
+    }
+
+    .new_dzn-test-drive-card,
+    .new_dzn-credit-card,
+    .new_dzn2-test-drive-card {
+        width: 100% !important;
+        height: auto !important;
+        padding: 20px 16px !important;
+        margin: 0 auto;
+    }
+
+    .new_dzn-test-drive-card-title h2,
+    .new_dzn-credit-card-title h2,
+    .new_dzn2-test-drive-card-title h2 {
+        font-size: 20px !important;
+        line-height: 24px !important;
+    }
+
+    .new_dzn-test-drive-card-sale,
+    .new_dzn-credit-card-sale,
+    .new_dzn2-test-drive-card-sale {
+        font-size: 16px !important;
+    }
+
+    .new_dzn-test-drive-input,
+    .new_dzn-credit-input,
+    .new_dzn2-test-drive-input {
+        font-size: 14px !important;
+        height: 44px !important;
+    }
+
+    .new_dzn-test-drive-btn,
+    .new_dzn-credit-btn,
+    .new_dzn2-test-drive-btn {
+        font-size: 14px !important;
+        height: 44px !important;
+        padding: 0 16px !important;
+    }
+
+    .new_dzn-test-drive-checkbox-label span,
+    .new_dzn-credit-checkbox-label span,
+    .new_dzn2-test-drive-checkbox-label span {
+        font-size: 12px !important;
+        line-height: 16px !important;
+    }
+
+    /* Таймер в первой форме */
+    .new_dzn-test-drive-timer {
+        width: 100% !important;
+        padding: 0 10px;
+    }
+
+    .new_dzn-test-drive-timer-title {
+        font-size: 18px !important;
+    }
+
+    .new_dzn-test-drive-timer-num {
+        font-size: 32px !important;
+        line-height: 36px !important;
+    }
+
+    .new_dzn-test-drive-timer-labels {
+        gap: 15px !important;
+        font-size: 12px !important;
+    }
+
+    .new_dzn-test-drive-timer-labels span {
+        width: 45px !important;
+    }
+
+    /* Состояния успеха */
+    .new_dzn-test-drive-success,
+    .new_dzn-credit-success,
+    .new_dzn2-test-drive-success {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .new_dzn-test-drive-success-icon,
+    .new_dzn-credit-success-icon,
+    .new_dzn2-test-drive-success-icon {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 22px !important;
+        margin: 0 auto;
+    }
+
+    .new_dzn-test-drive-success-title,
+    .new_dzn-credit-success-title,
+    .new_dzn2-test-drive-success-title {
+        font-size: 18px !important;
+    }
+
+    .new_dzn-test-drive-success-text,
+    .new_dzn-credit-success-text,
+    .new_dzn2-test-drive-success-text {
+        font-size: 14px !important;
+    }
+}
+
+/* ===== АДАПТИВ ДЛЯ МОДЕЛЬНОГО РЯДА 375px ===== */
+@media (max-width: 375px) {
+    .new_dzn_model-item {
+        width: 100% !important;
+        height: auto !important;
+        padding: 40px 16px !important;
+        gap: 24px !important;
+    }
+
+    .new_dzn_model-item-content {
+        width: 100% !important;
+        height: auto !important;
+        gap: 24px !important;
+    }
+
+    .new_dzn_model-item-title h2 {
+        font-size: 24px !important;
+        width: auto !important;
+    }
+
+    .new_dzn_model-item-navigation {
+        width: 100% !important;
+        height: auto !important;
+        flex-wrap: wrap;
+        gap: 8px !important;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .model-tab {
+        width: auto !important;
+        height: 30px !important;
+        min-width: 120px;
+        padding: 0 12px;
+    }
+
+    .model-tab.active {
+        width: auto !important;
+        height: 35px !important;
+    }
+
+    .model-tab h3 {
+        font-size: 13px !important;
+        white-space: nowrap;
+    }
+
+    .model-tab.active h3 {
+        font-size: 14px !important;
+    }
+
+    .tab-indicator {
+        width: 100% !important;
+    }
+
+    .model-tab.active .tab-indicator {
+        width: 100% !important;
+    }
+
+    .new_dzn_model-item-main {
+        width: 100% !important;
+        height: auto !important;
+        gap: 24px !important;
+    }
+
+    .new_dzn_model-item-img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .new_dzn_model-item-img-blocks {
+        width: 100% !important;
+        height: auto !important;
+        flex-direction: column;
+        gap: 16px !important;
+        margin: 0 !important;
+    }
+
+    .new_dzn_model-item-img-block {
+        flex-direction: column;
+        gap: 16px !important;
+        width: 100%;
+    }
+
+    .new_dzn_model-item-img-block img {
+        width: 100% !important;
+        height: 180px !important;
+    }
+
+    .new_dzn_model-item-img-car {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: 100%;
+        order: -1;
+        margin-bottom: 16px;
+    }
+
+    .new_dzn_model-item-img-car img {
+        width: 100% !important;
+        height: 200px !important;
+        object-fit: contain;
+    }
+
+    .new_dzn_model-item-img-block-colors {
+        margin-top: 20px !important;
+    }
+
+    .new_dzn_model-item-img-colors-circles-row {
+        flex-wrap: wrap;
+        gap: 12px !important;
+        height: auto !important;
+        justify-content: center;
+    }
+
+    .color-circle {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .color-name {
+        font-size: 18px !important;
+        margin-top: 12px;
+    }
+
+    .new_dzn_model-item-img-price {
+        width: 100% !important;
+        height: auto !important;
+        gap: 16px !important;
+    }
+
+    .price-divider {
+        width: 100% !important;
+    }
+
+    .new_dzn_model-item-img-price-car {
+        width: 100% !important;
+        height: auto !important;
+        flex-direction: column;
+        gap: 16px !important;
+        align-items: flex-start;
+    }
+
+    .new_dzn_model-item-img-price-name {
+        width: 100% !important;
+        height: auto !important;
+        gap: 8px !important;
+    }
+
+    .new_dzn_model-item-img-price-name h2 {
+        width: 100% !important;
+        font-size: 24px !important;
+    }
+
+    .new_dzn_model-item-img-price-name h3 {
+        width: 100% !important;
+        font-size: 20px !important;
+    }
+
+    .new_dzn_model-item-img-price-btns {
+        width: 100% !important;
+        height: auto !important;
+        justify-content: space-between;
+    }
+
+    .price-btn {
+        flex: 1;
+        min-width: 140px;
+        font-size: 14px !important;
+    }
+}
+
+/* ===== АДАПТИВ ДЛЯ ВИДЕО БЛОКА 375px ===== */
+@media (max-width: 375px) {
+    .video-comments-container {
+        padding: 40px 0 !important;
+    }
+
+    .video-comments-header {
+        padding: 0 16px;
+        margin-bottom: 32px !important;
+    }
+
+    .video-comments-impression {
+        font-size: 16px !important;
+    }
+
+    .video-comments-title {
+        font-size: 20px !important;
+        line-height: 24px !important;
+    }
+
+    .video-comments-wrapper {
+        padding: 0 16px;
+    }
+
+    .video-comments-grid {
+        flex-direction: column;
+        gap: 16px !important;
+        padding: 0 !important;
+        white-space: normal;
+    }
+
+    .video-comments-card {
+        width: 100% !important;
+        height: 300px !important;
+        opacity: 1 !important;
+        margin: 0 !important;
+        display: block;
+        padding: 20px;
+    }
+
+    .video-comments-card:first-child,
+    .video-comments-card:last-child {
+        margin: 0 !important;
+        opacity: 1 !important;
+    }
+
+    .video-comments-play-container {
+        width: 100% !important;
+        height: 200px !important;
+    }
+
+    .video-comments-text-container {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .text-content {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .video-comments-card-title {
+        font-size: 16px !important;
+    }
+
+    .video-comments-car-name {
+        font-size: 12px !important;
+    }
+
+    .video-comments-wrapper::before,
+    .video-comments-wrapper::after {
+        display: none;
+    }
+}
+
+/* ===== ДОПОЛНИТЕЛЬНЫЕ ФИКСЫ ДЛЯ МОБИЛЬНОЙ ПРОКРУТКИ ===== */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .new_dzn-commets {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .new_dzn-commets-content {
+        flex-direction: column;
+        padding: 40px 16px !important;
+        gap: 24px;
+        height: auto;
+    }
+
+    .new_dzn-commets-content-titiles {
+        width: 100% !important;
+        text-align: center;
+    }
+
+    .comments-columns-container {
+        width: 100%;
+        height: 400px;
+        flex-direction: column;
+    }
+
+    .comments-column {
+        width: 100% !important;
+        height: 200px;
+    }
+
+    .comment-card {
+        height: 180px !important;
+        padding: 16px;
+    }
+
+    .new_dzn-commets-content-style-elms {
+        font-size: 40px !important;
+        line-height: 44px !important;
+    }
+
+    .new_dzn-commets-content-style-title1 p {
+        font-size: 13px !important;
+        line-height: 16px !important;
+        max-height: 64px;
+        overflow: hidden;
+    }
+}
