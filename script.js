@@ -307,6 +307,46 @@ $(document).ready(function() {
             successContent.style.display = 'flex';
             successContent.classList.add('fade-in');
         }
+        // --- form3: Тест-драйв ---
+$(document).ready(function() {
+    $('#testDrivePhoneInput').on('input', function(e) {
+        let x = $(this).val().replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+        $(this).val('+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : ''));
+    });
+
+    $('#testDriveForm').on('submit', function(e) {
+        e.preventDefault();
+
+        const phoneInput = $('#testDrivePhoneInput');
+        const agreementCheckbox = $('#testDriveAgreement');
+        const phoneError = $('#testDrivePhoneError');
+        const agreementError = $('#testDriveAgreementError');
+        let isValid = true;
+
+        const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+        if (!phoneRegex.test(phoneInput.val())) {
+            phoneInput.addClass('error');
+            phoneError.show();
+            isValid = false;
+        } else {
+            phoneInput.removeClass('error');
+            phoneError.hide();
+        }
+
+        if (!agreementCheckbox.is(':checked')) {
+            agreementError.show();
+            isValid = false;
+        } else {
+            agreementError.hide();
+        }
+
+        if (isValid) {
+            $('#testDriveFormContent').hide();
+            $('#testDriveSuccessContent').show().addClass('fade-in');
+        }
+    });
+});
+
 
             // Взаимодействие с вкладками моделей (первая секция)
             const modelTabs = document.querySelectorAll('.model-tab');
@@ -353,15 +393,63 @@ $(document).ready(function() {
             });
     
             // Функции для обновления информации (заглушки)
-            function updateModelInfo(modelId) {
-                // В реальном приложении здесь будет логика загрузки данных о модели
-                console.log('Выбрана модель:', modelId);
-            }
-    
-            function changeCarColor(color) {
-                // В реальном приложении здесь будет логика изменения цвета автомобиля на изображении
-                console.log('Выбран цвет:', color);
-            }
+           // --- Данные для моделей ---
+const modelsData = {
+    "tiggo-4-pro": {
+        title: "CHERY TIGGO 4 PRO",
+        price: "2 100 000 ₽",
+        mainImage: "./images/tiggo-4-pro-white.png",
+        secondaryLeft: "./images/tiggo-4-pro-left.png",
+        secondaryRight: "./images/tiggo-4-pro-right.png",
+        colors: {
+            white: "./images/tiggo-4-pro-white.png",
+            red: "./images/tiggo-4-pro-red.png",
+            gray: "./images/tiggo-4-pro-gray.png"
+        }
+    },
+    "tiggo-7l": {
+        title: "CHERY TIGGO 7L",
+        price: "2 880 000 ₽",
+        mainImage: "./images/22 1.png",
+        secondaryLeft: "./images/Rectangle 12.png",
+        secondaryRight: "./images/Rectangle 13.png",
+        colors: {
+            white: "./images/22 1.png",
+            black: "./images/tiggo-7l-black.png",
+            blue: "./images/tiggo-7l-blue.png"
+        }
+    }
+    // Добавь остальные модели по аналогии
+};
+
+// --- Обновление модели ---
+function updateModelInfo(modelId) {
+    const model = modelsData[modelId];
+    if (!model) return;
+
+    document.getElementById("modelTitle").textContent = model.title;
+    document.getElementById("modelPrice").textContent = model.price;
+    document.getElementById("modelMainImage").src = model.mainImage;
+    document.getElementById("modelSecondaryImageLeft").src = model.secondaryLeft;
+    document.getElementById("modelSecondaryImageRight").src = model.secondaryRight;
+
+    // обновление цветов
+    const circles = document.querySelectorAll(".color-circle");
+    circles.forEach(circle => {
+        const color = circle.dataset.color;
+        circle.dataset.colorImage = model.colors[color] || "";
+    });
+}
+
+// --- Смена цвета авто ---
+function changeCarColor(color) {
+    const activeCircle = document.querySelector(`.color-circle[data-color="${color}"]`);
+    const imgPath = activeCircle.dataset.colorImage;
+    if (imgPath) {
+        document.getElementById("modelMainImage").src = imgPath;
+    }
+}
+
     
             // Данные отзывов (вторая секция)
             const reviews = [
@@ -468,9 +556,30 @@ $(document).ready(function() {
                         const card = this.closest('.video-comments-card');
                         const title = card.querySelector('.video-comments-card-title').textContent;
                         const carName = card.querySelector('.video-comments-car-name').textContent;
-                        
-                        alert(`Запуск видео отзыва:\n${title}\n${carName}`);
+                        // Попытка получить путь к видео из data-атрибута
+                        const videoPath = card.dataset.video || './videos/sample.mp4';
+
+                        const openExternal = confirm(`Открыть отзыв в видеоплеере?
+        ${title}\n${carName}\n\nНажмите "ОК" чтобы открыть видео во внешнем плеере (в новой вкладке).`);
+                        if (openExternal) {
+                            // Откроем видео в новой вкладке — браузер сам предложит варианты открытия
+                            window.open(videoPath, '_blank');
+                        }
                     });
                 });
+            });
+
+            // Горизонтальная прокрутка колесом мыши для видео-блока
+            document.addEventListener('DOMContentLoaded', function() {
+                const wrapper = document.querySelector('.video-comments-wrapper');
+                if (wrapper) {
+                    wrapper.addEventListener('wheel', function(e) {
+                        // если вертикальная прокрутка, преобразуем в горизонтальную
+                        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                            e.preventDefault();
+                            wrapper.scrollLeft += e.deltaY;
+                        }
+                    }, { passive: false });
+                }
             });
     

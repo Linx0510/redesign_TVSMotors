@@ -190,9 +190,8 @@
     <!-- Test Drive Section -->
 
   <section class="new_dzn-test-drive">
-        <div class="new_dzn-test-drive-bg">
+        
             <img src="image/Timer.svg" alt="Фон таймера" class="new_dzn-test-drive-bg-img">
-            <div class="new_dzn-test-drive-bg-overlay"></div>
             <div class="new_dzn-test-drive-timer">
                 <div class="new_dzn-test-drive-timer-title">До конца акции осталось</div>
                 <div class="new_dzn-test-drive-timer-values">
@@ -211,9 +210,7 @@
                     <span>Секунд</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="new_dzn-test-drive-card">
+            <div class="new_dzn-test-drive-card">
             <div class="new_dzn-test-drive-card-content" id="formContent">
                 <div class="new_dzn-test-drive-card-title">
                     <span class="new_dzn-test-drive-card-sale">Акция</span>
@@ -248,6 +245,9 @@
                 <a href="#" class="new_dzn-test-drive-success-btn">Посмотреть ещё акции</a>
             </div>
         </div>
+        
+        
+        
     </section>
    
  
@@ -327,41 +327,41 @@
         </div>
         <div class="new_dzn_model-item-main">
             <div class="new_dzn_model-item-img">
-                <div class="new_dzn_model-item-img-blocks">
+                <div class="new_dzn_model-item-img-blocks" id="modelExtraImages">
                     <div class="new_dzn_model-item-img-block">
-                        <img src="./images/Rectangle 12.png" alt="Chery Tiggo 7L вид спереди">
-                        <img src="./images/Rectangle 13.png" alt="Chery Tiggo 7L вид сбоку">
+                        <img id="modelSecondaryImageLeft" src="./images/Rectangle 12.png" alt="Chery Tiggo 7L вид спереди">
+                        <img id="modelSecondaryImageRight" src="./images/Rectangle 13.png" alt="Chery Tiggo 7L вид сбоку">
                     </div>
                     <div class="new_dzn_model-item-img-car">
-                        <img src="./images/22 1.png" alt="Chery Tiggo 7L">
+                        <img id="modelMainImage" src="./images/22 1.png" alt="Chery Tiggo 7L">
                     </div>
                 </div>
                 
                 <!-- Кружочки с цветами внутри блока с машиной -->
-                <div class="new_dzn_model-item-img-block-colors">
-                    <div class="new_dzn_model-item-img-colors-circles-row">
-                        <div class="color-circle color-white active" data-color="white" data-name="Белый"></div>
-                        <div class="color-circle color-red" data-color="red" data-name="Красный"></div>
-                        <div class="color-circle color-gray" data-color="gray" data-name="Серый"></div>
-                        <div class="color-circle color-dark-gray" data-color="dark-gray" data-name="Темно-серый"></div>
-                        <div class="color-circle color-black" data-color="black" data-name="Черный"></div>
-                        <div class="color-circle color-silver" data-color="silver" data-name="Серебристый"></div>
-                        <div class="color-circle color-blue" data-color="blue" data-name="Синий"></div>
+                <div class="new_dzn_model-item-img-block-colors" id="modelColors">
+                    <div class="new_dzn_model-item-img-colors-circles-row" id="colorCirclesContainer">
+                        <div class="color-circle color-white active" data-color="white" data-name="Белый" data-color-image="./images/22 1.png"></div>
+                        <div class="color-circle color-red" data-color="red" data-name="Красный" data-color-image=""></div>
+                        <div class="color-circle color-gray" data-color="gray" data-name="Серый" data-color-image=""></div>
+                        <div class="color-circle color-dark-gray" data-color="dark-gray" data-name="Темно-серый" data-color-image=""></div>
+                        <div class="color-circle color-black" data-color="black" data-name="Черный" data-color-image=""></div>
+                        <div class="color-circle color-silver" data-color="silver" data-name="Серебристый" data-color-image=""></div>
+                        <div class="color-circle color-blue" data-color="blue" data-name="Синий" data-color-image=""></div>
                     </div>
-                    <div class="color-name">Белый</div>
+                    <div class="color-name" id="selectedColorName">Белый</div>
                 </div>
             </div>
     
-            <div class="new_dzn_model-item-img-price">
+            <div class="new_dzn_model-item-img-price" id="modelInfo">
                 <div class="price-divider"></div>
                 <div class="new_dzn_model-item-img-price-car">
                     <div class="new_dzn_model-item-img-price-name">
-                        <h2>CHERY TIGGO 7</h2>
-                        <h3>2 880 000 ₽</h3>
+                        <h2 id="modelTitle">CHERY TIGGO 7</h2>
+                        <h3 id="modelPrice">2 880 000 ₽</h3>
                     </div>
                     <div class="new_dzn_model-item-img-price-btns">
-                        <button type="button" class="price-btn btn-outline">О модели</button>
-                        <button type="button" class="price-btn btn-primary">Прайс-лист</button>
+                        <button type="button" class="price-btn btn-outline" id="modelButtonAbout">О модели</button>
+                        <button type="button" class="price-btn btn-primary" id="modelButtonPrice">Прайс-лист</button>
                     </div>
                 </div>
             </div>
@@ -397,7 +397,6 @@
    <section class="new_dzn-credit">
         <div class="new_dzn-credit-bg">
             <img src="image/Credit contact.svg" alt="Кредит авто" class="new_dzn-credit-bg-img">
-            <div class="new_dzn-credit-bg-overlay"></div>
         
         <div class="new_dzn-credit-card">
             <div class="new_dzn-credit-card-content">
@@ -416,9 +415,11 @@
                         </label>
                         <div class="new_dzn-error-message" id="creditAgreementError">Необходимо ваше согласие</div>
                         
-                        <button type="submit" class="new_dzn-credit-btn" id="creditSubmitBtn">
+                        <button type="submit" class="new_dzn-btn new_dzn-btn-outline-header" id="creditSubmitBtn">
                             Отправить заявку 
-                            <span class="new_dzn-credit-btn-arrow">→</span>
+                            <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                         </button>
                     </form>
                 </div>
@@ -439,7 +440,7 @@
         <div class="new_dzn2-test-drive-bg">
             <!-- Замените на реальный путь к изображению -->
             <img src="image/Test drive contact.svg" alt="Фон тест-драйва" class="new_dzn2-test-drive-bg-img">
-         ]
+         
             <div class="new_dzn22-test-drive-content">
                 <h1 class="new_dzn22-test-drive-title">Тест-драйв</h1>
                 <p class="new_dzn22-test-drive-subtitle">Предлагаем вам проверить автомобиль на уникальном маршруте</p>
@@ -447,40 +448,35 @@
        
         
         <div class="new_dzn2-test-drive-card">
-            <div class="new_dzn2-test-drive-card-content" id="formContent">
-                <div class="new_dzn2-test-drive-card-title">
-                    <span class="new_dzn2-test-drive-card-sale">Запись на тест-драйв</span>
-                    <h2>Оставьте заявку</h2>
-                </div>
-                
-                <form class="new_dzn2-test-drive-form" id="testDriveForm">
-                    <input type="tel" class="new_dzn2-test-drive-input" id="phoneInput" placeholder="+7 (___) ___-__-__" required>
-                    <div class="new_dzn2-error-message" id="phoneError">Пожалуйста, введите корректный номер телефона</div>
-                    
-                    <label class="new_dzn2-test-drive-checkbox-label">
-                        <input type="checkbox" class="new_dzn2-test-drive-checkbox" id="agreementCheckbox" required>
-                        <span>Даю согласие на обработку персональных данных согласно Политике обработки персональных данных</span>
-                    </label>
-                    <div class="new_dzn2-error-message" id="agreementError">Необходимо ваше согласие</div>
-                    
-                    <button type="submit" class="new_dzn2-test-drive-btn" id="submitBtn">
-                        Записаться на тест-драйв
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#FDFDFD"/>
-                        </svg>
-                    </button>
-                </form>
-            </div> </div>
-            
-            <div class="new_dzn2-test-drive-success" id="successContent">
-                <div class="new_dzn2-test-drive-success-icon">✓</div>
-                <h3 class="new_dzn2-test-drive-success-title">Заявка принята!</h3>
-                <p class="new_dzn2-test-drive-success-text">
-                    Мы свяжемся с вами в ближайшее время для подтверждения записи на тест-драйв
-                </p>
-                <a href="#" class="new_dzn2-test-drive-success-btn">Посмотреть другие автомобили</a>
-            </div>
+             <div id="testDriveFormContent" class="new_dzn2-test-drive-card-content">
+    <div class="new_dzn2-test-drive-card-title">
+      <span class="new_dzn2-test-drive-card-sale">Тест-драйв</span>
+      <h2>Запишитесь на тест-драйв</h2>
+    </div>
+    <form class="new_dzn2-test-drive-form" id="testDriveForm">
+      <input type="tel" class="new_dzn2-test-drive-input" id="testDrivePhoneInput" placeholder="+7 (___) ___-__-__" required>
+      <div class="new_dzn-error-message" id="testDrivePhoneError">Введите корректный номер телефона</div>
+
+      <label class="new_dzn2-test-drive-checkbox-label">
+        <input type="checkbox" id="testDriveAgreement" required>
+        <span>Согласие на обработку персональных данных</span>
+      </label>
+      <div class="new_dzn-error-message" id="testDriveAgreementError">Необходимо согласие</div>
+
+      <button type="submit" class="new_dzn2-test-drive-btn">Отправить заявку</button>
+    </form>
+  </div>
+
+  <div id="testDriveSuccessContent" style="display:none;">
+    <div class="new_dzn-credit-success-icon">✓</div>
+    <h3>Заявка на тест-драйв отправлена!</h3>
+    <p>Наш менеджер свяжется с вами для уточнения деталей.</p>
+  </div>
+</div>
         </div>
+       
+
+
     </section>
 
   <!-- Вторая секция - Отзывы клиентов -->
