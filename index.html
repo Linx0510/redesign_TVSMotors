@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -154,23 +153,36 @@
         </div>
     </div>
 </header>
-<div class="new_dzn-hero" id="mainHero">
-    <div class="new_dzn-hero-bg" id="heroBg"></div>
+    <!-- Hero Section -->
+<section class="new_dzn-hero">
+    <div class="new_dzn-hero-backgrounds">
+        <!-- Фоновые изображения -->
+        <div class="new_dzn-hero-bg new_dzn-hero-bg-active" data-bg="1" style="background-image: url('image/Hero\ \(2\).svg');"></div>
+        <div class="new_dzn-hero-bg" data-bg="2" style="background-image: url('image/CHERY_footer.svg');"></div>
+        <div class="new_dzn-hero-bg" data-bg="3" style="background-image: url('image/Hero\ \(2\).svg');"></div>
+    </div>
+    
     <div class="new_dzn-hero-content">
         <div class="new_dzn-hero-text">
-            <div class="new_dzn-hero-price">От 1 690 000 ₽</div>
-            <div class="new_dzn-hero-subtitle">Рассрочка 0,01%</div>
+            <h1 class="new_dzn-hero-price">От 1 690 000 ₽</h1>
+            <h2 class="new_dzn-hero-subtitle">Рассрочка 0,01%</h2>
         </div>
-        <button class="new_dzn-btn new_dzn-btn-primary">Получить предложение <span class="new_dzn-btn-icon">→</span></button>
+        <button class="new_dzn-btn new_dzn-btn-primary">
+            Получить предложение
+            <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>
-    <!-- Пагинация ВНЕ hero-content -->
-    <div class="new_dzn-hero-pagination">
-        <span class="new_dzn-hero-dot active" data-index="0"></span>
-        <span class="new_dzn-hero-dot" data-index="1"></span>
-        <span class="new_dzn-hero-dot" data-index="2"></span>
-        <span class="new_dzn-hero-dot" data-index="3"></span>
+    
+    <!-- Индикаторы вместо декоративного элемента -->
+    <div class="new_dzn-hero-indicators">
+        <div class="new_dzn-hero-indicator new_dzn-hero-indicator-active" data-slide="1"></div>
+        <div class="new_dzn-hero-indicator" data-slide="2"></div>
+        <div class="new_dzn-hero-indicator" data-slide="3"></div>
     </div>
-</div>
+</section>
+<!-- Блок с иконками и подписями -->
 <section class="new_dzn-features">
     <div class="new_dzn-features-container">
         <div class="new_dzn-feature">
@@ -192,29 +204,23 @@
 <section class="new_dzn-test-drive">
     <div class="new_dzn-test-drive-bg">
        
-        
+        <div class="new_dzn-test-drive-timer">
             <div class="new_dzn-test-drive-timer-title">До конца акции осталось</div>
             <div class="new_dzn-test-drive-timer-values">
-              
-                <span class="new_dzn-test-drive-timer-num" id="days">13</span>
-                <span class="new_dzn-test-drive-timer-num" id="days">:</span> 
-                <span class="new_dzn-test-drive-timer-num" id="hours">12</span>
-                <span class="new_dzn-test-drive-timer-num" id="hours">:</span> 
-
-                <span class="new_dzn-test-drive-timer-num" id="minutes">56</span>
-                <span class="new_dzn-test-drive-timer-num" id="hours">:</span> 
-
+                <span class="new_dzn-test-drive-timer-num" id="days">13</span> :
+                <span class="new_dzn-test-drive-timer-num" id="hours">12</span> :
+                <span class="new_dzn-test-drive-timer-num" id="minutes">56</span> :
                 <span class="new_dzn-test-drive-timer-num" id="seconds">01</span>
-             
             </div>
             <div class="new_dzn-test-drive-timer-labels">
-                <span class="">Дней</span>
+                <span>Дней</span>
                 <span>Часов</span>
                 <span>Минут</span>
                 <span>Секунд</span>
             </div>
         </div>
-         <div class="new_dzn-test-drive-card">
+    </div>
+    <div class="new_dzn-test-drive-card">
         <div class="new_dzn-test-drive-card-content">
             <div class="new_dzn-test-drive-card-title">
                 <span class="new_dzn-test-drive-card-sale">Акция</span>
@@ -225,15 +231,11 @@
                 <label class="new_dzn-test-drive-checkbox-label">
                     <input type="checkbox" class="new_dzn-test-drive-checkbox">
                     <span>Даю согласие на обработку персональных данных согласно<br>Политике обработки персональных данных</span>
-                </label></div>
-                <a type="submit" class="new_dzn-test-drive-btn">Получить выгодное предложение <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#FDFDFD"/>
-</svg></a>
+                </label>
+                <button type="submit" class="new_dzn-test-drive-btn">Получить выгодное предложение <span class="new_dzn-test-drive-btn-arrow">→</span></button>
             </form>
-        
-    
+        </div>
     </div>
-   
 </section>
 
 <section class="new_cards">
@@ -473,87 +475,37 @@
     </footer>
     <div id="mobileMenu" class="new_dzn-mobile-menu">
         <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
+            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-mobile-logo">
+            <button id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню">&times;</button>
         </div>
         <nav class="new_dzn-mobile-navigation">
             <div id="mobileMainMenu">
-                
-                <div class="new_dzn-nav-item" data-menu="cars">Автомобили 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="buyers">Покупателям 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="owners">Владельцам 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="company">О компании 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="offers">Спецпредложения
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
+                <div class="new_dzn-nav-item" data-menu="cars">Автомобили <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="buyers">Покупателям <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="owners">Владельцам <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="company">О компании <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="offers">Спецпредложения <span class="new_dzn-arrow">&rarr;</span></div>
             </div>
             <div id="mobileSubMenu-cars" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Автомобили</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Автомобили</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Новые автомобили CHERY</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Автомобили с пробегом</a>
             </div>
             <div id="mobileSubMenu-buyers" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Покупателям</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Покупателям</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Trade-in</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Кредит</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Лизинг</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Запись на тест-драйв</a>
             </div>
             <div id="mobileSubMenu-owners" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Владельцам</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Владельцам</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Сервис и обслуживание</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Страхование</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Запись на сервис</a>
             </div>
             <div id="mobileSubMenu-company" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> О компании</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> О компании</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">О нас</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Новости</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Блог</a>
@@ -561,211 +513,83 @@
                 <a href="#" class="new_dzn-mobile-submenu-link">Вакансии</a>
             </div>
             <div id="mobileSubMenu-offers" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Спецпредложения</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Спецпредложения</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Все акции</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">На новые авто</a>
             </div>
         </nav>
         <div class="new_dzn-mobile-menu-footer">
             <div class="new_dzn-mobile-phones">
-                <div>
                 <div class="new_dzn-mobile-label">Горячая линия</div>
                 <div class="new_dzn-mobile-phone hotline">+ 7 (906) 834-11-82</div>
-                </div>
-                <div>
                 <div class="new_dzn-mobile-label">Продажи</div>
                 <div class="new_dzn-mobile-phone">+7 (353) 232-52-20</div>
-                </div>
-                <div>
                 <div class="new_dzn-mobile-label">Сервис</div>
                 <div class="new_dzn-mobile-phone">+7 (3532) 32-52-30</div>
-                </div>
             </div>
-            <div class="new_dzn-mobile-ozn-wb-btn">
+            <div style="display: flex;">
             <div class="new_dzn-mobile-socials">
-                <img src="image/ozon.svg" alt="Ozon" class="new_dzn-mobile-social">
+                <img src="image/ozon.png" alt="Ozon" class="new_dzn-mobile-social">
                 <img src="image/wb.svg" alt="WB" class="new_dzn-mobile-social">
             </div>
-            <a href="#" class="new_dzn-mobile-testdrive-btn">Хочу тест-драйв <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
-  <path d="M13.9697 8.53033C13.6768 8.23744 13.6768 7.76256 13.9697 7.46967C14.2626 7.17678 14.7374 7.17678 15.0303 7.46967L19.0303 11.4697C19.3232 11.7626 19.3232 12.2374 19.0303 12.5303L15.0303 16.5303C14.7374 16.8232 14.2626 16.8232 13.9697 16.5303C13.6768 16.2374 13.6768 15.7626 13.9697 15.4697L16.6893 12.75H7C6.58579 12.75 6.25 12.4142 6.25 12C6.25 11.5858 6.58579 11.25 7 11.25H16.6893L13.9697 8.53033Z" fill="#3B82F6"/>
-</svg></a>
+            <a href="#" class="new_dzn-mobile-testdrive-btn">Хочу тест-драйв <span class="new_dzn-arrow-btn">&rarr;</span></a>
         </div></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
     <script>
-         $(document).ready(function() {
-        var $cards = $('.new_cards_cart');
-        var $leftArrow = $('.new_arrow img').first();
-        var $rightArrow = $('.new_arrow img').last();
-        var $sliderContainer = $('.new_cards_content');
-        var currentIndex = 0;
-        var isAnimating = false;
-        var startX = 0;
-        var isDragging = false;
-        var swipeThreshold = 50;
+        $(document).ready(function() {
+            var $cards = $('.new_cards_cart');
+            var $leftArrow = $('.new_arrow img').first();
+            var $rightArrow = $('.new_arrow img').last();
+            var currentIndex = 0;
+            var isAnimating = false;
 
-        function initSlider() {
-            if ($(window).width() <= 768) {
-                $cards.removeClass('active').css({
-                    transform: 'translateX(100%)',
-                    display: 'none'
-                });
-                
-                $cards.eq(currentIndex).addClass('active').css({
-                    transform: 'translateX(0)',
-                    display: 'block'
-                });
-            }
-        }
+            $cards.removeClass('active previous').css({left: '100%', opacity: 0});
+            $cards.eq(currentIndex).addClass('active').css({left: 0, opacity: 1});
 
-        function showSlide(newIndex, direction) {
-            if (isAnimating || newIndex === currentIndex) return;
-            isAnimating = true;
+            function showSlide(newIndex, direction) {
+                if (isAnimating || newIndex === currentIndex) return;
+                isAnimating = true;
 
-            var $current = $cards.eq(currentIndex);
-            var $next = $cards.eq(newIndex);
+                var $current = $cards.eq(currentIndex);
+                var $next = $cards.eq(newIndex);
 
-            if (direction === 'next') {
-                $next.css({
-                    transform: 'translateX(100%)',
-                    display: 'block'
+                $next.removeClass('previous').css({
+                    left: direction === 'next' ? '100%' : '-100%',
+                    opacity: 0,
+                    zIndex: 3
                 });
-            } else {
-                $next.css({
-                    transform: 'translateX(-100%)',
-                    display: 'block'
-                });
+
+                setTimeout(function(){
+                    $current.removeClass('active').addClass('previous').css({
+                        left: direction === 'next' ? '-100%' : '100%',
+                        opacity: 0,
+                        zIndex: 2
+                    });
+                    $next.addClass('active').css({
+                        left: 0,
+                        opacity: 1
+                    });
+                }, 20);
+
+                setTimeout(function() {
+                    $current.removeClass('previous').css({zIndex: '', left: '100%'});
+                    currentIndex = newIndex;
+                    isAnimating = false;
+                }, 520);
             }
 
-            setTimeout(function() {
-                $current.css({
-                    transform: direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)',
-                    transition: 'transform 0.4s ease-in-out'
-                });
-
-                $next.css({
-                    transform: 'translateX(0)',
-                    transition: 'transform 0.4s ease-in-out'
-                });
-            }, 10);
-
-            setTimeout(function() {
-                $current.removeClass('active').css({
-                    display: 'none',
-                    transform: 'translateX(100%)',
-                    transition: 'none'
-                });
-                
-                $next.addClass('active').css({
-                    transition: 'none'
-                });
-                
-                currentIndex = newIndex;
-                isAnimating = false;
-            }, 400);
-        }
-
-        function nextSlide() {
-            if ($(window).width() <= 768 && !isAnimating) {
-                var newIndex = (currentIndex + 1) % $cards.length;
-                showSlide(newIndex, 'next');
-            }
-        }
-
-        function prevSlide() {
-            if ($(window).width() <= 768 && !isAnimating) {
+            $leftArrow.click(function() {
                 var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
                 showSlide(newIndex, 'prev');
-            }
-        }
+            });
 
-        $leftArrow.click(prevSlide);
-        $rightArrow.click(nextSlide);
-
-        $sliderContainer.on('touchstart', function(e) {
-            if ($(window).width() <= 768 && !isAnimating) {
-                startX = e.originalEvent.touches[0].clientX;
-                isDragging = true;
-            }
+            $rightArrow.click(function() {
+                var newIndex = (currentIndex + 1) % $cards.length;
+                showSlide(newIndex, 'next');
+            });
         });
-
-        $sliderContainer.on('touchend', function(e) {
-            if ($(window).width() <= 768 && isDragging && !isAnimating) {
-                var endX = e.originalEvent.changedTouches[0].clientX;
-                var diffX = startX - endX;
-                
-                if (Math.abs(diffX) > swipeThreshold) {
-                    if (diffX > 0) {
-                        nextSlide(); 
-                    } else {
-                        prevSlide();
-                    }
-                }
-                isDragging = false;
-            }
-        });
-
-        $(document).on('keydown', function(e) {
-            if ($(window).width() <= 768 && !isAnimating) {
-                switch(e.key) {
-                    case 'ArrowLeft':
-                        e.preventDefault();
-                        prevSlide();
-                        break;
-                    case 'ArrowRight':
-                        e.preventDefault();
-                        nextSlide();
-                        break;
-                }
-            }
-        });
-
-        var autoSlideInterval;
-        
-        function startAutoSlide() {
-            if ($(window).width() <= 768) {
-                autoSlideInterval = setInterval(function() {
-                    if (!isAnimating && !isDragging) {
-                        nextSlide();
-                    }
-                }, 3000); 
-            }
-        }
-        
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-        
-        startAutoSlide();
-        
-        $sliderContainer.add($leftArrow).add($rightArrow).on('touchstart mouseenter', stopAutoSlide);
-        $sliderContainer.add($leftArrow).add($rightArrow).on('touchend mouseleave', startAutoSlide);
-
-        $(window).resize(function() {
-            if ($(window).width() > 768) {
-                $cards.removeClass('active').css({
-                    position: '',
-                    transform: '',
-                    display: 'block',
-                    transition: ''
-                });
-                stopAutoSlide();
-            } else {
-                initSlider();
-                startAutoSlide();
-            }
-        });
-
-        initSlider();
-    });
     </script>
 </body>
 </html>
