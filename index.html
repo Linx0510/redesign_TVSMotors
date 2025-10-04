@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Inter:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body>сагвкасргука
 <header class="new_dzn-header">
     <div class="new_dzn-header-top">
         <div class="new_dzn-container">
@@ -154,23 +153,36 @@
         </div>
     </div>
 </header>
-<div class="new_dzn-hero" id="mainHero">
-    <div class="new_dzn-hero-bg" id="heroBg"></div>
+    <!-- Hero Section -->
+<section class="new_dzn-hero">
+    <div class="new_dzn-hero-backgrounds">
+        <!-- Фоновые изображения -->
+        <div class="new_dzn-hero-bg new_dzn-hero-bg-active" data-bg="1" style="background-image: url('image/Hero\ \(2\).svg');"></div>
+        <div class="new_dzn-hero-bg" data-bg="2" style="background-image: url('image/CHERY_footer.svg');"></div>
+        <div class="new_dzn-hero-bg" data-bg="3" style="background-image: url('image/Hero\ \(2\).svg');"></div>
+    </div>
+    
     <div class="new_dzn-hero-content">
         <div class="new_dzn-hero-text">
-            <div class="new_dzn-hero-price">От 1 690 000 ₽</div>
-            <div class="new_dzn-hero-subtitle">Рассрочка 0,01%</div>
+            <h1 class="new_dzn-hero-price">От 1 690 000 ₽</h1>
+            <h2 class="new_dzn-hero-subtitle">Рассрочка 0,01%</h2>
         </div>
-        <button class="new_dzn-btn new_dzn-btn-primary">Получить предложение <span class="new_dzn-btn-icon">→</span></button>
+        <button class="new_dzn-btn new_dzn-btn-primary">
+            Получить предложение
+            <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>
-    <!-- Пагинация ВНЕ hero-content -->
-    <div class="new_dzn-hero-pagination">
-        <span class="new_dzn-hero-dot active" data-index="0"></span>
-        <span class="new_dzn-hero-dot" data-index="1"></span>
-        <span class="new_dzn-hero-dot" data-index="2"></span>
-        <span class="new_dzn-hero-dot" data-index="3"></span>
+    
+    <!-- Индикаторы вместо декоративного элемента -->
+    <div class="new_dzn-hero-indicators">
+        <div class="new_dzn-hero-indicator new_dzn-hero-indicator-active" data-slide="1"></div>
+        <div class="new_dzn-hero-indicator" data-slide="2"></div>
+        <div class="new_dzn-hero-indicator" data-slide="3"></div>
     </div>
-</div>
+</section>
+<!-- Блок с иконками и подписями -->
 <section class="new_dzn-features">
     <div class="new_dzn-features-container">
         <div class="new_dzn-feature">
@@ -189,68 +201,43 @@
 </section>
     <!-- Test Drive Section -->
 
-  <section class="new_dzn-test-drive">
-        <div class="new_dzn-test-drive-bg">
-            <img src="image/Timer.svg" alt="Фон таймера" class="new_dzn-test-drive-bg-img">
-            <div class="new_dzn-test-drive-bg-overlay"></div>
-            <div class="new_dzn-test-drive-timer">
-                <div class="new_dzn-test-drive-timer-title">До конца акции осталось</div>
-                <div class="new_dzn-test-drive-timer-values">
-                    <span class="new_dzn-test-drive-timer-num" id="days">13</span>
-                    <span class="new_dzn-test-drive-timer-num">:</span> 
-                    <span class="new_dzn-test-drive-timer-num" id="hours">12</span>
-                    <span class="new_dzn-test-drive-timer-num">:</span> 
-                    <span class="new_dzn-test-drive-timer-num" id="minutes">56</span>
-                    <span class="new_dzn-test-drive-timer-num">:</span> 
-                    <span class="new_dzn-test-drive-timer-num" id="seconds">01</span>
-                </div>
-                <div class="new_dzn-test-drive-timer-labels">
-                    <span>Дней</span>
-                    <span>Часов</span>
-                    <span>Минут</span>
-                    <span>Секунд</span>
-                </div>
+<section class="new_dzn-test-drive">
+    <div class="new_dzn-test-drive-bg">
+       
+        <div class="new_dzn-test-drive-timer">
+            <div class="new_dzn-test-drive-timer-title">До конца акции осталось</div>
+            <div class="new_dzn-test-drive-timer-values">
+                <span class="new_dzn-test-drive-timer-num" id="days">13</span> :
+                <span class="new_dzn-test-drive-timer-num" id="hours">12</span> :
+                <span class="new_dzn-test-drive-timer-num" id="minutes">56</span> :
+                <span class="new_dzn-test-drive-timer-num" id="seconds">01</span>
+            </div>
+            <div class="new_dzn-test-drive-timer-labels">
+                <span>Дней</span>
+                <span>Часов</span>
+                <span>Минут</span>
+                <span>Секунд</span>
             </div>
         </div>
-        
-        <div class="new_dzn-test-drive-card">
-            <div class="new_dzn-test-drive-card-content" id="formContent">
-                <div class="new_dzn-test-drive-card-title">
-                    <span class="new_dzn-test-drive-card-sale">Акция</span>
-                    <h2>Зафиксируйте предложение</h2>
-                </div>
-                
-                <form class="new_dzn-test-drive-form" id="offerForm">
-                    <input type="tel" class="new_dzn-test-drive-input" id="phoneInput" placeholder="+7 (___) ___-__-__" required>
-                    <div class="new_dzn-error-message" id="phoneError">Пожалуйста, введите корректный номер телефона</div>
-                    
-                    <label class="new_dzn-test-drive-checkbox-label">
-                        <input type="checkbox" class="new_dzn-test-drive-checkbox" id="agreementCheckbox" required>
-                        <span>Даю согласие на обработку персональных данных согласно<br>Политике обработки персональных данных</span>
-                    </label>
-                    <div class="new_dzn-error-message" id="agreementError">Необходимо ваше согласие</div>
-                    
-                    <button type="submit" class="new_dzn-test-drive-btn" id="submitBtn">
-                        Получить выгодное предложение 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#FDFDFD"/>
-                        </svg>
-                    </button>
-                </form>
+    </div>
+    <div class="new_dzn-test-drive-card">
+        <div class="new_dzn-test-drive-card-content">
+            <div class="new_dzn-test-drive-card-title">
+                <span class="new_dzn-test-drive-card-sale">Акция</span>
+                <h2>Зафиксируйте предложение</h2>
             </div>
-            
-            <div class="new_dzn-test-drive-success" id="successContent">
-                <div class="new_dzn-test-drive-success-icon">✓</div>
-                <h3 class="new_dzn-test-drive-success-title">Предложение зафиксировано!</h3>
-                <p class="new_dzn-test-drive-success-text">
-                    Вы сделали первый шаг к выгодной покупке. Наш специалист позвонит вам, чтобы уточнить детали
-                </p>
-                <a href="#" class="new_dzn-test-drive-success-btn">Посмотреть ещё акции</a>
-            </div>
+            <form class="new_dzn-test-drive-form">
+                <input type="tel" class="new_dzn-test-drive-input" placeholder="+7 (___) ___-__-__">
+                <label class="new_dzn-test-drive-checkbox-label">
+                    <input type="checkbox" class="new_dzn-test-drive-checkbox">
+                    <span>Даю согласие на обработку персональных данных согласно<br>Политике обработки персональных данных</span>
+                </label>
+                <button type="submit" class="new_dzn-test-drive-btn">Получить выгодное предложение <span class="new_dzn-test-drive-btn-arrow">→</span></button>
+            </form>
         </div>
-    </section>
-   
- 
+    </div>
+</section>
+
 <section class="new_cards">
         <div class="new_cards-container">
             <div class="new_cards_content">
@@ -289,84 +276,7 @@
         </div>
     </section>
 
- <section class="new_dzn_model-item">
-        <div class="new_dzn_model-item-content">
-            <div class="new_dzn_model-item-title">
-                <h2>Модельный ряд</h2>
-            </div>
-            <div class="new_dzn_model-item-navigation">
-                <div class="model-tab inactive" data-model="tiggo-4-pro">
-                    <h3>Tiggo 4 Pro</h3>
-                    <div class="tab-indicator"></div>
-                </div>
-                <div class="model-tab semi-inactive" data-model="tiggo-4-new">
-                    <h3>Tiggo 4 New</h3>
-                    <div class="tab-indicator"></div>
-                </div>
-                <div class="model-tab" data-model="tiggo-7-pro-max">
-                    <h3>Tiggo 7 Pro Max New</h3>
-                    <div class="tab-indicator"></div>
-                </div>
-                <div class="model-tab active" data-model="tiggo-7l">
-                    <h3>Tiggo 7L</h3>
-                    <div class="tab-indicator"></div>
-                </div>
-                <div class="model-tab" data-model="tiggo-8-pro-max">
-                    <h3>Tiggo 8 Pro Max New</h3>
-                    <div class="tab-indicator"></div>
-                </div>
-                <div class="model-tab semi-inactive" data-model="tiggo-9">
-                    <h3>Tiggo 9</h3>
-                    <div class="tab-indicator"></div>
-                </div>
-                <div class="model-tab inactive" data-model="arrizo-8">
-                    <h3>Arrizo 8</h3>
-                    <div class="tab-indicator"></div>
-                </div>
-            </div>
-        </div>
-        <div class="new_dzn_model-item-main">
-            <div class="new_dzn_model-item-img">
-                <div class="new_dzn_model-item-img-blocks">
-                    <div class="new_dzn_model-item-img-block">
-                        <img src="./images/Rectangle 12.png" alt="Chery Tiggo 7L вид спереди">
-                        <img src="./images/Rectangle 13.png" alt="Chery Tiggo 7L вид сбоку">
-                    </div>
-                    <div class="new_dzn_model-item-img-car">
-                        <img src="./images/22 1.png" alt="Chery Tiggo 7L">
-                    </div>
-                </div>
-                
-                <!-- Кружочки с цветами внутри блока с машиной -->
-                <div class="new_dzn_model-item-img-block-colors">
-                    <div class="new_dzn_model-item-img-colors-circles-row">
-                        <div class="color-circle color-white active" data-color="white" data-name="Белый"></div>
-                        <div class="color-circle color-red" data-color="red" data-name="Красный"></div>
-                        <div class="color-circle color-gray" data-color="gray" data-name="Серый"></div>
-                        <div class="color-circle color-dark-gray" data-color="dark-gray" data-name="Темно-серый"></div>
-                        <div class="color-circle color-black" data-color="black" data-name="Черный"></div>
-                        <div class="color-circle color-silver" data-color="silver" data-name="Серебристый"></div>
-                        <div class="color-circle color-blue" data-color="blue" data-name="Синий"></div>
-                    </div>
-                    <div class="color-name">Белый</div>
-                </div>
-            </div>
-    
-            <div class="new_dzn_model-item-img-price">
-                <div class="price-divider"></div>
-                <div class="new_dzn_model-item-img-price-car">
-                    <div class="new_dzn_model-item-img-price-name">
-                        <h2>CHERY TIGGO 7</h2>
-                        <h3>2 880 000 ₽</h3>
-                    </div>
-                    <div class="new_dzn_model-item-img-price-btns">
-                        <button type="button" class="price-btn btn-outline">О модели</button>
-                        <button type="button" class="price-btn btn-primary">Прайс-лист</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <section class="new_ozon_Wildberries">
         <div class="new_dzn-container">
             <div class="new_ozon_Wildberries_content">
@@ -394,213 +304,31 @@
         </div>
     </section>
  
-   <section class="new_dzn-credit">
-        <div class="new_dzn-credit-bg">
-            <img src="image/Credit contact.svg" alt="Кредит авто" class="new_dzn-credit-bg-img">
-            <div class="new_dzn-credit-bg-overlay"></div>
-        
-        <div class="new_dzn-credit-card">
-            <div class="new_dzn-credit-card-content">
-                <div class="new_dzn-credit-form-content" id="creditFormContent">
-                    <div class="new_dzn-credit-card-title">
-                        <span class="new_dzn-credit-card-sale">Кредит</span>
-                        <h2>Оставьте заявку и получите<br>выгодные условия<br>по кредитованию</h2>
-                    </div>
-                    <form class="new_dzn-credit-form" id="creditForm">
-                        <input type="tel" class="new_dzn-credit-input" id="creditPhoneInput" placeholder="+7 (___) ___-__-__" required>
-                        <div class="new_dzn-error-message" id="creditPhoneError">Пожалуйста, введите корректный номер телефона</div>
-                        
-                        <label class="new_dzn-credit-checkbox-label">
-                            <input type="checkbox" class="new_dzn-credit-checkbox" id="creditAgreementCheckbox" required>
-                            <span>Даю согласие на обработку персональных данных согласно<br>Политике обработки персональных данных</span>
-                        </label>
-                        <div class="new_dzn-error-message" id="creditAgreementError">Необходимо ваше согласие</div>
-                        
-                        <button type="submit" class="new_dzn-credit-btn" id="creditSubmitBtn">
-                            Отправить заявку 
-                            <span class="new_dzn-credit-btn-arrow">→</span>
-                        </button>
-                    </form>
-                </div>
-                
-                <div class="new_dzn-credit-success" id="creditSuccessContent">
-                    <div class="new_dzn-credit-success-icon">✓</div>
-                    <h3 class="new_dzn-credit-success-title">Заявка оставлена!</h3>
-                    <p class="new_dzn-credit-success-text">
-                        Наш менеджер скоро свяжется с вами, чтобы обсудить детали и подобрать лучшее предложение
-                    </p>
-                    <a href="#" class="new_dzn-credit-success-btn">Посмотреть ещё акции</a>
-                </div></div>
+<section class="new_dzn-credit">
+    <div class="new_dzn-credit-bg">
+        <img src="image/credit-car.jpg" alt="Кредит авто" class="new_dzn-credit-bg-img">
+        <div class="new_dzn-credit-bg-overlay"></div>
+    </div>
+    <div class="new_dzn-credit-card">
+        <div class="new_dzn-credit-card-content">
+            <div class="new_dzn-credit-card-title">
+                <span class="new_dzn-credit-card-sale">Кредит</span>
+                <h2>Оставьте заявку и получите<br>выгодные условия<br>по кредитованию</h2>
             </div>
+            <form class="new_dzn-credit-form">
+                <input type="tel" class="new_dzn-credit-input" placeholder="+7 (___) ___-__-__">
+                <label class="new_dzn-credit-checkbox-label">
+                    <input type="checkbox" class="new_dzn-credit-checkbox">
+                    <span>Даю согласие на обработку персональных данных согласно<br>Политике обработки персональных данных</span>
+                </label>
+                <button type="submit" class="new_dzn-credit-btn">Отправить заявку <span class="new_dzn-credit-btn-arrow">→</span></button>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
-         <section class="new_dzn2-test-drive-section">
-        <div class="new_dzn2-test-drive-bg">
-            <!-- Замените на реальный путь к изображению -->
-            <img src="image/Test drive contact.svg" alt="Фон тест-драйва" class="new_dzn2-test-drive-bg-img">
-         ]
-            <div class="new_dzn22-test-drive-content">
-                <h1 class="new_dzn22-test-drive-title">Тест-драйв</h1>
-                <p class="new_dzn22-test-drive-subtitle">Предлагаем вам проверить автомобиль на уникальном маршруте</p>
-            </div>
-       
-        
-        <div class="new_dzn2-test-drive-card">
-            <div class="new_dzn2-test-drive-card-content" id="formContent">
-                <div class="new_dzn2-test-drive-card-title">
-                    <span class="new_dzn2-test-drive-card-sale">Запись на тест-драйв</span>
-                    <h2>Оставьте заявку</h2>
-                </div>
-                
-                <form class="new_dzn2-test-drive-form" id="testDriveForm">
-                    <input type="tel" class="new_dzn2-test-drive-input" id="phoneInput" placeholder="+7 (___) ___-__-__" required>
-                    <div class="new_dzn2-error-message" id="phoneError">Пожалуйста, введите корректный номер телефона</div>
-                    
-                    <label class="new_dzn2-test-drive-checkbox-label">
-                        <input type="checkbox" class="new_dzn2-test-drive-checkbox" id="agreementCheckbox" required>
-                        <span>Даю согласие на обработку персональных данных согласно Политике обработки персональных данных</span>
-                    </label>
-                    <div class="new_dzn2-error-message" id="agreementError">Необходимо ваше согласие</div>
-                    
-                    <button type="submit" class="new_dzn2-test-drive-btn" id="submitBtn">
-                        Записаться на тест-драйв
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                            <path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#FDFDFD"/>
-                        </svg>
-                    </button>
-                </form>
-            </div> </div>
-            
-            <div class="new_dzn2-test-drive-success" id="successContent">
-                <div class="new_dzn2-test-drive-success-icon">✓</div>
-                <h3 class="new_dzn2-test-drive-success-title">Заявка принята!</h3>
-                <p class="new_dzn2-test-drive-success-text">
-                    Мы свяжемся с вами в ближайшее время для подтверждения записи на тест-драйв
-                </p>
-                <a href="#" class="new_dzn2-test-drive-success-btn">Посмотреть другие автомобили</a>
-            </div>
-        </div>
-    </section>
+    
 
-  <!-- Вторая секция - Отзывы клиентов -->
-    <section class="new_dzn-commets">
-        <div class="new_dzn-commets-content">
-            <!-- Заголовок слева по центру -->
-            <div class="new_dzn-commets-content-titiles">
-                <span class="new_dzn-commets-fitback">Мнение клиентов</span>
-                <h2>Репутация, проверенная опытом</h2>
-            </div>
-            
-            <!-- Две колонки с независимым скроллом -->
-            <div class="comments-columns-container">
-                <!-- Левая колонка -->
-                <div class="comments-column">
-                    <div class="comments-scroll-track" id="column1">
-                        <!-- Карточки отзывов будут добавлены через JavaScript -->
-                    </div>
-                    <div class="gradient-overlay gradient-overlay-top"></div>
-                    <div class="gradient-overlay gradient-overlay-bottom"></div>
-                </div>
-                
-                <!-- Правая колонка -->
-                <div class="comments-column">
-                    <div class="comments-scroll-track" id="column2">
-                        <!-- Карточки отзывов будут добавлены через JavaScript -->
-                    </div>
-                    <div class="gradient-overlay gradient-overlay-top"></div>
-                    <div class="gradient-overlay gradient-overlay-bottom"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Третья секция - Видео отзывы -->
-    <div class="video-comments-container">
-        <div class="video-comments-header">
-            <span class="video-comments-impression">Живые впечатления</span>
-            <h2 class="video-comments-title">Открытые отзывы наших клиентов</h2>
-        </div>
-        
-        <div class="video-comments-wrapper">
-            <div class="video-comments-grid">
-                <!-- Карточка 1 (левая крайняя) -->
-                <div class="video-comments-card" style="background-image: url('./images/faddb968d9930a43d3816e04ae240f3d59b62699.png')">
-                    <div class="video-comments-play-container">
-                        <div class="video-comments-play-btn">
-                            <div class="video-comments-play-icon"></div>
-                        </div>
-                    </div>
-                    <div class="video-comments-text-container">
-                        <div class="text-content">
-                            <h4 class="video-comments-card-title">Юрий Морозов</h4>
-                            <span class="video-comments-car-name">Chery Tiggo 7 Pro</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Карточка 2 -->
-                <div class="video-comments-card" style="background-image: url('./images/faddb968d9930a43d3816e04ae240f3d59b62699.png')">
-                    <div class="video-comments-play-container">
-                        <div class="video-comments-play-btn">
-                            <div class="video-comments-play-icon"></div>
-                        </div>
-                    </div>
-                    <div class="video-comments-text-container">
-                        <div class="text-content">
-                            <h4 class="video-comments-card-title">Андрей Пересыпкин</h4>
-                            <span class="video-comments-car-name">Chery Arrizo 8</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Карточка 3 -->
-                    <div class="video-comments-card" style="background-image: url('./images/e0e589db428b131916feea3048f802cb8d2343eb.png')">
-                        <div class="video-comments-play-container">
-                            <div class="video-comments-play-btn">
-                                <div class="video-comments-play-icon"></div>
-                            </div>
-                        </div>
-                        <div class="video-comments-text-container">
-                            <div class="text-content">
-                                <h4 class="video-comments-card-title">Татьяна П.</h4>
-                                <span class="video-comments-car-name">Chery Tiggo 4 New</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Карточка 4 -->
-                    <div class="video-comments-card" style="background-image: url('./images/b9e8f602f4449fd557cf198168a6eac4ca00aeee.png')">
-                        <div class="video-comments-play-container">
-                            <div class="video-comments-play-btn">
-                                <div class="video-comments-play-icon"></div>
-                            </div>
-                        </div>
-                        <div class="video-comments-text-container">
-                            <div class="text-content">
-                                <h4 class="video-comments-card-title">Татс Снега</h4>
-                                <span class="video-comments-car-name">Chery Tiggo 7 Pro</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Карточка 5 (правая крайняя) -->
-                    <div class="video-comments-card" style="background-image: url('./images/b9e8f602f4449fd557cf198168a6eac4ca00aeee.png')">
-                        <div class="video-comments-play-container">
-                            <div class="video-comments-play-btn">
-                                <div class="video-comments-play-icon"></div>
-                            </div>
-                        </div>
-                        <div class="video-comments-text-container">
-                            <div class="text-content">
-                                <h4 class="video-comments-card-title">Анна Иванова</h4>
-                                <span class="video-comments-car-name">Chery Tiggo 8 Pro</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     
 
     <section class="new_news">
@@ -747,87 +475,37 @@
     </footer>
     <div id="mobileMenu" class="new_dzn-mobile-menu">
         <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
+            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-mobile-logo">
+            <button id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню">&times;</button>
         </div>
         <nav class="new_dzn-mobile-navigation">
             <div id="mobileMainMenu">
-                
-                <div class="new_dzn-nav-item" data-menu="cars">Автомобили 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="buyers">Покупателям 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="owners">Владельцам 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="company">О компании 
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
-                <div class="new_dzn-nav-item" data-menu="offers">Спецпредложения
-
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-<path d="M8.4697 1.53033C8.1768 1.23744 8.1768 0.762558 8.4697 0.469668C8.7626 0.176777 9.2374 0.176777 9.5303 0.469668L13.5303 4.4697C13.8232 4.7626 13.8232 5.2374 13.5303 5.5303L9.5303 9.5303C9.2374 9.8232 8.7626 9.8232 8.4697 9.5303C8.1768 9.2374 8.1768 8.7626 8.4697 8.4697L11.1893 5.75H1.5C1.08579 5.75 0.75 5.4142 0.75 5C0.75 4.5858 1.08579 4.25 1.5 4.25H11.1893L8.4697 1.53033Z" fill="#3B82F6"/>
-</svg></div>
+                <div class="new_dzn-nav-item" data-menu="cars">Автомобили <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="buyers">Покупателям <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="owners">Владельцам <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="company">О компании <span class="new_dzn-arrow">&rarr;</span></div>
+                <div class="new_dzn-nav-item" data-menu="offers">Спецпредложения <span class="new_dzn-arrow">&rarr;</span></div>
             </div>
             <div id="mobileSubMenu-cars" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Автомобили</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Автомобили</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Новые автомобили CHERY</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Автомобили с пробегом</a>
             </div>
             <div id="mobileSubMenu-buyers" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Покупателям</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Покупателям</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Trade-in</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Кредит</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Лизинг</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Запись на тест-драйв</a>
             </div>
             <div id="mobileSubMenu-owners" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Владельцам</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Владельцам</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Сервис и обслуживание</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Страхование</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Запись на сервис</a>
             </div>
             <div id="mobileSubMenu-company" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> О компании</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> О компании</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">О нас</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Новости</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">Блог</a>
@@ -835,41 +513,26 @@
                 <a href="#" class="new_dzn-mobile-submenu-link">Вакансии</a>
             </div>
             <div id="mobileSubMenu-offers" class="new_dzn-mobile-submenu">
-                 <div class="new_dzn-mobile-menu-header">
-            <img src="image/LOGO 3.svg" alt="ТВС Моторс" class="new_dzn-logo-img">
-            <div class="new_close">
-            <img id="mobileMenuClose" class="new_dzn-mobile-menu-close" aria-label="Закрыть меню" src="image/X.svg"/></div>
-        </div>
-                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
-  <path d="M5.5303 1.53033C5.8232 1.23744 5.8232 0.762558 5.5303 0.469668C5.2374 0.176777 4.7626 0.176777 4.4697 0.469668L0.4697 4.4697C0.1768 4.7626 0.1768 5.2374 0.4697 5.5303L4.4697 9.5303C4.7626 9.8232 5.2374 9.8232 5.5303 9.5303C5.8232 9.2374 5.8232 8.7626 5.5303 8.4697L2.8107 5.75H12.5C12.9142 5.75 13.25 5.4142 13.25 5C13.25 4.5858 12.9142 4.25 12.5 4.25H2.8107L5.5303 1.53033Z" fill="#222222"/>
-</svg></button> Спецпредложения</div>
+                <div class="new_dzn-mobile-submenu-header"><button class="new_dzn-mobile-back">&larr;</button> Спецпредложения</div>
                 <a href="#" class="new_dzn-mobile-submenu-link">Все акции</a>
                 <a href="#" class="new_dzn-mobile-submenu-link">На новые авто</a>
             </div>
         </nav>
         <div class="new_dzn-mobile-menu-footer">
             <div class="new_dzn-mobile-phones">
-                <div>
                 <div class="new_dzn-mobile-label">Горячая линия</div>
                 <div class="new_dzn-mobile-phone hotline">+ 7 (906) 834-11-82</div>
-                </div>
-                <div>
                 <div class="new_dzn-mobile-label">Продажи</div>
                 <div class="new_dzn-mobile-phone">+7 (353) 232-52-20</div>
-                </div>
-                <div>
                 <div class="new_dzn-mobile-label">Сервис</div>
                 <div class="new_dzn-mobile-phone">+7 (3532) 32-52-30</div>
-                </div>
             </div>
-            <div class="new_dzn-mobile-ozn-wb-btn">
+            <div style="display: flex;">
             <div class="new_dzn-mobile-socials">
-                <img src="image/ozon.svg" alt="Ozon" class="new_dzn-mobile-social">
+                <img src="image/ozon.png" alt="Ozon" class="new_dzn-mobile-social">
                 <img src="image/wb.svg" alt="WB" class="new_dzn-mobile-social">
             </div>
-            <a href="#" class="new_dzn-mobile-testdrive-btn">Хочу тест-драйв <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
-  <path d="M13.9697 8.53033C13.6768 8.23744 13.6768 7.76256 13.9697 7.46967C14.2626 7.17678 14.7374 7.17678 15.0303 7.46967L19.0303 11.4697C19.3232 11.7626 19.3232 12.2374 19.0303 12.5303L15.0303 16.5303C14.7374 16.8232 14.2626 16.8232 13.9697 16.5303C13.6768 16.2374 13.6768 15.7626 13.9697 15.4697L16.6893 12.75H7C6.58579 12.75 6.25 12.4142 6.25 12C6.25 11.5858 6.58579 11.25 7 11.25H16.6893L13.9697 8.53033Z" fill="#3B82F6"/>
-</svg></a>
+            <a href="#" class="new_dzn-mobile-testdrive-btn">Хочу тест-драйв <span class="new_dzn-arrow-btn">&rarr;</span></a>
         </div></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
