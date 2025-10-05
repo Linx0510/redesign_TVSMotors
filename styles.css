@@ -405,7 +405,7 @@
             align-self: stretch;
             display: flex;
             flex-direction: row;
-            gap: 72px;
+            gap: 60px;
             color: #FDFDFD;
             text-align: center;
             font-family: Play;
@@ -1750,22 +1750,30 @@ max-height: 48px;
         .new_dzn-test-drive-success,
         .new_dzn-credit-success,
         .new_dzn2-test-drive-success {
-            display: none; /* показывается JS */
-            flex-direction: row;
+            display: none ; /* показывается JS */
+            flex-direction: column;
             align-items: flex-start;
             text-align: left;
             gap: 20px;
             width: 100%;
+            height: 300px;
         }
-
+.content_success{
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+    width: 100%;
+    height: 300px;
+}
         /* Иконка слева внутри карточки */
         .new_dzn-test-drive-success-icon,
         .new_dzn-credit-success-icon,
         .new_dzn2-test-drive-success-icon {
-            width: 56px;
-            height: 56px;
-            background: #E6F6FF; /* светло-голубой фон */
-            border-radius: 12px;
+            width: 64px;
+            height: 64px;
+            background: #3B82F61A; /* светло-голубой фон */
+
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1773,18 +1781,24 @@ max-height: 48px;
             color: #0EA5E9; /* голубой тик */
             flex-shrink: 0;
         }
-
+        .new_dzn-test-drive-success-title{
+            margin-bottom: 16px !important;
+        }
+        .new_dzn-test-drive-success-text{
+            margin-bottom: 32px !important;
+        }
         .new_dzn-test-drive-success-title,
         .new_dzn-credit-success-title,
         .new_dzn2-test-drive-success-title {
             color: #222;
             font-family: Play;
-            font-size: 20px;
+            font-size: 32px;
             font-style: normal;
-            font-weight: 700;
+            font-weight: 400;
             line-height: 1.1;
             letter-spacing: -0.3px;
             margin: 0;
+            margin-bottom: 16px;
         }
 
         .new_dzn-test-drive-success-text,
@@ -1798,7 +1812,7 @@ max-height: 48px;
             line-height: 20px;
             letter-spacing: -0.3px;
             margin: 0;
-            max-width: 380px;
+            margin-bottom: 32px;
         }
 
         /* Кнопка располагается рядом с текстом/под ним и стилизована под макет */
@@ -1813,9 +1827,9 @@ max-height: 48px;
             line-height: 20px;
             letter-spacing: -0.3px;
             text-decoration: none;
-            border: 2px solid #3B82F6;
+            border: 1px solid #3B82F6;
             border-radius: 12px;
-            padding: 10px 18px;
+            padding: 12px 24px;
             background: transparent;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -4062,4 +4076,74 @@ html, body {
         max-height: 64px;
         overflow: hidden;
     }
+}
+/* Стили для успешного состояния третьей формы */
+.new_dzn2-test-drive-success {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+    width: 100%;
+    height: 300px;
+}
+
+.new_dzn2-test-drive-success-icon {
+    width: 64px;
+    height: 64px;
+    background: #3B82F61A;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #0EA5E9;
+    flex-shrink: 0;
+}
+
+.new_dzn2-test-drive-success-title {
+    color: #222;
+    font-family: Play;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.new_dzn2-test-drive-success-text {
+    color: #4B5563;
+    font-family: Play;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    margin: 0;
+    margin-bottom: 32px;
+}
+
+.new_dzn2-test-drive-success-btn {
+    color: #3B82F6;
+    font-family: Play;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    text-decoration: none;
+    border: 1px solid #3B82F6;
+    border-radius: 12px;
+    padding: 12px 24px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+.new_dzn2-test-drive-success-btn:hover {
+    background: #3B82F6;
+    color: white;
 }

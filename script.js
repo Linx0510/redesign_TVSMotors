@@ -298,7 +298,54 @@ $(document).ready(function() {
                 showSuccessState();
             }
         });
+// form3 - Test Drive Form
+$(document).ready(function() {
+    // Маска для телефона
+    $('#testDrivePhoneInput').on('input', function(e) {
+        let x = $(this).val().replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+        $(this).val('+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : ''));
+    });
 
+    // Валидация формы
+    $('#testDriveForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const phoneInput = $('#testDrivePhoneInput');
+        const agreementCheckbox = $('#testDriveAgreementCheckbox');
+        const phoneError = $('#testDrivePhoneError');
+        const agreementError = $('#testDriveAgreementError');
+        let isValid = true;
+
+        // Валидация телефона
+        const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
+        if (!phoneRegex.test(phoneInput.val())) {
+            phoneInput.addClass('error');
+            phoneError.show();
+            isValid = false;
+        } else {
+            phoneInput.removeClass('error');
+            phoneError.hide();
+        }
+
+        // Валидация согласия
+        if (!agreementCheckbox.is(':checked')) {
+            agreementError.show();
+            isValid = false;
+        } else {
+            agreementError.hide();
+        }
+
+        if (isValid) {
+            // Показываем успешное состояние
+            showTestDriveSuccessState();
+        }
+    });
+
+    function showTestDriveSuccessState() {
+        $('#testDriveFormContent').hide();
+        $('#testDriveSuccessContent').show().addClass('fade-in');
+    }
+});
         function showSuccessState() {
             const formContent = document.getElementById('formContent');
             const successContent = document.getElementById('successContent');
