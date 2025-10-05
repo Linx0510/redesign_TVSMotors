@@ -478,34 +478,34 @@ const modelsData = {
     "tiggo-7l": {
         title: "CHERY TIGGO 7L",
         price: "2 880 000 ₽",
-        mainImage: "./images/22 1.png",
-        secondaryLeft: "./images/Rectangle 12.png",
+        mainImage: "./image/model.svg",
+        secondaryLeft: "./image/left-model.svg",
         secondaryRight: "./images/Rectangle 13.png",
         colors: {
             white: { 
-                main: "./images/22 1.png",
-                left: "./images/Rectangle 12.png", 
-                right: "./images/Rectangle 13.png"
+                  main: "./image/car_model.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
             black: { 
-                main: "./images/tiggo-7l-black.png",
-                left: "./images/tiggo-7l-black-left.png", 
-                right: "./images/tiggo-7l-black-right.png"
+                main: "./image/car_model.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
             blue: { 
-                main: "./images/tiggo-7l-blue.png",
-                left: "./images/tiggo-7l-blue-left.png", 
-                right: "./images/tiggo-7l-blue-right.png"
+                 main: "./image/car_model.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
             red: { 
-                main: "./images/tiggo-7l-red.png",
-                left: "./images/tiggo-7l-red-left.png", 
-                right: "./images/tiggo-7l-red-right.png"
+                    main: "./image/car_model.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
             gray: { 
-                main: "./images/tiggo-7l-gray.png",
-                left: "./images/tiggo-7l-gray-left.png", 
-                right: "./images/tiggo-7l-gray-right.png"
+                   main: "./image/car_model.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
             "dark-gray": { 
                 main: "./images/tiggo-7l-dark-gray.png",
