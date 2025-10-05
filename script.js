@@ -833,3 +833,82 @@ window.addEventListener('resize', function() {
         document.documentElement.style.transform = 'none';
     }
 });
+// Добавьте в script.js
+function initMapForm() {
+    // Инициализация Яндекс Карты
+    if (typeof ymaps !== 'undefined') {
+        ymaps.ready(function() {
+            const map = new ymaps.Map('map', {
+                center: [51.768199, 55.096955], // Координаты вашего автосалона
+                zoom: 15,
+                controls: ['zoomControl']
+            });
+            
+            // Добавление метки
+            const placemark = new ymaps.Placemark([51.768199, 55.096955], {
+                hintContent: 'ТВС Моторс',
+                balloonContent: 'Официальный дилер CHERY'
+            });
+            
+            map.geoObjects.add(placemark);
+        });
+    }
+}
+
+// Вызовите функцию при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    initMapForm();
+});
+// Улучшенная прокрутка видеоотзывов
+function initVideoScroll() {
+    const wrapper = document.querySelector('.video-comments-wrapper');
+    if (!wrapper) return;
+    
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    // Desktop drag to scroll
+    wrapper.addEventListener('mousedown', (e) => {
+        isDown = true;
+        wrapper.style.cursor = 'grabbing';
+        startX = e.pageX - wrapper.offsetLeft;
+        scrollLeft = wrapper.scrollLeft;
+    });
+    
+    wrapper.addEventListener('mouseleave', () => {
+        isDown = false;
+        wrapper.style.cursor = 'grab';
+    });
+    
+    wrapper.addEventListener('mouseup', () => {
+        isDown = false;
+        wrapper.style.cursor = 'grab';
+    });
+    
+    wrapper.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - wrapper.offsetLeft;
+        const walk = (x - startX) * 2;
+        wrapper.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Mobile touch events
+    wrapper.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX - wrapper.offsetLeft;
+        scrollLeft = wrapper.scrollLeft;
+    });
+    
+    wrapper.addEventListener('touchmove', (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const x = e.touches[0].pageX - wrapper.offsetLeft;
+        const walk = (x - startX) * 2;
+        wrapper.scrollLeft = scrollLeft - walk;
+    });
+}
+
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    initVideoScroll();
+});

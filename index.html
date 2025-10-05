@@ -297,7 +297,8 @@
             <div class="new_dzn_model-item-title">
                 <h2>Модельный ряд</h2>
             </div>
-            <div class="new_dzn_model-item-navigation">
+            <div class="new_dzn_model-item-navigation-wrapper">
+<div class="new_dzn_model-item-navigation">
                 <div class="model-tab inactive" data-model="tiggo-4-pro">
                     <h3>Tiggo 4 Pro</h3>
                     <div class="tab-indicator"></div>
@@ -327,6 +328,8 @@
                     <div class="tab-indicator"></div>
                 </div>
             </div>
+</div>
+            
         </div>
         <div class="new_dzn_model-item-main">
             <div class="new_dzn_model-item-img">
@@ -418,7 +421,7 @@
                         </label>
                         <div class="new_dzn-error-message" id="creditAgreementError">Необходимо ваше согласие</div>
                         
-                        <button type="submit" class="new_dzn-btn new_dzn-btn-outline-header" id="creditSubmitBtn">
+                        <button type="submit" class="new_dzn-btn new_dzn-btn-outline-credit" id="creditSubmitBtn">
                             Отправить заявку 
                             <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -459,7 +462,9 @@
                 </label>
                 <div class="new_dzn-error-message" id="testDriveAgreementError">Необходимо согласие</div>
 
-                <button type="submit" class="new_dzn2-test-drive-btn">Отправить заявку</button>
+                <button type="submit" class="new_dzn2-test-drive-btn">Записаться на тест-драйв <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg></button>
             </form>
         </div>
         
@@ -511,6 +516,7 @@
     </section>
 
     <!-- Третья секция - Видео отзывы -->
+    
     <div class="video-comments-container">
         <div class="video-comments-header">
             <span class="video-comments-impression">Живые впечатления</span>
@@ -518,6 +524,7 @@
         </div>
         
         <div class="video-comments-wrapper">
+            
             <div class="video-comments-grid">
                 <!-- Карточка 1 (левая крайняя) -->
                 <div class="video-comments-card" style="background-image: url('./images/faddb968d9930a43d3816e04ae240f3d59b62699.png')">
@@ -649,7 +656,29 @@
             </div>
         </div>
     </section>
-
+<section class="new_dzn-map-form-section">
+    <div class="new_dzn-map-container" id="map"></div>
+    <div class="new_dzn-map-form-overlay">
+        <div class="new_dzn-map-form-card">
+            <div class="new_dzn-map-form-content">
+                <div class="new_dzn-map-form-title">
+                    <span class="new_dzn-map-form-sale">Контакты</span>
+                    <h2>Посетите наш автосалон</h2>
+                </div>
+                <form class="new_dzn-map-form">
+                    <input type="text" class="new_dzn-map-form-input" placeholder="Ваше имя" required>
+                    <input type="tel" class="new_dzn-map-form-input" placeholder="+7 (___) ___-__-__" required>
+                    <button type="submit" class="new_dzn-map-form-btn">
+                        Записаться на просмотр
+                        <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
     <footer class="new_dzn-footer">
         <div class="new_dzn-container">
             <div class="new_dzn-footer-content">
