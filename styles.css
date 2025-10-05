@@ -87,6 +87,18 @@
         .new_dzn-btn-outline-header:hover {
             background-color: #dbeafe;
         }
+         .new_dzn-btn-outline-credit:hover {
+            background-color: #dbeafe;
+        }
+         .new_dzn-btn-outline-credit {
+            background-color: transparent;
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
+        }
+
+        .new_dzn-btn-outline-credit:hover {
+            background-color: #dbeafe;
+        }
 
         .new_dzn-btn-icon {
             width: 24px;
@@ -442,12 +454,11 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 24px;
             width: 100%;
         }
 
         .new_dzn-test-drive-card-title {
-            margin-bottom: 10px;
+            margin-bottom: 32px;
         }
 
         .new_dzn-test-drive-card-title h2 {
@@ -471,12 +482,7 @@
             letter-spacing: -0.3px;
         }
 
-        .new_dzn-test-drive-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            width: 100%;
-        }
+    
 
         .new_dzn-test-drive-input {
             display: flex;
@@ -488,7 +494,7 @@
             border-radius: 12px;
             border: 1px solid #C3C6D4;
             background: #FFF;
-            width: 100%;
+            width: 452px;
             flex: 1 0 0;
             overflow: hidden;
             color: #676879;
@@ -518,6 +524,7 @@
             color: #222;
             margin-top: 16px;
             cursor: pointer;
+            margin-bottom: 32px;
         }
 
         .new_dzn-test-drive-checkbox-label span {
@@ -540,7 +547,7 @@
             line-height: 20px;
             letter-spacing: -0.3px;
             display: flex;
-            width: 100%;
+            width: 321px;
             height: 48px;
             min-height: 48px;
             max-height: 48px;
@@ -805,13 +812,10 @@
         .new_dzn2-test-drive-card-content {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 24px;
-            width: 100%;
-        }
+     }
 
         .new_dzn2-test-drive-card-title {
-            margin-bottom: 10px;
+            margin-bottom: 32px;
         }
 
         .new_dzn2-test-drive-card-title h2 {
@@ -838,21 +842,19 @@
         .new_dzn2-test-drive-form {
             display: flex;
             flex-direction: column;
-            gap: 18px;
-            width: 100%;
         }
 
         .new_dzn2-test-drive-input {
             display: flex;
             height: 48px;
-            padding: 4px 4px 4px 16px;
+            padding: 8px 6px 8px 16px;
             align-items: center;
             gap: 8px;
             align-self: stretch;
             border-radius: 12px;
             border: 1px solid #C3C6D4;
             background: #FFF;
-            width: 100%;
+            width: 452px;
             flex: 1 0 0;
             overflow: hidden;
             color: #676879;
@@ -863,6 +865,7 @@
             font-weight: 400;
             line-height: 22px;
             transition: border-color 0.3s ease;
+            
         }
 
         .new_dzn2-test-drive-input:focus {
@@ -882,6 +885,7 @@
             color: #222;
             margin-top: 16px;
             cursor: pointer;
+            margin-bottom: 32px;
         }
 
         .new_dzn2-test-drive-checkbox-label span {
@@ -896,7 +900,9 @@
         }
 
         .new_dzn2-test-drive-btn {
-            color: #FDFDFD;
+                background-color: transparent;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
             font-family: Play;
             font-size: 15px;
             font-style: normal;
@@ -904,17 +910,14 @@
             line-height: 20px;
             letter-spacing: -0.3px;
             display: flex;
-            width: 100%;
+            width: 262px;
             height: 48px;
             min-height: 48px;
             max-height: 48px;
-            padding: 24px;
             justify-content: center;
             align-items: center;
             gap: 8px;
             border-radius: 12px;
-            background: #3B82F6;
-            border: none;
             cursor: pointer;
             text-decoration: none;
             transition: background 0.3s ease;
@@ -2008,7 +2011,7 @@
 
         .new_dzn_model-item-img-car {
             position: absolute;
-            top: 50%;
+            top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
@@ -2192,7 +2195,6 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            padding: 0px 24px;
             gap: 8px;
             height: 48px;
             min-height: 48px;
@@ -2252,7 +2254,7 @@
             height: 100%;
             display: flex;
             gap: 40px;
-            padding: 140px 120px;
+            padding: 0 140px 120px;
             align-items: flex-start;
         }
 
@@ -3769,6 +3771,10 @@
                 padding: 32px 16px;
                 gap: 12px;
             }
+            .new_dzn2-test-drive-section{
+            background: linear-gradient(0deg, rgba(253, 253, 253, 0.80) 0%, rgba(253, 253, 253, 0.80) 100%), url(image/Test\ drive\ contact.svg) lightgray -100px 0px / 197.334% 100% no-repeat;
+
+            }
         }
 
         /* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ===== */
@@ -4006,7 +4012,6 @@
         width: 48px !important;
         height: 48px !important;
         font-size: 22px !important;
-        margin: 0 auto;
     }
 
     .new_dzn-test-drive-success-title,
@@ -4043,13 +4048,13 @@
     }
 
     .new_dzn_model-item-navigation {
-        width: 100% !important;
         height: auto !important;
         flex-wrap: wrap;
         gap: 8px !important;
         justify-content: flex-start;
-        overflow-x: auto;
+        overflow: auto;
         padding-bottom: 8px;
+        scroll-behavior: smooth;
     }
 
     .model-tab {
@@ -4322,6 +4327,9 @@ html, body {
         max-height: 64px;
         overflow: hidden;
     }
+    .new_dzn2-test-drive-input{
+        width: 343px;
+    }
 }
 /* Стили для успешного состояния третьей формы */
 .new_dzn2-test-drive-success {
@@ -4392,4 +4400,236 @@ html, body {
 .new_dzn2-test-drive-success-btn:hover {
     background: #3B82F6;
     color: white;
+}
+/* Стили для прокрутки модельного ряда на мобильных */
+.new_dzn_model-item-navigation-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.new_dzn_model-item-navigation {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE */
+}
+
+.new_dzn_model-item-navigation::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+@media (max-width: 768px) {
+    .new_dzn_model-item-navigation {
+        padding-bottom: 8px;
+        gap: 12px;
+    }
+    
+    .model-tab {
+        flex-shrink: 0;
+        min-width: 140px;
+    }
+}
+/* Стили для формы на фоне карты */
+.new_dzn-map-form-section {
+    position: relative;
+    height: 600px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.new_dzn-map-container {
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5; /* Заглушка для карты */
+}
+
+.new_dzn-map-form-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 40px;
+    background: linear-gradient(90deg, rgba(253,253,253,0) 0%, rgba(253,253,253,0.8) 30%);
+}
+
+.new_dzn-map-form-card {
+    background: #FFF;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.new_dzn-map-form-title {
+    margin-bottom: 32px;
+}
+
+.new_dzn-map-form-sale {
+    color: #F97316;
+    font-family: Play;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.new_dzn-map-form-title h2 {
+    color: #222;
+    font-family: Play;
+    font-size: 32px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.new_dzn-map-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.new_dzn-map-form-input {
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid #C3C6D4;
+    background: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.new_dzn-map-form-input:focus {
+    outline: none;
+    border-color: #3B82F6;
+}
+
+.new_dzn-map-form-btn {
+    height: 48px;
+    background: #3B82F6;
+    color: #FDFDFD;
+    border: none;
+    border-radius: 12px;
+    font-family: Play;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.new_dzn-map-form-btn:hover {
+    background: #2563eb;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+    .new_dzn-map-form-section {
+        height: 500px;
+    }
+    
+    .new_dzn-map-form-overlay {
+        justify-content: center;
+        padding: 20px;
+        background: linear-gradient(0deg, rgba(253,253,253,0.9) 0%, rgba(253,253,253,0.7) 100%);
+    }
+    
+    .new_dzn-map-form-card {
+        padding: 24px;
+        max-width: 100%;
+    }
+    
+    .new_dzn-map-form-title h2 {
+        font-size: 24px;
+    }
+}
+/* Улучшенные стили для горизонтальной прокрутки видео */
+.video-comments-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    cursor: grab;
+}
+
+.video-comments-wrapper:active {
+    cursor: grabbing;
+}
+
+.video-comments-grid {
+    display: flex;
+    gap: 24px;
+    padding: 0 40px 20px;
+    width: max-content;
+    min-width: 100%;
+}
+
+/* Убедитесь что карточки не сжимаются */
+.video-comments-card {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 520px;
+}
+
+/* Скрыть скроллбар но оставить функциональность */
+.video-comments-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.video-comments-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.video-comments-wrapper::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.video-comments-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Индикаторы прокрутки для мобильных */
+.video-comments-scroll-hint {
+    display: none;
+    text-align: center;
+    color: #7c7c7c;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .video-comments-grid {
+        padding: 0 20px 15px;
+        gap: 16px;
+    }
+    
+    .video-comments-card {
+        width: 300px;
+        height: 400px;
+    }
+    
+    .video-comments-scroll-hint {
+        display: block;
+    }
+    
+    /* Улучшенная прокрутка для тач-устройств */
+    .video-comments-wrapper {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .video-comments-card {
+        scroll-snap-align: start;
+    }
 }
