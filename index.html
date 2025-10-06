@@ -142,11 +142,11 @@
                     <a href=""><img src="image/ozon.svg" alt="Социальная сеть" class="new_dzn-social-icon"></a>
                     <a href=""><img src="image/wb.svg" alt="Социальная сеть" class="new_dzn-social-icon"></a>
                 </div>
-                <button class="new_dzn-btn new_dzn-btn-outline-header">
-                    Хочу тест-драйв
-                    <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <button class=" new_dzn-btn-outline-header">
+                    <span>Хочу тест-драйв</span>
+                    <span>
+                        <img src="image/Arrow-Right_bluee.svg" alt="">
+                    </span>
                 </button>
             </div>
             
@@ -161,7 +161,10 @@
             <div class="new_dzn-hero-price">От 1 690 000 ₽</div>
             <div class="new_dzn-hero-subtitle">Рассрочка 0,01%</div>
         </div>
-        <button class="new_dzn-btn new_dzn-btn-primary">Получить предложение <span class="new_dzn-btn-icon">→</span></button>
+        <button class="new_dzn-btn new_dzn-btn-primary">
+            <span class="new_btn-text">Получить предложение</span>
+            <span class="new_btn-icon"><img src="image/Arrow-Right_white.svg" alt=""></span>
+        </button>    
     </div>
     <!-- Пагинация ВНЕ hero-content -->
     <div class="new_dzn-hero-pagination">
@@ -1308,7 +1311,7 @@
             }
     
             function startAutoplay() {
-                autoplayInterval = setInterval(nextSlide, 3000);
+                autoplayInterval = setInterval(nextSlide, 2000);
             }
     
             updateSlider();
