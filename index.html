@@ -142,11 +142,11 @@
                     <a href=""><img src="image/ozon.svg" alt="Социальная сеть" class="new_dzn-social-icon"></a>
                     <a href=""><img src="image/wb.svg" alt="Социальная сеть" class="new_dzn-social-icon"></a>
                 </div>
-                <button class="new_dzn-btn new_dzn-btn-outline-header">
-                    Хочу тест-драйв
-                    <svg class="new_dzn-btn-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <button class=" new_dzn-btn-outline-header">
+                    <span>Хочу тест-драйв</span>
+                    <span>
+                        <img src="image/Arrow-Right_bluee.svg" alt="">
+                    </span>
                 </button>
             </div>
             
@@ -161,7 +161,10 @@
             <div class="new_dzn-hero-price">От 1 690 000 ₽</div>
             <div class="new_dzn-hero-subtitle">Рассрочка 0,01%</div>
         </div>
-        <button class="new_dzn-btn new_dzn-btn-primary">Получить предложение <span class="new_dzn-btn-icon">→</span></button>
+        <button class="new_dzn-btn new_dzn-btn-primary">
+            <span class="new_btn-text">Получить предложение</span>
+            <span class="new_btn-icon"><img src="image/Arrow-Right_white.svg" alt=""></span>
+        </button>    
     </div>
     <!-- Пагинация ВНЕ hero-content -->
     <div class="new_dzn-hero-pagination">
@@ -401,6 +404,49 @@
         </div>
     </section>
     <section class="new_technology_security">
+        <div class="new_dzn-container">
+            <div class="new_technology_security_header">
+                <h2>Технологии и безопасность</h2>
+                <div class="new_ikon_indikators">
+                    <div class="new_ikon_indikator "></div>
+                    <div class="new_ikon_indikator "></div>
+                    <div class="new_ikon_indikator "></div>
+                    <div class="new_ikon_indikator"></div>
+                    <div class="new_ikon_indikator"></div>
+                </div>
+            </div>
+        </div>
+        <div class="new_technology_security_content">
+            <div class="new_slider-container">
+                <div class="new_technology_security_content_cart new_epb">
+                    <h3>EPB + AUTOHOLD </h3>
+                    <p>Электронный стояночный тормоз с автоудержанием для комфортного вождения в городе и удобной парковки</p>
+                </div>
+                <div class="new_technology_security_content_cart new_security">
+                    <h3>Боковые подушки безопасности</h3>
+                    <p style="display: flex; flex-direction: column;">Дополнительная защита при боковых ударах <span>для водителя и пассажиров</span></p>
+                </div>
+                <div class="new_technology_security_content_cart new_ecran">
+                    <h3>10,25-дюймовый сенсорный экран <hr style="border: none;"> 7-дюймовый Full-Liquid Crysta</h3>
+                    <p style="display: flex; flex-direction: column;">Современная мультимедийная система с четким изображением <span> и быстрым откликом</span></p>
+                </div>
+                <div class="new_technology_security_content_cart new_epb">
+                    <h3>EPB + AUTOHOLD </h3>
+                    <p>Электронный стояночный тормоз с автоудержанием для комфортного вождения в городе и удобной парковки</p>
+                </div>
+                <div class="new_technology_security_content_cart new_security">
+                    <h3>Боковые подушки безопасности</h3>
+                    <p style="display: flex; flex-direction: column;">Дополнительная защита при боковых ударах <span>для водителя и пассажиров</span></p>
+                </div>
+            </div>
+        </div>
+         <div class="new_mobile_indicators">
+        <div class="new_mobile_indicator"></div>
+        <div class="new_mobile_indicator"></div>
+        <div class="new_mobile_indicator"></div>
+        <div class="new_mobile_indicator"></div>
+        <div class="new_mobile_indicator"></div>
+    </div>
     </section>
 
    <main class="new_main_blok_animate">
@@ -1225,6 +1271,100 @@
 
         initSlider();
     });
+    </script>
+    <script>
+        $(document).ready(function() {
+            let currentSlide = 0;
+            let autoplayInterval;
+    
+            const $sliderContainer = $('.new_slider-container');
+            const $slides = $('.new_technology_security_content_cart');
+            const $indicators = $('.new_ikon_indikator');
+            const $mobileIndicators = $('.new_mobile_indicator');
+            const totalSlides = $slides.length;
+    
+            const $lastSlideClone1 = $slides.eq(totalSlides - 1).clone();
+            const $lastSlideClone2 = $slides.eq(totalSlides - 2).clone();
+            $sliderContainer.prepend($lastSlideClone2, $lastSlideClone1);
+    
+            const $firstSlideClone1 = $slides.eq(0).clone();
+            const $firstSlideClone2 = $slides.eq(1).clone();
+            $sliderContainer.append($firstSlideClone1, $firstSlideClone2);
+    
+            const $allSlides = $('.new_technology_security_content_cart');
+            const totalAllSlides = $allSlides.length;
+    
+            currentSlide = 2;
+
+            function updateSlider() {
+                const containerWidth = $('.new_technology_security_content').width();
+                const cardWidth = $slides.first().outerWidth(true);
+                const gap = 24;
+        
+                const offset = (containerWidth / 2) - (cardWidth / 2) - (currentSlide * (cardWidth + gap));
+        
+                $sliderContainer.css('transform', `translateX(${offset}px)`);
+        
+                $allSlides.removeClass('active');
+                $indicators.removeClass('active');
+                $mobileIndicators.removeClass('active');
+        
+                let realIndex = (currentSlide - 2 + totalSlides) % totalSlides;
+                if (realIndex < 0) realIndex += totalSlides;
+        
+                $allSlides.eq(currentSlide).addClass('active');
+                $indicators.eq(realIndex).addClass('active');
+                $mobileIndicators.eq(realIndex).addClass('active');
+            }
+    
+            function nextSlide() {
+                currentSlide++;
+        
+                if (currentSlide >= totalAllSlides - 2) {
+                    $sliderContainer.css('transition', 'none');
+                    currentSlide = 2;
+                    const containerWidth = $('.new_technology_security_content').width();
+                    const cardWidth = $slides.first().outerWidth(true);
+                    const gap = 24;
+                    const offset = (containerWidth / 2) - (cardWidth / 2) - (currentSlide * (cardWidth + gap));
+                    $sliderContainer.css('transform', `translateX(${offset}px)`);
+            
+                    setTimeout(() => {
+                        $sliderContainer.css('transition', 'transform 0.5s ease');
+                    }, 50);
+                }
+        
+                updateSlider();
+            }
+    
+            function goToSlide(index) {
+                currentSlide = index + 2;
+                updateSlider();
+                resetAutoplay();
+            }
+    
+            function resetAutoplay() {
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            }
+    
+            function startAutoplay() {
+                autoplayInterval = setInterval(nextSlide, 2000);
+            }
+    
+            updateSlider();
+            startAutoplay();
+    
+            $indicators.on('click', function() {
+                goToSlide($(this).index());
+            });
+    
+            $mobileIndicators.on('click', function() {
+                goToSlide($(this).index());
+            });
+    
+            $(window).on('resize', updateSlider);
+        });
     </script>
 </body>
 </html>
