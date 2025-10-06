@@ -3177,7 +3177,7 @@
                 font-size: 24px;
             }
             .new_animation_car_text_blok_description>p{
-                width: 100%;
+                width: 100% !important;
             }
                    
             .new_animation_car2{
@@ -3191,6 +3191,7 @@
             }
             .new_animation_car21 {
                 gap: 32px;
+                width: 100%;
             }
             .new_animation_car3{
             display: flex;
