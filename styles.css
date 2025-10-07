@@ -2475,7 +2475,7 @@
         }
 
         .new_dzn_model-item-img-price-name h2 {
-            width: 236px;
+            width: 600px;
             height: 37px;
             font-family: 'Play';
             font-style: normal;
@@ -2484,6 +2484,7 @@
             line-height: 37px;
             letter-spacing: -0.3px;
             color: #222222;
+            text-align: start;
         }
         
         .new_dzn_model-item-img-price-name h3 {
@@ -2496,6 +2497,7 @@
             line-height: 28px;
             letter-spacing:  0.5px;
             color: #7D7D7D;
+            text-align: start;
         }
 
         .new_dzn_model-item-img-price-btns {
@@ -3262,6 +3264,13 @@
         padding-top: 40px;
         gap: 24px;
     }
+    .video-comments-header {
+            text-align: start;
+        
+        }
+        .new_news_header>h2 {
+            width: 155px;
+        }
 }
 
 
@@ -4940,7 +4949,7 @@ html, body {
 
     .new_dzn-commets-content-titiles {
         width: 100% !important;
-        text-align: center;
+        text-align: start;
     }
 
     .comments-columns-container {
@@ -5279,6 +5288,9 @@ html, body {
     font-size: 14px;
     margin-top: 10px;
 }
+.video-comments-nav{
+    display: none;
+}
 
 @media (max-width: 768px) {
     .video-comments-grid {
@@ -5360,5 +5372,14 @@ html, body {
         margin-top: 24px;
         z-index: 10;
         position: relative;
+    }
+    .video-comments-nav{
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+    }
+    .video-comments-nav>button{
+        border: none;
+        background: transparent;
     }
 }
