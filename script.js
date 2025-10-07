@@ -926,4 +926,106 @@ $(document).ready(function() {
 
             initSlider();
         });
+
+
+/*видеоблок со скроллоm */
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cardsContainer = document.querySelector('.new_croll-cards-container');
+            const arrowLeft = document.querySelector('.new_croll-arrow-left');
+            const arrowRight = document.querySelector('.new_croll-arrow-right');
+            const cards = document.querySelectorAll('.new_croll-card');
+            
+            let isDragging = false;
+            let startX = 0;
+            let scrollLeft = 0;
+            
+            function updateArrows() {
+                const container = cardsContainer;
+                const scrollLeft = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                
+                // Обновляем стрелки
+                arrowLeft.style.opacity = scrollLeft <= 10 ? '0.4' : '1';
+                arrowRight.style.opacity = scrollLeft >= maxScroll - 10 ? '0.4' : '1';
+            }
+            
+            function scrollToCard(direction) {
+                const container = cardsContainer;
+                const cardWidth = cards[0].offsetWidth + 20; // + gap
+                const currentScroll = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                
+                let targetScroll;
+                
+                if (direction === 'left') {
+                    targetScroll = Math.max(0, currentScroll - cardWidth);
+                } else {
+                    targetScroll = Math.min(maxScroll, currentScroll + cardWidth);
+                }
+                
+                container.scrollTo({
+                    left: targetScroll,
+                    behavior: 'smooth'
+                });
+                
+                // Обновляем стрелки после анимации
+                setTimeout(updateArrows, 300);
+            }
+            
+            // Обработчики для стрелок
+            arrowLeft.addEventListener('click', () => scrollToCard('left'));
+            arrowRight.addEventListener('click', () => scrollToCard('right'));
+            
+            // Свайп для десктопа
+            cardsContainer.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                cardsContainer.classList.add('grabbing');
+                startX = e.pageX - cardsContainer.offsetLeft;
+                scrollLeft = cardsContainer.scrollLeft;
+            });
+            
+            cardsContainer.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - cardsContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                cardsContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            function endDrag() {
+                isDragging = false;
+                cardsContainer.classList.remove('grabbing');
+                updateArrows();
+            }
+            
+            cardsContainer.addEventListener('mouseup', endDrag);
+            cardsContainer.addEventListener('mouseleave', endDrag);
+            
+            // Touch события для мобильных
+            cardsContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].pageX - cardsContainer.offsetLeft;
+                scrollLeft = cardsContainer.scrollLeft;
+            });
+            
+            cardsContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const x = e.touches[0].pageX - cardsContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                cardsContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            cardsContainer.addEventListener('touchend', updateArrows);
+            
+            // Обновление при изменении размера
+            window.addEventListener('resize', updateArrows);
+            
+            // Обновление при скролле
+            cardsContainer.addEventListener('scroll', updateArrows);
+            
+            // Инициализация
+            updateArrows();
+        });
+  
+
   
