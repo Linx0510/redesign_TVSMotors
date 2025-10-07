@@ -428,6 +428,7 @@
             z-index: 1;
             transition: background-image 0.5s ease-in-out;
         }
+        
 
         .new_dzn-hero-content {
             position: relative;
@@ -456,7 +457,7 @@
             line-height: 65px;
             letter-spacing: -0.3px;
             color: #fff;
-            margin-bottom: 59px;
+            margin-bottom: 60px;
         }
 
         .new_dzn-hero-decoration {
@@ -928,6 +929,7 @@
             gap: 52px;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .new_dzn2-test-drive-bg {
@@ -3653,7 +3655,8 @@
             }
 
             .new_dzn-credit-card {
-                max-width: 500px;
+                width: 100%;
+                height: auto;
                 margin: 0 auto;
             }
 
@@ -3876,8 +3879,8 @@
             }
 
             .new_dzn-hero {
-                padding: 80px 16px;
-                height: 600px;
+                padding: 200px 16px 80px 16px;
+                height: 730px;
             }
 
             .new_dzn-hero-price {
@@ -3914,7 +3917,20 @@
             }
 
             .new_dzn-test-drive-card {
-                padding: 24px;
+                padding: 16px;
+            }
+            .new_dzn-test-drive-timer{
+                width: 100%;
+            }
+            .new_dzn-test-drive-checkbox-label>span>br,
+            .new_dzn-credit-checkbox-label>span>br{
+                display: none;
+            }
+            .new_dzn2-test-drive-form{
+                width: 100%;
+            }
+            .new_dzn-test-drive-input{
+                width: 100%;
             }
 
             .new_dzn-test-drive-card-title h2 {
@@ -5053,7 +5069,7 @@
 /*видеоблок */
 
         .video-comments-container {
-    
+            max-width: 1440px;
             margin: 0 auto;
             padding: 60px 0;
         }
