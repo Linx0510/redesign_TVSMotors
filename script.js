@@ -925,4 +925,5 @@ $(document).ready(function() {
             });
 
             initSlider();
-        })
+        });
+  

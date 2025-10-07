@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chery Tiggo 4 - Идеальные модели в наличии</title>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Play', sans-serif;
+            background: #FDFDFD;
+            color: #222222;
+            overflow-x: hidden;
+        }
+
+        .new_croll_cards-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 140px 120px;
+            gap: 40px;
+            width: 1440px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .new_crollsection-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            gap: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .new_croll-section-subtitle {
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 23px;
+            letter-spacing: -0.3px;
+            color: #F97316;
+        }
+
+        .new_croll-section-title {
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 37px;
+            letter-spacing: -0.3px;
+            color: #222222;
+        }
+
+        .new_croll-cards-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 20px;
+            width: 100%;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+            scroll-snap-type: x mandatory;
+        }
+
+        .new_croll-cards-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .new_croll-cards-container.grabbing {
+            cursor: grabbing;
+            scroll-behavior: auto;
+        }
+
+        .new_croll-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 400px;
+            min-width: 400px;
+            background: #F5F5F5;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+
+        .new_croll-card-image {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
+        }
+
+        .new_croll-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .new_croll-image-slides {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 4px;
+            position: absolute;
+            width: 376px;
+            height: 4px;
+            left: 12px;
+            bottom: 12px;
+        }
+
+        .new_croll-slide-indicator {
+            height: 4px;
+            flex-grow: 1;
+            border-radius: 4px;
+        }
+
+        .new_croll-slide-active {
+            background: #3B82F6;
+        }
+
+        .new_croll-slide-inactive {
+            background: #FDFDFD;
+            opacity: 0.6;
+        }
+
+        .new_croll-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 16px 16px 24px;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .new_croll-card-title {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .new_croll-car-model {
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 37px;
+            letter-spacing: -0.3px;
+            color: #222222;
+        }
+
+        .new_croll-car-details {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 23px;
+            letter-spacing: -0.3px;
+            color: #7D7D7D;
+        }
+
+        .new_croll-car-specs {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .new_croll-spec-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 8px;
+        }
+
+        .new_croll-spec-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .new_croll-spec-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .new_croll-spec-text {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 23px;
+            letter-spacing: -0.3px;
+            color: #222222;
+        }
+
+        .new_croll-card-price {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .new_croll-price-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .new_croll-price-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            padding: 0px;
+            gap: 4px;
+            flex-grow: 1;
+        }
+
+        .new_croll-price-from {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 23px;
+            letter-spacing: -0.3px;
+            color: #7D7D7D;
+        }
+
+        .new_croll-price-value {
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 37px;
+            letter-spacing: -0.3px;
+            color: #222222;
+        }
+
+        .new_croll-navigation-arrows {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 24px;
+            width: 184px;
+            height: 40px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .new_croll-arrow {
+            width: 80px;
+            height: 2px;
+            background: #3B82F6;
+            position: relative;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .new_croll-arrow-left {
+            opacity: 0.4;
+        }
+
+        .new_croll-arrow-right {
+            opacity: 1;
+        }
+
+        .new_croll-arrow-left::before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #3B82F6;
+            border-left: 2px solid #3B82F6;
+            top: -5px;
+            left: 0;
+            transform: rotate(-45deg);
+        }
+
+        .new_croll-arrow-right::before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #3B82F6;
+            border-right: 2px solid #3B82F6;
+            top: -5px;
+            right: 0;
+            transform: rotate(45deg);
+        }
+
+        .new_croll-arrow:hover {
+            opacity: 0.8;
+        }
+
+        .new_croll-arrow-left:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 1200px) {
+            .new_croll-cards-section {
+                padding: 80px 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .new_croll-cards-section {
+                padding: 60px 20px;
+            }
+            
+            .new_croll-cards-container {
+                gap: 16px;
+                padding: 0 10px;
+            }
+            
+            .new_croll-card {
+                width: calc(100vw - 60px);
+                min-width: calc(100vw - 60px);
+                max-width: calc(100vw - 60px);
+            }
+
+            .new_croll-navigation-arrows {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .new_croll-cards-section {
+                padding: 40px 15px;
+            }
+            
+            .new_croll-cards-container {
+                gap: 12px;
+                padding: 0 5px;
+            }
+            
+            .new_croll-card {
+                width: calc(100vw - 40px);
+                min-width: calc(100vw - 40px);
+                max-width: calc(100vw - 40px);
+            }
+
+            .new_croll-navigation-arrows {
+                gap: 16px;
+            }
+            
+            .new_croll-arrow {
+                width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="new_croll-cards-section">
+        <div class="new_croll-section-header">
+            <div class="new_croll-section-subtitle">Идеальные модели в наличии</div>
+            <div class="new_croll-section-title">Актуальные предложения</div>
+        </div>
+        
+        <div class="new_croll-cards-container">
+            <!-- Карточка 1 -->
+            <div class="new_croll-card">
+                <div class="new_croll-card-image">
+                    <img src="./images/b6d357d5504c86932444f447bfa105dda31946e4.png" alt="Chery Tiggo 4 серый" onerror="this.style.display='none'">
+                    <div class="new_croll-image-slides">
+                        <div class="new_croll-slide-indicator slide-active"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                    </div>
+                </div>
+                <div class="new_croll-card-content">
+                    <div class="new_croll-card-title">
+                        <div class="new_croll-car-model">Tiggo 4</div>
+                        <div class="new_croll-car-details">Рестайлинг 2 МТ Line (серый), 2025</div>
+                    </div>
+                    <div class="new_croll-car-specs">
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/engine-motor_svgrepo.com.png" alt="Объем двигателя">
+                            </div>
+                            <div class="new_croll-spec-text">1,5 л</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/speed_svgrepo.com.png" alt="Мощность">
+                            </div>
+                            <div class="new_croll-spec-text">113 л.с.</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/transmission_svgrepo.com.png" alt="Трансмиссия">
+                            </div>
+                            <div class="new_croll-spec-text">Автоматическая</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/suspension_svgrepo.com.png" alt="Привод">
+                            </div>
+                            <div class="new_croll-spec-text">Передний привод</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/gas-station-petrol_svgrepo.com.png" alt="Топливо">
+                            </div>
+                            <div class="new_croll-spec-text">Бензин</div>
+                        </div>
+                    </div>
+                    <div class="new_croll-card-price">
+                        <div class="new_croll-price-container">
+                            <div class="new_croll-price-wrapper">
+                                <div class="new_croll-price-from">от</div>
+                                <div class="new_croll-price-value">2 150 000 ₽</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="new_croll-card">
+                <div class="new_croll-card-image">
+                    <img src="./images/a0fa3472d0ca1ee4c64072b113527a04a85fbe55.png" alt="Chery Tiggo 4 черный" onerror="this.style.display='none'">
+                    <div class="new_croll-image-slides">
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-active"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                    </div>
+                </div>
+                <div class="new_croll-card-content">
+                    <div class="new_croll-card-title">
+                        <div class="new_croll-car-model">Tiggo 4</div>
+                        <div class="new_croll-car-details">Рестайлинг 2 МТ Prime (черный), 2025</div>
+                    </div>
+                    <div class="new_croll-car-specs">
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/engine-motor_svgrepo.com.png" alt="Объем двигателя">
+                            </div>
+                            <div class="new_croll-spec-text">1,5 л</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/speed_svgrepo.com.png" alt="Мощность">
+                            </div>
+                            <div class="new_croll-spec-text">113 л.с.</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/transmission_svgrepo.com.png" alt="Трансмиссия">
+                            </div>
+                            <div class="new_croll-spec-text">Автоматическая</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/suspension_svgrepo.com.png" alt="Привод">
+                            </div>
+                            <div class="new_croll-spec-text">Передний привод</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/gas-station-petrol_svgrepo.com.png" alt="Топливо">
+                            </div>
+                            <div class="new_croll-spec-text">Бензин</div>
+                        </div>
+                    </div>
+                    <div class="new_croll-card-price">
+                        <div class="new_croll-price-container">
+                            <div class="new_croll-price-wrapper">
+                                <div class="new_croll-price-from">от</div>
+                                <div class="new_croll-price-value">2 150 000 ₽</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Карточка 3 -->
+            <div class="new_croll-card">
+                <div class="new_croll-card-image">
+                    <img src="./images/" alt="Chery Tiggo 4 черный Line" onerror="this.style.display='none'">
+                    <div class="new_croll-image-slides">
+                        <div class="new_croll-slide-indicator slide-active"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                        <div class="new_croll-slide-indicator slide-inactive"></div>
+                    </div>
+                </div>
+                <div class="new_croll-card-content">
+                    <div class="new_croll-card-title">
+                        <div class="new_croll-car-model">Tiggo 4</div>
+                        <div class="new_croll-car-details">Рестайлинг 2 МТ Line (черный), 2025</div>
+                    </div>
+                    <div class="new_croll-car-specs">
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/engine-motor_svgrepo.com.png" alt="Объем двигателя">
+                            </div>
+                            <div class="new_croll-spec-text">1,5 л</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/speed_svgrepo.com.png" alt="Мощность">
+                            </div>
+                            <div class="new_croll-spec-text">113 л.с.</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/transmission_svgrepo.com.png" alt="Трансмиссия">
+                            </div>
+                            <div class="new_croll-spec-text">Автоматическая</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/suspension_svgrepo.com.png" alt="Привод">
+                            </div>
+                            <div class="new_croll-spec-text">Передний привод</div>
+                        </div>
+                        <div class="new_croll-spec-item">
+                            <div class="new_croll-spec-icon">
+                                <img src="./images/gas-station-petrol_svgrepo.com.png" alt="Топливо">
+                            </div>
+                            <div class="new_croll-spec-text">Бензин</div>
+                        </div>
+                    </div>
+                    <div class="new_croll-card-price">
+                        <div class="new_croll-price-container">
+                            <div class="new_croll-price-wrapper">
+                                <div class="new_croll-price-from">от</div>
+                                <div class="new_croll-price-value">1 800 000 ₽</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="new_croll-navigation-arrows">
+            <div class="new_croll-arrow arrow-left"></div>
+            <div class="new_croll-arrow arrow-right"></div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cardsContainer = document.querySelector('.new_croll-cards-container');
+            const arrowLeft = document.querySelector('.new_croll-arrow-left');
+            const arrowRight = document.querySelector('.new_croll-arrow-right');
+            const cards = document.querySelectorAll('.new_croll-card');
+            
+            let isDragging = false;
+            let startX = 0;
+            let scrollLeft = 0;
+            
+            function updateArrows() {
+                const container = cardsContainer;
+                const scrollLeft = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                
+                // Обновляем стрелки
+                arrowLeft.style.opacity = scrollLeft <= 10 ? '0.4' : '1';
+                arrowRight.style.opacity = scrollLeft >= maxScroll - 10 ? '0.4' : '1';
+            }
+            
+            function scrollToCard(direction) {
+                const container = cardsContainer;
+                const cardWidth = cards[0].offsetWidth + 20; // + gap
+                const currentScroll = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                
+                let targetScroll;
+                
+                if (direction === 'left') {
+                    targetScroll = Math.max(0, currentScroll - cardWidth);
+                } else {
+                    targetScroll = Math.min(maxScroll, currentScroll + cardWidth);
+                }
+                
+                container.scrollTo({
+                    left: targetScroll,
+                    behavior: 'smooth'
+                });
+                
+                // Обновляем стрелки после анимации
+                setTimeout(updateArrows, 300);
+            }
+            
+            // Обработчики для стрелок
+            arrowLeft.addEventListener('click', () => scrollToCard('left'));
+            arrowRight.addEventListener('click', () => scrollToCard('right'));
+            
+            // Свайп для десктопа
+            cardsContainer.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                cardsContainer.classList.add('grabbing');
+                startX = e.pageX - cardsContainer.offsetLeft;
+                scrollLeft = cardsContainer.scrollLeft;
+            });
+            
+            cardsContainer.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - cardsContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                cardsContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            function endDrag() {
+                isDragging = false;
+                cardsContainer.classList.remove('grabbing');
+                updateArrows();
+            }
+            
+            cardsContainer.addEventListener('mouseup', endDrag);
+            cardsContainer.addEventListener('mouseleave', endDrag);
+            
+            // Touch события для мобильных
+            cardsContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].pageX - cardsContainer.offsetLeft;
+                scrollLeft = cardsContainer.scrollLeft;
+            });
+            
+            cardsContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const x = e.touches[0].pageX - cardsContainer.offsetLeft;
+                const walk = (x - startX) * 2;
+                cardsContainer.scrollLeft = scrollLeft - walk;
+            });
+            
+            cardsContainer.addEventListener('touchend', updateArrows);
+            
+            // Обновление при изменении размера
+            window.addEventListener('resize', updateArrows);
+            
+            // Обновление при скролле
+            cardsContainer.addEventListener('scroll', updateArrows);
+            
+            // Инициализация
+            updateArrows();
+        });
+    </script>
+</body>
+</html>
