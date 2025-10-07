@@ -796,43 +796,63 @@ function updateColorCircles(availableColors) {
                 });
             });
 
-            // Горизонтальная прокрутка колесом мыши для видео-блока
-            document.addEventListener('DOMContentLoaded', function() {
-                const wrapper = document.querySelector('.video-comments-wrapper');
-                if (wrapper) {
-                    wrapper.addEventListener('wheel', function(e) {
-                        // если вертикальная прокрутка, преобразуем в горизонтальную
-                        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                            e.preventDefault();
-                            wrapper.scrollLeft += e.deltaY;
-                        }
-                    }, { passive: false });
-                }
-            });
-    // Фикс для мобильной прокрутки
-document.addEventListener('DOMContentLoaded', function() {
-    // Убираем любые трансформации, мешающие прокрутке
-    document.body.style.transform = 'none';
-    document.documentElement.style.transform = 'none';
+           
+   // Файл: script.js
+
+// Улучшенная прокрутка видеоотзывов (логика для стрелок)
+function initVideoScroll() {
+    const wrapper = document.querySelector('.video-comments-wrapper');
+    const leftArrow = document.querySelector('.video-comments-nav .left-arrow');
+    const rightArrow = document.querySelector('.video-comments-nav .right-arrow');
     
-    // Фикс для высоты секций на мобильных
-    if (window.innerWidth <= 768) {
-        const sections = document.querySelectorAll('section, .new_dzn-commets, .video-comments-container');
-        sections.forEach(section => {
-            section.style.height = 'auto';
-            section.style.minHeight = 'auto';
-            section.style.transform = 'none';
-        });
+    // Проверяем наличие элементов
+    if (!wrapper || !leftArrow || !rightArrow) {
+        return; 
     }
+
+    // Определяем шаг прокрутки (ширина карточки + отступ, 343px + 16px)
+    // Шаг прокрутки должен соответствовать ширине одной карточки + gap (24px на десктопе, 16px на мобильном)
+    // На мобильном: 343px + 16px = 359px
+    const SCROLL_STEP = 359; 
+
+    // Функция для прокрутки
+    function scroll(direction) {
+        const currentScroll = wrapper.scrollLeft;
+        
+        // Используем scrollBy для плавной прокрутки
+        if (direction === 'left') {
+            wrapper.scrollBy({
+                left: -SCROLL_STEP,
+                behavior: 'smooth'
+            });
+        } else if (direction === 'right') {
+            wrapper.scrollBy({
+                left: SCROLL_STEP,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    // Добавляем обработчики событий для стрелок
+    leftArrow.addEventListener('click', () => scroll('left'));
+    rightArrow.addEventListener('click', () => scroll('right'));
+}
+
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    initVideoScroll();
 });
 
-// Ресайз обработчик для мобильных
-window.addEventListener('resize', function() {
-    if (window.innerWidth <= 768) {
-        document.body.style.transform = 'none';
-        document.documentElement.style.transform = 'none';
-    }
-});
+
+
+
+
+
+
+
+
+
+
 // Добавьте в script.js
 function initMapForm() {
     // Инициализация Яндекс Карты
@@ -861,54 +881,132 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 // Улучшенная прокрутка видеоотзывов
 function initVideoScroll() {
-    const wrapper = document.querySelector('.video-comments-wrapper');
-    if (!wrapper) return;
+   
     
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    
-    // Desktop drag to scroll
-    wrapper.addEventListener('mousedown', (e) => {
-        isDown = true;
-        wrapper.style.cursor = 'grabbing';
-        startX = e.pageX - wrapper.offsetLeft;
-        scrollLeft = wrapper.scrollLeft;
-    });
-    
-    wrapper.addEventListener('mouseleave', () => {
-        isDown = false;
-        wrapper.style.cursor = 'grab';
-    });
-    
-    wrapper.addEventListener('mouseup', () => {
-        isDown = false;
-        wrapper.style.cursor = 'grab';
-    });
-    
-    wrapper.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - wrapper.offsetLeft;
-        const walk = (x - startX) * 2;
-        wrapper.scrollLeft = scrollLeft - walk;
-    });
-    
-    // Mobile touch events
-    wrapper.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - wrapper.offsetLeft;
-        scrollLeft = wrapper.scrollLeft;
-    });
-    
-    wrapper.addEventListener('touchmove', (e) => {
-        if (!e.touches || e.touches.length !== 1) return;
-        const x = e.touches[0].pageX - wrapper.offsetLeft;
-        const walk = (x - startX) * 2;
-        wrapper.scrollLeft = scrollLeft - walk;
-    });
 }
 
 // Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', function() {
     initVideoScroll();
+});
+
+
+
+
+
+
+
+
+
+/* Файл: script.js (добавить в конец) */
+
+$(document).ready(function() {
+    var $cards = $('.video-comments-card');
+    var $leftArrow = $('.video-comments-nav .left-arrow');
+    var $rightArrow = $('.video-comments-nav .right-arrow');
+    var $wrapper = $('.video-comments-wrapper');
+    var currentIndex = 0;
+    var isAnimating = false;
+    var touchStartX = 0;
+    var touchEndX = 0;
+    var minSwipeDistance = 50; // Минимальное расстояние для срабатывания свайпа
+
+    if ($cards.length === 0) return;
+
+    // 1. Инициализация: делаем первую карточку активной
+    $cards.first().addClass('active').css('opacity', 1);
+
+    // Функция переключения слайда
+    function showSlide(newIndex, direction) {
+        if (isAnimating || newIndex < 0 || newIndex >= $cards.length) return;
+        isAnimating = true;
+
+        var $current = $cards.eq(currentIndex);
+        var $next = $cards.eq(newIndex);
+        
+        // Позиционируем следующую карточку за пределами контейнера
+        var initialTransform = direction === 'next' ? 'translateX(50%)' : 'translateX(-150%)';
+
+        $next.removeClass('previous').css({
+            transform: initialTransform,
+            opacity: 0,
+            zIndex: 3,
+            transition: 'none' // Отключаем transition для моментального позиционирования
+        });
+        
+        // Принудительный перерасчет стилей для применения 'transition: none'
+        void $next[0].offsetWidth; 
+        
+        $next.css('transition', 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out');
+        
+        // 1. Сдвигаем текущую карточку
+        $current.removeClass('active').css({
+            transform: direction === 'next' ? 'translateX(-150%)' : 'translateX(50%)',
+            opacity: 0,
+            zIndex: 2
+        });
+
+        // 2. Сдвигаем следующую карточку в центр
+        $next.addClass('active').css({
+            transform: 'translateX(-50%)',
+            opacity: 1
+        });
+
+        setTimeout(function() {
+            // Очищаем стили для неактивных карточек после анимации
+            $cards.not($next).css({
+                zIndex: 1,
+                transform: 'translateX(-50%)', // Возвращаем в исходное положение для следующего цикла
+                opacity: 0
+            });
+            currentIndex = newIndex;
+            isAnimating = false;
+        }, 400); // 400ms соответствует transition duration
+    }
+
+    // 2. Обработчики стрелок
+    $leftArrow.on('click', function() {
+        var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
+        showSlide(newIndex, 'prev');
+    });
+
+    $rightArrow.on('click', function() {
+        var newIndex = (currentIndex + 1) % $cards.length;
+        showSlide(newIndex, 'next');
+    });
+
+    // 3. Обработчики свайпов (Touch/Swipe)
+    $wrapper.on('touchstart', function(e) {
+        // Убеждаемся, что свайп происходит одним пальцем
+        if (e.originalEvent.touches.length === 1) {
+            touchStartX = e.originalEvent.touches[0].screenX;
+        }
+    });
+
+    $wrapper.on('touchend', function(e) {
+        // Убеждаемся, что свайп происходит одним пальцем
+        if (e.originalEvent.changedTouches.length === 1) {
+            touchEndX = e.originalEvent.changedTouches[0].screenX;
+            handleSwipe();
+        }
+    });
+
+    function handleSwipe() {
+        var diff = touchStartX - touchEndX;
+        
+        // Если движение было недостаточным
+        if (Math.abs(diff) < minSwipeDistance) {
+            return; 
+        }
+
+        if (diff > 0) {
+            // Свайп влево (переход к следующей карточке)
+            var newIndex = (currentIndex + 1) % $cards.length;
+            showSlide(newIndex, 'next');
+        } else {
+            // Свайп вправо (переход к предыдущей карточке)
+            var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
+            showSlide(newIndex, 'prev');
+        }
+    }
 });

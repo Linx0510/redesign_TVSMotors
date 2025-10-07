@@ -2877,15 +2877,8 @@
 
         .video-comments-grid {
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 24px;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            /* Не переносим карточки, чтобы они были в один ряд при горизонтальной прокрутке */
-            white-space: nowrap;
+    gap: 24px;
+    padding: 0 40px 20px;
         }
 
         .video-comments-card {
@@ -3015,14 +3008,7 @@
             opacity: 1;
         }
 
-        .video-comments-card-title {
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 23px;
-            letter-spacing: -0.3px;
-            color: #FDFDFD;
-            margin-bottom: 4px;
-        }
+      
 
         .video-comments-car-name {
             font-weight: 400;
@@ -5255,20 +5241,9 @@ html, body {
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    cursor: grab;
 }
 
-.video-comments-wrapper:active {
-    cursor: grabbing;
-}
 
-.video-comments-grid {
-    display: flex;
-    gap: 24px;
-    padding: 0 40px 20px;
-    width: max-content;
-    min-width: 100%;
-}
 
 /* Убедитесь что карточки не сжимаются */
 .video-comments-card {
@@ -5328,5 +5303,62 @@ html, body {
     
     .video-comments-card {
         scroll-snap-align: start;
+    }
+}
+/* Файл: styles.css */
+
+@media (max-width: 768px) {
+    
+    /* 1. Контейнер слайдера (Wrapper): устанавливаем фиксированную высоту и скрываем лишнее */
+    .video-comments-wrapper {
+        overflow: hidden; /* Скрываем неактивные карточки */
+        position: relative; 
+        height: 520px; /* Фиксированная высота под размер карточки */
+        padding: 0 20px; /* Добавляем отступы для контейнера, чтобы стрелки были вне его */
+    }
+
+    /* 2. Сетка карточек (Grid): сбрасываем flex-поведение */
+    .video-comments-grid { 
+        display: block; 
+        position: relative;
+        /* Высота и overflow уже заданы в .video-comments-wrapper, но для .video-comments-grid ставим 100% */
+        height: 100%;
+        gap: 0; /* Убираем отступы между карточками */
+        width: 100%;
+    }
+    
+    /* 3. Карточки (Card): задаем размеры и позиционирование */
+    .video-comments-card {
+        width: 343px; 
+        height: 520px; 
+        
+        /* Абсолютное позиционирование поверх друг друга */
+        position: absolute;
+        top: 0;
+        left: 50%;
+        
+        /* Центрирование и начальное скрытие */
+        transform: translateX(-50%);
+        opacity: 0; 
+        z-index: 1;
+        
+        /* Плавный переход */
+        transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    }
+    
+    /* Активная карточка */
+    .video-comments-card.active {
+        opacity: 1;
+        transform: translateX(-50%); /* Остается по центру */
+        z-index: 5; 
+    }
+    
+    /* 4. Навигация */
+    .video-comments-nav {
+        display: flex; /* Убеждаемся, что стрелки видны */
+        justify-content: center;
+        margin-top: 24px;
+        z-index: 10;
+        position: relative;
     }
 }
