@@ -773,240 +773,156 @@ function updateColorCircles(availableColors) {
     
             duplicateContentForScroll(column1);
             duplicateContentForScroll(column2);
-    
-            // Обработчики для кнопок воспроизведения (третья секция)
-            document.addEventListener('DOMContentLoaded', function() {
-                const playButtons = document.querySelectorAll('.video-comments-play-btn');
-                playButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        // Получаем информацию о карточке
-                        const card = this.closest('.video-comments-card');
-                        const title = card.querySelector('.video-comments-card-title').textContent;
-                        const carName = card.querySelector('.video-comments-car-name').textContent;
-                        // Попытка получить путь к видео из data-атрибута
-                        const videoPath = card.dataset.video || './videos/sample.mp4';
+    //карта 
+    function initYandexMap() {
+    ymaps.ready(function () {
+        // Обновляем координаты на правильный адрес
+        var dealerCoords = [51.815934, 55.158308]; // Координаты для п. Пригородный, Нежинское шоссе
 
-                        const openExternal = confirm(`Открыть отзыв в видеоплеере?
-        ${title}\n${carName}\n\nНажмите "ОК" чтобы открыть видео во внешнем плеере (в новой вкладке).`);
-                        if (openExternal) {
-                            // Откроем видео в новой вкладке — браузер сам предложит варианты открытия
-                            window.open(videoPath, '_blank');
-                        }
-                    });
-                });
-            });
-
-           
-   // Файл: script.js
-
-// Улучшенная прокрутка видеоотзывов (логика для стрелок)
-function initVideoScroll() {
-    const wrapper = document.querySelector('.video-comments-wrapper');
-    const leftArrow = document.querySelector('.video-comments-nav .left-arrow');
-    const rightArrow = document.querySelector('.video-comments-nav .right-arrow');
-    
-    // Проверяем наличие элементов
-    if (!wrapper || !leftArrow || !rightArrow) {
-        return; 
-    }
-
-    // Определяем шаг прокрутки (ширина карточки + отступ, 343px + 16px)
-    // Шаг прокрутки должен соответствовать ширине одной карточки + gap (24px на десктопе, 16px на мобильном)
-    // На мобильном: 343px + 16px = 359px
-    const SCROLL_STEP = 359; 
-
-    // Функция для прокрутки
-    function scroll(direction) {
-        const currentScroll = wrapper.scrollLeft;
-        
-        // Используем scrollBy для плавной прокрутки
-        if (direction === 'left') {
-            wrapper.scrollBy({
-                left: -SCROLL_STEP,
-                behavior: 'smooth'
-            });
-        } else if (direction === 'right') {
-            wrapper.scrollBy({
-                left: SCROLL_STEP,
-                behavior: 'smooth'
-            });
-        }
-    }
-
-    // Добавляем обработчики событий для стрелок
-    leftArrow.addEventListener('click', () => scroll('left'));
-    rightArrow.addEventListener('click', () => scroll('right'));
-}
-
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    initVideoScroll();
-});
-
-
-
-
-
-
-
-
-
-
-
-// Добавьте в script.js
-function initMapForm() {
-    // Инициализация Яндекс Карты
-    if (typeof ymaps !== 'undefined') {
-        ymaps.ready(function() {
-            const map = new ymaps.Map('map', {
-                center: [51.768199, 55.096955], // Координаты вашего автосалона
-                zoom: 15,
-                controls: ['zoomControl']
-            });
-            
-            // Добавление метки
-            const placemark = new ymaps.Placemark([51.768199, 55.096955], {
-                hintContent: 'ТВС Моторс',
-                balloonContent: 'Официальный дилер CHERY'
-            });
-            
-            map.geoObjects.add(placemark);
+        var myMap = new ymaps.Map('carta-map-canvas', {
+            center: dealerCoords,
+            zoom: 16,
+            controls: ['zoomControl', 'fullscreenControl']
+        }, {
+            searchControlProvider: 'yandex#search'
         });
-    }
+
+        var dealerPlacemark = new ymaps.Placemark(dealerCoords, {
+            hintContent: 'ТВС Моторс, официальный дилер CHERY',
+            balloonContent: 'Оренбургская область, п. Пригородный, Нежинское шоссе, 12-й км' 
+        }, {
+            preset: 'islands#redStretchyIcon' 
+        });
+
+        myMap.geoObjects.add(dealerPlacemark);
+    });
 }
-
-// Вызовите функцию при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    initMapForm();
-});
-// Улучшенная прокрутка видеоотзывов
-function initVideoScroll() {
-   
-    
-}
-
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    initVideoScroll();
-});
-
-
-
-
-
-
-
-
-
-/* Файл: script.js (добавить в конец) */
 
 $(document).ready(function() {
-    var $cards = $('.video-comments-card');
-    var $leftArrow = $('.video-comments-nav .left-arrow');
-    var $rightArrow = $('.video-comments-nav .right-arrow');
-    var $wrapper = $('.video-comments-wrapper');
-    var currentIndex = 0;
-    var isAnimating = false;
-    var touchStartX = 0;
-    var touchEndX = 0;
-    var minSwipeDistance = 50; // Минимальное расстояние для срабатывания свайпа
-
-    if ($cards.length === 0) return;
-
-    // 1. Инициализация: делаем первую карточку активной
-    $cards.first().addClass('active').css('opacity', 1);
-
-    // Функция переключения слайда
-    function showSlide(newIndex, direction) {
-        if (isAnimating || newIndex < 0 || newIndex >= $cards.length) return;
-        isAnimating = true;
-
-        var $current = $cards.eq(currentIndex);
-        var $next = $cards.eq(newIndex);
-        
-        // Позиционируем следующую карточку за пределами контейнера
-        var initialTransform = direction === 'next' ? 'translateX(50%)' : 'translateX(-150%)';
-
-        $next.removeClass('previous').css({
-            transform: initialTransform,
-            opacity: 0,
-            zIndex: 3,
-            transition: 'none' // Отключаем transition для моментального позиционирования
-        });
-        
-        // Принудительный перерасчет стилей для применения 'transition: none'
-        void $next[0].offsetWidth; 
-        
-        $next.css('transition', 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out');
-        
-        // 1. Сдвигаем текущую карточку
-        $current.removeClass('active').css({
-            transform: direction === 'next' ? 'translateX(-150%)' : 'translateX(50%)',
-            opacity: 0,
-            zIndex: 2
-        });
-
-        // 2. Сдвигаем следующую карточку в центр
-        $next.addClass('active').css({
-            transform: 'translateX(-50%)',
-            opacity: 1
-        });
-
-        setTimeout(function() {
-            // Очищаем стили для неактивных карточек после анимации
-            $cards.not($next).css({
-                zIndex: 1,
-                transform: 'translateX(-50%)', // Возвращаем в исходное положение для следующего цикла
-                opacity: 0
-            });
-            currentIndex = newIndex;
-            isAnimating = false;
-        }, 400); // 400ms соответствует transition duration
-    }
-
-    // 2. Обработчики стрелок
-    $leftArrow.on('click', function() {
-        var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
-        showSlide(newIndex, 'prev');
-    });
-
-    $rightArrow.on('click', function() {
-        var newIndex = (currentIndex + 1) % $cards.length;
-        showSlide(newIndex, 'next');
-    });
-
-    // 3. Обработчики свайпов (Touch/Swipe)
-    $wrapper.on('touchstart', function(e) {
-        // Убеждаемся, что свайп происходит одним пальцем
-        if (e.originalEvent.touches.length === 1) {
-            touchStartX = e.originalEvent.touches[0].screenX;
-        }
-    });
-
-    $wrapper.on('touchend', function(e) {
-        // Убеждаемся, что свайп происходит одним пальцем
-        if (e.originalEvent.changedTouches.length === 1) {
-            touchEndX = e.originalEvent.changedTouches[0].screenX;
-            handleSwipe();
-        }
-    });
-
-    function handleSwipe() {
-        var diff = touchStartX - touchEndX;
-        
-        // Если движение было недостаточным
-        if (Math.abs(diff) < minSwipeDistance) {
-            return; 
-        }
-
-        if (diff > 0) {
-            // Свайп влево (переход к следующей карточке)
-            var newIndex = (currentIndex + 1) % $cards.length;
-            showSlide(newIndex, 'next');
-        } else {
-            // Свайп вправо (переход к предыдущей карточке)
-            var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
-            showSlide(newIndex, 'prev');
-        }
+    if (typeof ymaps !== 'undefined') {
+        initYandexMap();
     }
 });
+          
+
+
+
+
+
+
+
+
+/*видеоотзыв */
+ 
+        $(document).ready(function() {
+            var $cards = $('.video-comments-card');
+            var $leftArrow = $('.video-comments-nav .left-arrow');
+            var $rightArrow = $('.video-comments-nav .right-arrow');
+            var $wrapper = $('.video-comments-wrapper');
+            var currentIndex = 0;
+            var isAnimating = false;
+            var touchStartX = 0;
+            var touchEndX = 0;
+            var minSwipeDistance = 50;
+            
+            function isMobile() {
+                return $(window).width() <= 768;
+            }
+
+            function showSlide(newIndex, direction) {
+                if (!isMobile() || isAnimating || newIndex < 0 || newIndex >= $cards.length) return;
+                isAnimating = true;
+
+                var $current = $cards.eq(currentIndex);
+                var $next = $cards.eq(newIndex);
+                
+                var initialTransform = direction === 'next' ? 'translateX(50%)' : 'translateX(-150%)';
+
+                $next.removeClass('active').css({
+                    transform: initialTransform,
+                    opacity: 0,
+                    zIndex: 3,
+                    transition: 'none'
+                });
+                
+                void $next[0].offsetWidth;
+                
+                $next.css('transition', 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out');
+                
+                $current.removeClass('active').css({
+                    transform: direction === 'next' ? 'translateX(-150%)' : 'translateX(50%)',
+                    opacity: 0,
+                    zIndex: 2
+                });
+
+                $next.addClass('active').css({
+                    transform: 'translateX(-50%)',
+                    opacity: 1
+                });
+
+                setTimeout(function() {
+                    $cards.not($next).css({
+                        zIndex: 1,
+                        transform: 'translateX(-50%)',
+                        opacity: 0
+                    });
+                    currentIndex = newIndex;
+                    isAnimating = false;
+                }, 400);
+            }
+
+            function initSlider() {
+                if (isMobile()) {
+                    $cards.removeClass('active').css({
+                        opacity: 0,
+                        transform: 'translateX(-50%)',
+                        position: 'absolute'
+                    });
+                    $cards.eq(0).addClass('active').css('opacity', 1);
+                    currentIndex = 0;
+                } else {
+                    $cards.css({
+                        opacity: 1,
+                        transform: 'none',
+                        position: 'relative'
+                    });
+                }
+            }
+            
+            $leftArrow.on('click', function() {
+                var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
+                showSlide(newIndex, 'prev');
+            });
+
+            $rightArrow.on('click', function() {
+                var newIndex = (currentIndex + 1) % $cards.length;
+                showSlide(newIndex, 'next');
+            });
+
+            $wrapper.on('touchstart', function(e) {
+                if (!isMobile() || isAnimating) return;
+                touchStartX = e.originalEvent.touches[0].screenX;
+            });
+
+            $wrapper.on('touchend', function(e) {
+                if (!isMobile() || isAnimating) return;
+                touchEndX = e.originalEvent.changedTouches[0].screenX;
+                var diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > minSwipeDistance) {
+                    if (diff > 0) {
+                        var newIndex = (currentIndex + 1) % $cards.length;
+                        showSlide(newIndex, 'next');
+                    } else {
+                        var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
+                        showSlide(newIndex, 'prev');
+                    }
+                }
+            });
+            
+            $(window).on('resize', function() {
+                initSlider();
+            });
+
+            initSlider();
+        })
