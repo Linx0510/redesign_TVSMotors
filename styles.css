@@ -4106,6 +4106,10 @@
                 display: flex;
                 flex-direction: column;
                 width: 100%;
+                align-items: flex-start;
+            }
+            .color-name{
+                margin-bottom: 32px;
             }
             .price-divider {
                 width: 100%;
