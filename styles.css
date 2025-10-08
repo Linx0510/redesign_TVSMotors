@@ -647,7 +647,7 @@
         .new_dzn-test-drive-input {
             display: flex;
             height: 48px;
-            padding: 8px 6px 8px 16px;
+            padding: 6px 6px 6px 16px;
             align-items: center;
             gap: 8px;
             align-self: stretch;
@@ -1508,7 +1508,7 @@
         }
 
         .new_dzn-dropdown-header {
-            font-size: 16px !important;
+            font-size: 20px !important;
             font-weight: 700 !important;
             color: #222 !important;
             margin-bottom: 8px;
@@ -2635,7 +2635,6 @@
         /* Стили для второй секции */
         .new_dzn-commets {
             width: 1440px;
-            height: 900px;
             opacity: 1;
             position: relative;
             margin: 0 auto;
@@ -2648,7 +2647,7 @@
             gap: 40px;
 
    padding: 0 140px ;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .new_dzn-commets-content-titiles {
@@ -5016,7 +5015,7 @@ width: 100%;
     align-items: center;
    gap: 24px;
 
-   margin-top: 32px;
+   margin-top: 0px;
 }
 
 /* Стили для заголовка секции */
@@ -5149,7 +5148,7 @@ width: 100%;
       
         .video-comments-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
@@ -5491,7 +5490,13 @@ width: 100%;
         }
 
 
-
+.new_dzn-company-menu{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 80px;
+}
 
            /* видеоблок со скроллом */
 
@@ -5499,7 +5504,7 @@ width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 140px 120px;
+            padding: 140px 105px;
             gap: 40px;
             width: 1440px;
             max-width: 100%;
@@ -5539,6 +5544,7 @@ width: 100%;
             align-items: flex-start;
             padding: 0px;
             gap: 12px;
+            width: 100%;
             justify-content: flex-start;
             flex-wrap: nowrap;
             overflow-x: auto;
