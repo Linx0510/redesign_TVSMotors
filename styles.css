@@ -2646,7 +2646,8 @@
             height: 100%;
             display: flex;
             gap: 40px;
-            padding: 0 140px ;
+
+   padding: 0 140px ;
             align-items: flex-start;
         }
 
@@ -5528,8 +5529,7 @@ width: 100%;
             flex-direction: row;
             align-items: flex-start;
             padding: 0px;
-            gap: 20px;
-            width: 100%;
+            gap: 12px;
             justify-content: flex-start;
             flex-wrap: nowrap;
             overflow-x: auto;
