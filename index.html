@@ -1597,5 +1597,30 @@
             $(window).on('resize', updateSlider);
         });
     </script>
+    <script>
+        $(document).ready(function() {
+    function mobileImageSlider() {
+        const $imgBlock = $('.new_dzn_model-item-img-block');
+        const $images = $imgBlock.find('img');
+        
+        if ($(window).width() <= 768) {
+            $images.hide().eq(0).show();
+            
+            let currentIndex = 0;
+            
+            setInterval(function() {
+                $images.eq(currentIndex).fadeOut(500);
+                currentIndex = (currentIndex + 1) % $images.length;
+                $images.eq(currentIndex).fadeIn(500);
+            }, 3000);
+        } else {
+            $images.show().css('display', '');
+        }
+    }
+    
+    mobileImageSlider();
+    $(window).resize(mobileImageSlider);
+});
+    </script>
 </body>
 </html>
