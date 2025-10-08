@@ -647,7 +647,7 @@
         .new_dzn-test-drive-input {
             display: flex;
             height: 48px;
-            padding: 8px 6px 8px 16px;
+            padding: 6px 6px 6px 16px;
             align-items: center;
             gap: 8px;
             align-self: stretch;
@@ -2647,7 +2647,7 @@
             gap: 40px;
 
    padding: 0 140px ;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .new_dzn-commets-content-titiles {
@@ -5006,7 +5006,7 @@ width: 100%;
     align-items: center;
    gap: 24px;
 
-   margin-top: 32px;
+   margin-top: 0px;
 }
 
 /* Стили для заголовка секции */
