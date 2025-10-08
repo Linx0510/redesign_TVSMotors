@@ -2646,7 +2646,7 @@
             height: 100%;
             display: flex;
             gap: 40px;
-            padding: 0 140px 120px;
+            padding: 0px 140px 0px 120px;
             align-items: flex-start;
         }
 
@@ -5471,8 +5471,7 @@
             flex-direction: row;
             align-items: flex-start;
             padding: 0px;
-            gap: 20px;
-            width: 100%;
+            gap: 12px;
             justify-content: flex-start;
             flex-wrap: nowrap;
             overflow-x: auto;
@@ -5780,4 +5779,3 @@
                 padding: 0px 20px;
             }
         }
-=
