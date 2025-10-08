@@ -5526,6 +5526,7 @@ width: 100%;
             align-items: flex-start;
             padding: 0px;
             gap: 12px;
+            width: 100%;
             justify-content: flex-start;
             flex-wrap: nowrap;
             overflow-x: auto;
