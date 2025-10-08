@@ -4123,6 +4123,15 @@
                 transition: all 0.3s ease;
                 position: relative;
             }
+            .new_dzn-commets-content {
+                display: flex;
+                padding: 80px 16px;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                align-self: stretch;
+            }
         }
 
         @media (max-width: 480px) {
