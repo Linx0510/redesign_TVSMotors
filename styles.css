@@ -2216,16 +2216,27 @@
             text-align: center;
         }
 
-        .new_dzn_model-item-navigation {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-end;
-            padding: 0px;
-            gap: 16px;
-            width: 1292px;
-            height: 35px;
-        }
+ .new_dzn_model-item-navigation-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.new_dzn_model-item-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 0px;
+    gap: 16px;
+    width: auto;
+    height: 35px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
 
         .model-tab {
             display: flex;
@@ -4524,15 +4535,6 @@
         width: auto !important;
     }
 
-    .new_dzn_model-item-navigation {
-        height: auto !important;
-        flex-wrap: wrap;
-        gap: 8px !important;
-        justify-content: flex-start;
-        overflow: auto;
-        padding-bottom: 8px;
-        scroll-behavior: smooth;
-    }
 
     .model-tab {
         width: auto !important;
@@ -4610,7 +4612,13 @@
     }
 
     .new_dzn_model-item-img-block-colors {
-        margin-top: 20px !important;
+    }
+    .new_dzn_model-item-img-block-colors{
+        margin-top: -30px !important;
+    }
+    .color-name{
+        margin-bottom: 22px;
+    }
     }
 
     .new_dzn_model-item-img-colors-circles-row {
@@ -4623,11 +4631,6 @@
     .color-circle {
         width: 36px !important;
         height: 36px !important;
-    }
-
-    .color-name {
-        font-size: 18px !important;
-        margin-top: 12px;
     }
 
     .new_dzn_model-item-img-price {
@@ -4754,15 +4757,7 @@
     position: relative;
 }
 
-.new_dzn_model-item-navigation {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE */
-}
+
 
 .new_dzn_model-item-navigation::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
@@ -5851,4 +5846,115 @@ width: 100%;
             {
                 padding: 0px 20px;
             }
+            #modelSecondaryImageLeft{
+                display: none;
+            }
+          .new_dzn_model-item-img-block img{
+            position: absolute;
+            
+            top: 0px;
+            left: 0px;
+
+          }
+          #modelMainImage{
+            margin-top: 40px;
+          }
+          .new_dzn_model-item-img-car{
+            margin-bottom: 0px;
+          }
         }
+.new_dzn_model-item-navigation-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.new_dzn_model-item-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 0px;
+    gap: 16px;
+    width: auto;
+    height: 35px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.new_dzn_model-item-navigation::-webkit-scrollbar {
+    display: none;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    .new_dzn_model-item-navigation-wrapper {
+        max-width: 343px;
+        margin: 0 auto;
+    }
+    
+    .new_dzn_model-item-navigation {
+        gap: 12px;
+        padding-bottom: 8px;
+        height: 40px;
+        justify-content: flex-start;
+        width: 100%;
+    }
+    
+    .model-tab {
+        flex-shrink: 0;
+        min-width: 140px;
+        width: auto;
+        height: 30px;
+    }
+    
+    .model-tab.active {
+        width: auto;
+        height: 35px;
+    }
+    
+    .model-tab h3 {
+        font-size: 13px;
+        white-space: nowrap;
+    }
+    
+    .model-tab.active h3 {
+        font-size: 14px;
+    }
+    
+    .tab-indicator {
+        width: 100%;
+    }
+    
+    .model-tab.active .tab-indicator {
+        width: 100%;
+    }
+}
+
+/* Адаптация для 375px */
+@media (max-width: 375px) {
+    .new_dzn_model-item-navigation-wrapper {
+        max-width: 343px;
+    }
+    
+    .new_dzn_model-item-navigation {
+        max-width: 343px;
+        gap: 8px;
+    }
+    
+    .model-tab {
+        min-width: 120px;
+        padding: 0 12px;
+    }
+    
+    .model-tab h3 {
+        font-size: 12px;
+    }
+    
+    .model-tab.active h3 {
+        font-size: 13px;
+    }
+}
