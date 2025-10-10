@@ -63,6 +63,10 @@
             flex-direction: row; 
             position: relative;
             overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--CTA-Primary, #3B82F6);
+            background: #FFFFFF;
+            color: #3B82F6;
         }
         .new_dzn-btn1 {
             display: flex;
