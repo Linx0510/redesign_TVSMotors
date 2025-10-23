@@ -60,6 +60,29 @@
             border: none;
             cursor: pointer;
             border-radius: 12px;
+            flex-direction: row; 
+            position: relative;
+            overflow: hidden;
+        }
+        .new_dzn-btn2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 321px;
+            height: 48px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Play', Helvetica, sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 20px;
+            text-align: center;
+            letter-spacing: -0.3px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 12px;
 border: 1px solid var(--CTA-Primary, #3B82F6);
             flex-direction: row; 
             position: relative;
@@ -405,6 +428,60 @@ border: 1px solid var(--CTA-Primary, #3B82F6);
             transition: all 0.3s ease;
         }
 
+
+        /* Новый контейнер навигации модели */
+        .car-page-nav {
+            background: #fff;
+            border-bottom: 1px solid #e6e6e9;
+        }
+        .car-page-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .car-page-nav-links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+        }
+        .car-page-nav-links a {
+            color: #374151;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 0;
+        }
+        .car-page-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Ссылка Прайс-лист (как на макете) */
+        .car-page-price-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff7a18;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .car-page-price-icon {
+            width: 18px;
+            height: 18px;
+        }
+        .car-page-price-link:hover { text-decoration: underline; }
+
+        @media (max-width: 900px) {
+            .car-page-nav-inner { flex-direction: column; align-items: stretch; }
+            .car-page-nav-links { justify-content: center; flex-wrap: wrap; }
+            .car-page-nav-actions { justify-content: center; margin-top: 8px; }
+        }
         /* ===== СТИЛИ ДЛЯ ГЕРОЙ-СЕКЦИИ ===== */
         .new_dzn-hero {
             position: relative;
@@ -1167,40 +1244,93 @@ border: 1px solid var(--CTA-Primary, #3B82F6);
 
        
 
-        /* ===== СТИЛИ ДЛЯ ФИЧЕЙ ===== */
+        /* ===== СТИЛИ ДЛЯ ФИЧЕЙ (карточки характеристик на car_page) ===== */
         .new_dzn-features {
             background: #f4f4f6;
-            padding: 32px 120px;
+            padding: 48px 80px;
             width: 100%;
-        }
-
-        .new_dzn-feature-icon {
-            width: 44px;
-            height: 44px;
-            object-fit: contain;
         }
 
         .new_dzn-features-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             gap: 24px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .new_dzn-feature {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            padding: 32px 32px;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 16px;
+            flex: 1 1 0;
+            min-width: 0;
         }
 
+        /* Скрываем иконки в этой секции на десктопе (макет без иконок) */
+        .new_dzn-feature-icon {
+            display: none;
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        /* Маленькая метка сверху (если есть) */
+        .new_dzn-feature .new_dzn,
+        .new_dzn-feature-label {
+            color: #9CA3AF; /* neutral gray */
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: -0.2px;
+            margin: 0 0 6px 0;
+        }
+
+        /* Большая цифра / заголовок */
         .new_dzn-feature-title {
-            font-size: 18px;
-            color: #222;
-            font-weight: 500;
-            text-align: center;
+            font-size: 36px;
+            color: #111827;
+            font-weight: 400;
+            line-height: 1.05;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* Подпись (опционально) */
+        .new_dzn-feature-sub {
+            color: #6B7280;
+            font-size: 16px;
+            margin-top: 6px;
+        }
+
+        /* Адаптация для мобильных: показываем иконки и центрируем */
+        @media (max-width: 900px) {
+            .new_dzn-features {
+                padding: 24px 20px;
+            }
+            .new_dzn-features-container {
+                flex-direction: column;
+                gap: 18px;
+                align-items: center;
+            }
+            .new_dzn-feature {
+                align-items: center;
+                text-align: center;
+            }
+            .new_dzn-feature-icon {
+                display: block;
+                width: 40px;
+                height: 40px;
+            }
+            .new_dzn-feature-title {
+                font-size: 22px;
+            }
+            .new_dzn-feature .new_dzn,
+            .new_dzn-feature-label {
+                font-size: 13px;
+            }
         }
 
         /* ===== СТИЛИ ДЛЯ МОБИЛЬНОГО МЕНЮ ===== */
@@ -4612,14 +4742,11 @@ border: 1px solid var(--CTA-Primary, #3B82F6);
         object-fit: contain;
     }
 
-    .new_dzn_model-item-img-block-colors {
-    }
     .new_dzn_model-item-img-block-colors{
         margin-top: -30px !important;
     }
     .color-name{
         margin-bottom: 22px;
-    }
     }
 
     .new_dzn_model-item-img-colors-circles-row {
@@ -5957,5 +6084,676 @@ width: 100%;
     
     .model-tab.active h3 {
         font-size: 13px;
+    }
+}
+
+/* Конец файла - добавленный закрывающий блок */
+}
+.new_dzn_model-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 120px;
+    gap: 52px;
+    width: 100%;
+    background: #FDFDFD;
+}
+
+.new_dzn_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 415px;
+}
+
+
+.new_dzn_header h2 {
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: -0.3px;
+    color: #222222;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+    width: 100%;
+}
+
+.new_dzn_tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_tab:hover {
+    transform: translateY(-2px);
+}
+
+.new_dzn_tab.active .new_dzn_tab-title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #3B82F6;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_tab.inactive .new_dzn_tab-title {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    color: #7D7D7D;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_tab.active .new_dzn_tab-indicator {
+    width: 236px;
+    height: 4px;
+    background: #3B82F6;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_tab.inactive .new_dzn_tab-indicator {
+    width: 160px;
+    height: 2px;
+    background: #C2C2C2;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 52px;
+    width: 100%;
+    max-width: 1200px;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_car-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 52px;
+    width: 700px;
+    height: 742px;
+    background: #F0F0F2;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_car-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.new_dzn_car-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    width: 700px;
+    height: 464px;
+}
+
+.new_dzn_car-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #F0F0F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.new_dzn_car-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.new_dzn_specs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    width: 448px;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_model-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 293px;
+    height: 73px;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_model-title h2 {
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: -0.3px;
+    color: #222222;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_model-price {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+    color: #3B82F6;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_specs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+}
+
+.new_dzn_spec-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_spec-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_spec-item:hover {
+    transform: translateY(-3px);
+}
+
+.new_dzn_spec-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_spec-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_spec-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(49%) sepia(6%) saturate(533%) hue-rotate(169deg) brightness(93%) contrast(86%);
+}
+
+.new_dzn_spec-icon:hover {
+    transform: scale(1.1);
+}
+
+.new_dzn_spec-name {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: -0.3px;
+    color: #7D7D7D;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_spec-value {
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: -0.3px;
+    color: #222222;
+    transition: all 0.3s ease;
+}
+
+/* Блок с кнопками по макету */
+
+.new_dzn_actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+    width: 448px;
+    height: 152px;
+}
+
+.new_dzn_action-buttons-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+    width: 291px;
+    height: 48px;
+}
+
+.new_dzn_btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 24px;
+    gap: 8px;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+.new_dzn_btn:active {
+    transform: translateY(-1px);
+}
+
+.new_dzn_btn-primary {
+    background: #3B82F6;
+    color: #FDFDFD;
+}
+
+.new_dzn_btn-primary:hover {
+    background: #2563eb;
+}
+
+.new_dzn_btn-model {
+    width: 117px;
+}
+
+.new_dzn_btn-book {
+    width: 158px;
+}
+
+.new_dzn_btn-outline {
+    background: transparent;
+    border: 1px solid #3B82F6;
+    color: #3B82F6;
+    width: 230px;
+}
+
+.new_dzn_btn-outline:hover {
+    background: #3B82F6;
+    color: #FDFDFD;
+}
+
+.new_dzn_action-links-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 32px;
+    width: 424px;
+    height: 24px;
+}
+
+.new_dzn_action-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    color: #3B82F6;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.new_dzn_action-link:hover {
+    transform: translateY(-2px);
+    color: #2563eb;
+}
+
+.new_dzn_action-link:hover .new_dzn_spec-icon {
+    transform: scale(1.1);
+}
+
+.new_dzn_action-link .new_dzn_spec-icon img {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(95%) saturate(1553%) hue-rotate(202deg) brightness(97%) contrast(96%);
+}
+
+.new_dzn_link-calc {
+    width: 158px;
+    height: 24px;
+}
+
+.new_dzn_link-offer {
+    width: 234px;
+    height: 24px;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .new_dzn_model-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 40px 16px;
+        gap: 32px;
+        width: 100%;
+        min-height: 100vh;
+        background: #FDFDFD;
+    }
+
+    .new_dzn_header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 24px;
+        width: 100%;
+        max-width: 343px;
+    }
+
+    .new_dzn_header h2 {
+        width: 100%;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: -0.3px;
+        color: #222222;
+        text-align: center;
+    }
+
+    .new_dzn_tabs {
+        width: 100%;
+        max-width: 343px;
+    }
+
+    .new_dzn_tab.active .new_dzn_tab-indicator {
+        width: 171.5px;
+        height: 4px;
+    }
+
+    .new_dzn_tab.inactive .new_dzn_tab-indicator {
+        width: 171.5px;
+        height: 2px;
+    }
+
+    .new_dzn_content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 32px;
+        width: 100%;
+        max-width: 343px;
+    }
+
+    /* Изменение порядка элементов - изображение сверху */
+    .new_dzn_car-image {
+        order: -1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        width: 100%;
+        max-width: 343px;
+        height: 200px;
+        background: #F0F0F2;
+        border-radius: 20px;
+        gap: 0;
+    }
+
+    .new_dzn_car-image-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .new_dzn_car-image-placeholder {
+        border-radius: 20px;
+    }
+    
+    .new_dzn_car-image-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .new_dzn_specs {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 24px;
+        width: 100%;
+        max-width: 343px;
+    }
+
+    .new_dzn_model-title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .new_dzn_model-title h2 {
+        width: 100%;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: -0.3px;
+        color: #222222;
+    }
+
+    .new_dzn_model-price {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 23px;
+        letter-spacing: -0.3px;
+        color: #3B82F6;
+    }
+
+    .new_dzn_specs-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 100%;
+    }
+
+    .new_dzn_spec-row {
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .new_dzn_spec-item {
+        width: 100%;
+    }
+
+    .new_dzn_spec-name {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .new_dzn_spec-value {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    /* Кнопки - оставляем как в десктопе по расположению и размерам */
+    .new_dzn_actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 16px;
+        width: 100%;
+        max-width: 343px;
+        height: auto;
+    }
+
+    .new_dzn_action-buttons-row {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 16px;
+        width: 100%;
+        height: 48px;
+    }
+
+    .new_dzn_btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 24px;
+        gap: 8px;
+        height: 48px;
+        min-height: 48px;
+        max-height: 48px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 20px;
+        letter-spacing: -0.3px;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .new_dzn_btn-primary {
+        background: #3B82F6;
+        color: #FDFDFD;
+    }
+
+    .new_dzn_btn-model {
+        width: 117px;
+    }
+
+    .new_dzn_btn-book {
+        width: 158px;
+    }
+
+    .new_dzn_btn-outline {
+        background: transparent;
+        border: 1px solid #3B82F6;
+        color: #3B82F6;
+        width: 230px;
+    }
+
+    .new_dzn_action-links-row {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 32px;
+        width: 100%;
+        height: 24px;
+    }
+
+    .new_dzn_action-link {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 20px;
+        letter-spacing: -0.3px;
+        color: #3B82F6;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .new_dzn_link-calc {
+        width: 158px;
+    }
+
+    .new_dzn_link-offer {
+        width: 234px;
+    }
+}
+
+/* Дополнительные медиа-запросы для очень маленьких экранов */
+@media (max-width: 380px) {
+    .action-buttons-row {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 12px;
+    }
+    
+    .action-links-row {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 16px;
+    }
+    
+    .btn-model, .btn-book, .btn-outline {
+        width: 100%;
+    }
+    
+    .link-calc, .link-offer {
+        width: 100%;
     }
 }
