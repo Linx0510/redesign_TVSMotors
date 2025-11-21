@@ -1,4 +1,17 @@
-
+@font-face {
+  font-family: 'Play';
+  src: url('font/Play-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Play';
+  src: url('font/Play-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
         /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
@@ -1039,6 +1052,7 @@
         .new_dzn2-test-drive-card-content {
             display: flex;
             flex-direction: column;
+            width: 100% !important;
      }
 
         .new_dzn2-test-drive-card-title {
@@ -2452,6 +2466,12 @@
     
     .color-techgray {
         background: #909797;
+    }
+    .color-gray {
+        background: #5c6060;
+    }
+    .color-green {
+        background: #21413C;
     }
     
     .color-phantom {
@@ -4256,6 +4276,7 @@
 
             .new_dzn2-test-drive-input {
                 font-size: 14px;
+                width: 100%;
             }
 
             .new_dzn2-test-drive-checkbox-label span {
@@ -4560,7 +4581,7 @@
 }
 
 /* ===== АДАПТИВ ДЛЯ МОДЕЛЬНОГО РЯДА 375px ===== */
-@media (max-width: 375px) {
+@media (max-width: 376px) {
     .new_dzn_model-item {
         width: 100% !important;
         height: auto !important;
@@ -4655,15 +4676,18 @@
         object-fit: contain;
     }
 
-    .new_dzn_model-item-img-block-colors {
-    }
     .new_dzn_model-item-img-block-colors{
         margin-top: -30px !important;
     }
     .color-name{
         margin-bottom: 22px;
     }
+    .new_dzn_model-item-img-price-btns {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
     }
+}
 
     .new_dzn_model-item-img-colors-circles-row {
         flex-wrap: wrap;
@@ -4714,14 +4738,14 @@
     .new_dzn_model-item-img-price-btns {
         width: 100% !important;
         height: auto !important;
-        justify-content: space-between;
     }
 
     .price-btn {
         flex: 1;
-        min-width: 140px;
+        max-width: 140px;
         font-size: 14px !important;
     }
+    
 
 
 
@@ -4830,7 +4854,7 @@
     object-fit: contain;
 }
 .new_dzn_model-item-img-blocks {
-width: 100%;
+    width: 100%;
 }
 .new_dzn_model-item-img-block {
     width: 100%;
@@ -5888,8 +5912,9 @@ width: 100%;
             }
             .new_croll_cards-section
             {
-                padding: 0px 20px;
+                padding: 80px 20px;
             }
+           
             #modelSecondaryImageLeft{
                 display: none;
             }
@@ -5901,8 +5926,11 @@ width: 100%;
 
           }
           #modelMainImage{
-            margin-top: 40px;
-          }
+                margin-top: 40px;
+                object-fit: cover;
+                background-size: 200% auto;
+            
+            }
           .new_dzn_model-item-img-car{
             margin-bottom: 0px;
           }
@@ -5944,7 +5972,7 @@ width: 100%;
         gap: 12px;
         padding-bottom: 8px;
         height: 40px;
-        justify-content: flex-start;
+        justify-content: center;
         width: 100%;
     }
     

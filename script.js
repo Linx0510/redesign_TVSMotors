@@ -541,6 +541,7 @@ $(document).ready(function() {
                 left: "./image/left_model.svg", 
                 right: "./image/right_model.svg"
             }
+            
         }
     },
     "tiggo-9": {
@@ -551,14 +552,34 @@ $(document).ready(function() {
         secondaryRight: "./images/tiggo-9-right.png",
         colors: {
             white: { 
-                main: "./images/tiggo-9-white.png",
-                left: "./images/tiggo-9-left.png", 
-                right: "./images/tiggo-9-right.png"
+                main: "./image/9/9 White/white_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
+            },
+            black: { 
+                main: "./image/9/9 Black/black_47 (1) 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
             blue: { 
-                main: "./images/tiggo-9-blue.png",
-                left: "./images/tiggo-9-blue-left.png", 
-                right: "./images/tiggo-9-blue-right.png"
+                main: "./image/9/9 Blue/blue_47 (1) 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
+            },
+            green: { 
+                main: "./image/9/9 Green/green_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
+            },
+            techgray: { 
+                   main: "./image/9/9 Techno grey/grey_tech_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
+            },
+            gray: { 
+                   main: "./image/9/9 Grey/grey_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             }
         }
     },
