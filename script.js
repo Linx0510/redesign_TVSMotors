@@ -1,10 +1,10 @@
 $(document).ready(function() {
     // Фоны для главного блока
     const heroBackgrounds = [
-        "image/Hero (2).svg",
-        "image/Timer.svg", 
-       "image/Hero (2).svg",
-        "image/Hero (2).svg"
+        "image/Hero1.svg",
+        "image/Hero2.svg", 
+       "image/Hero3.svg",
+        "image/Hero4.svg"
     ];
     let currentHeroBg = 0;
 
@@ -412,8 +412,8 @@ $(document).ready(function() {
             // Добавьте этот код в существующий script.js после остального кода
 
 // Данные для моделей с цветами
-const modelsData = {
-    "tiggo-4-pro": {
+        const modelsData = {
+        "tiggo-4-pro": {
         title: "CHERY TIGGO 4 PRO",
         price: "2 100 000 ₽",
         mainImage: "./images/tiggo-4-pro-white.png",
@@ -483,39 +483,39 @@ const modelsData = {
         secondaryRight: "./images/Rectangle 13.png",
         colors: {
             white: { 
-                  main: "./image/car_model.svg",
+                  main: "./image/7L/T7 White/T7_studio_white_47 1.svg",
                 left: "./image/left_model.svg", 
                 right: "./image/right_model.svg"
             },
             black: { 
-                main: "./image/car_model.svg",
+                main: "./image/7L/T7 Black/T7_studio_black_47 (1) 1.svg",
                 left: "./image/left_model.svg", 
                 right: "./image/right_model.svg"
             },
             blue: { 
-                 main: "./image/car_model.svg",
+                 main: "./image/7L/T7 Blue/T7_studio_blue_47 (1) 1.svg",
                 left: "./image/left_model.svg", 
                 right: "./image/right_model.svg"
             },
             red: { 
-                    main: "./image/car_model.svg",
+                    main: "./image/7L/T7 Red/T7_studio_red_47 1.svg",
                 left: "./image/left_model.svg", 
                 right: "./image/right_model.svg"
             },
-            gray: { 
-                   main: "./image/car_model.svg",
+            techgray: { 
+                   main: "./image/7L/T7 Tech grey/T7_studio_tech grey_47 1.svg",
                 left: "./image/left_model.svg", 
                 right: "./image/right_model.svg"
             },
-            "dark-gray": { 
-                main: "./images/tiggo-7l-dark-gray.png",
-                left: "./images/tiggo-7l-dark-gray-left.png", 
-                right: "./images/tiggo-7l-dark-gray-right.png"
+            phantom: { 
+                main: "./image/7L/T7 Phantom/T7_studio_phantom_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
             silver: { 
-                main: "./images/tiggo-7l-silver.png",
-                left: "./images/tiggo-7l-silver-left.png", 
-                right: "./images/tiggo-7l-silver-right.png"
+                main: "./image/7L/T7 Silver/T7_studio_silver_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             }
         }
     },
@@ -526,15 +526,20 @@ const modelsData = {
         secondaryLeft: "./images/tiggo-8-pro-max-left.png",
         secondaryRight: "./images/tiggo-8-pro-max-right.png",
         colors: {
-            white: { 
-                main: "./images/tiggo-8-pro-max-white.png",
-                left: "./images/tiggo-8-pro-max-left.png", 
-                right: "./images/tiggo-8-pro-max-right.png"
+            purple: { 
+                main: "./image/8 Pro max/8 Purple/purple_47 (1) 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             },
-            black: { 
-                main: "./images/tiggo-8-pro-max-black.png",
-                left: "./images/tiggo-8-pro-max-black-left.png", 
-                right: "./images/tiggo-8-pro-max-black-right.png"
+            silver: { 
+                main: "./image/8 Pro max/8 Silver/silver_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
+            },
+            white: { 
+                main: "./image/8 Pro max/8 White/white_47 (4) 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
             }
         }
     },

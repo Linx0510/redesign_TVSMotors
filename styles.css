@@ -434,7 +434,7 @@
             transition: all 0.3s ease;
         }
 
-        /* ===== СТИЛИ ДЛЯ ГЕРОЙ-СЕКЦИИ ===== */
+        /* ===== СТИЛИ ДЛЯ ГЛАВНОЙ-СЕКЦИИ ===== */
         .new_dzn-hero {
             position: relative;
             height: 740px;
@@ -806,7 +806,7 @@
             background: #181c23;
             overflow: hidden;
             padding: 140px 120px;
-            background: url(image/Credit\ contact.svg) no-repeat center / cover;
+            background: url(image/Credit.svg) no-repeat center / cover;
         }
 
         .new_dzn-credit-bg-img {
@@ -951,7 +951,8 @@
 
         /* ===== СТИЛИ ДЛЯ ТРЕТЬЕЙ ФОРМЫ ===== */
         .new_dzn2-test-drive-section {
-            background: url(image/Test\ drive\ contact.svg) no-repeat center center / cover;
+            background: url(image/Testdrive.svg) no-repeat right center / cover;
+            background-position:  300px ;
             display: flex;
             min-height: 800px;
             padding: 140px 120px;
@@ -1104,7 +1105,7 @@
 
         .new_dzn2-test-drive-checkbox-label {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 8px;
             font-size: 13px;
             color: #222;
@@ -1610,7 +1611,7 @@
         }
 
         .new_model {
-            background-image: url(image/model.svg);
+            background-image: url(image/models.svg);
         }
 
         .new_cards_cart_content {
@@ -2377,12 +2378,13 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
+            width: 1200px;
         }
 
         .new_dzn_model-item-img-car img {
-            width: 759px;
-            height: 416px;
-            object-fit: contain;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
         }
 
         .new_dzn_model-item-img-block-colors {
@@ -2446,12 +2448,12 @@
         background: #B0293F;
     }
     
-    .color-gray {
+    .color-techgray {
         background: #909797;
     }
     
-    .color-dark-gray {
-        background: #66696B;
+    .color-phantom {
+        background: #3E3F42;
     }
     
     .color-black {
@@ -2464,6 +2466,9 @@
     
     .color-blue {
         background: #215271;
+    }
+    .color-purple{
+        background: #36202B;
     }
     
     .color-name {
@@ -2953,16 +2958,24 @@
             letter-spacing: -0.3px;
             align-self: stretch;
         }
-        .new_ecran{
-            background-image: url(image/ecran.svg);
+        .new_tech_1{
+            background-image: url(image/new_tech_1.svg);
             object-fit: cover;
         }
-        .new_epb{
-            background-image: url(image/EPB.svg);
+        .new_tech_2{
+            background-image: url(image/new_tech_2.svg);
             object-fit: cover;
         }
-        .new_security{
-            background-image: url(image/security.svg);
+        .new_tech_3{
+            background-image: url(image/new_tech_3.svg);
+            object-fit: cover;
+        }
+        .new_tech_4{
+            background-image: url(image/new_tech_4.svg);
+            object-fit: cover;
+        }
+        .new_tech_5{
+            background-image: url(image/new_tech_5.svg);
             object-fit: cover;
         }
         .new_ikon_indikator {
