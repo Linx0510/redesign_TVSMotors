@@ -815,18 +815,18 @@ $(document).ready(function() {
 /*видеоотзыв */
  
         $(document).ready(function() {
-            var $cards = $('.video-comments-card');
-            var $leftArrow = $('.video-comments-nav .left-arrow');
-            var $rightArrow = $('.video-comments-nav .right-arrow');
-            var $wrapper = $('.video-comments-wrapper');
-            var currentIndex = 0;
-            var isAnimating = false;
-            var touchStartX = 0;
+            let $cards = $('.video-comments-card');
+            let $leftArrow = $('.video-comments-nav .left-arrow');
+            let $rightArrow = $('.video-comments-nav .right-arrow');
+            let $wrapper = $('.video-comments-wrapper');
+            let currentIndex = 0;
+            let isAnimating = false;
+            let touchStartX = 0;
             var touchEndX = 0;
             var minSwipeDistance = 50;
             
             function isMobile() {
-                return $(window).width() <= 768;
+                return $(window).width() <= 300;
             }
 
             function showSlide(newIndex, direction) {
@@ -850,7 +850,7 @@ $(document).ready(function() {
                 $next.css('transition', 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out');
                 
                 $current.removeClass('active').css({
-                    transform: direction === 'next' ? 'translateX(-150%)' : 'translateX(50%)',
+                    transform: direction === 'next' ? 'translateX(-300%)' : 'translateX(50%)',
                     opacity: 0,
                     zIndex: 2
                 });
