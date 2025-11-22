@@ -1,4 +1,4 @@
-продолжи $(document).ready(function() {
+ $(document).ready(function() {
     // Фоны для главного блока
     const heroBackgrounds = [
         "image/Hero1.svg",
