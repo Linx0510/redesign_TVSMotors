@@ -10,12 +10,12 @@
     // Массив для мобильных изображений автомобилей
     const mobileCarImages = {
         "tiggo-4-pro": [
-            "image/mobile/tiggo-4-pro-mobile-1.jpg",
-            "image/mobile/tiggo-4-pro-mobile-2.jpg"
+            "image/22 1.svg",
+             "image/22 1.svg"
         ],
         "tiggo-4-new": [
-            "image/mobile/tiggo-4-new-mobile-1.jpg",
-            "image/mobile/tiggo-4-new-mobile-2.jpg"
+            "image/22 1.svg",
+             "image/22 1.svg"
         ],
         "tiggo-7-pro-max": [
             "image/mobile/tiggo-7-pro-max-mobile-1.jpg",
@@ -26,8 +26,8 @@
             "image/mobile/tiggo-7l-mobile-2.jpg"
         ],
         "tiggo-8-pro-max": [
-            "image/mobile/tiggo-8-pro-max-mobile-1.jpg",
-            "image/mobile/tiggo-8-pro-max-mobile-2.jpg"
+            "image/22 1.svg",
+            "image/22 1.svg"
         ],
         "tiggo-9": [
             "image/mobile/tiggo-9-mobile-1.jpg",
