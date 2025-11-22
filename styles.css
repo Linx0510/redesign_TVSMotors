@@ -24,7 +24,6 @@
             line-height: 1.6;
             color: #222;
             background-color: #fff;
-            padding-top: 160px;
         }
 
         img {
@@ -819,7 +818,8 @@
             background: #181c23;
             overflow: hidden;
             padding: 140px 120px;
-            background: url(image/Credit.svg) no-repeat center / cover;
+            background: linear-gradient(270deg, rgba(59, 130, 246, 0.80) 0%, rgba(59, 130, 246, 0.00) 100%), url(image/Credit.svg) lightgray -250px 0px / 132.222% 100%  no-repeat;
+            object-fit: cover;
         }
 
         .new_dzn-credit-bg-img {
@@ -1619,15 +1619,15 @@
         }
 
         .new_news_premer {
-            background-image: url(image/news_premer.svg);
+            background: radial-gradient(105.75% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(image/news_premer.svg) lightgray -175px 0px / 187.761% 100% no-repeat;
         }
 
         .new_news_action {
-            background-image: url(image/action.svg);
+            background: radial-gradient(105.75% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(image/action.svg) lightgray -175px 0px / 187.761% 100% no-repeat;
         }
 
         .new_model {
-            background-image: url(image/models.svg);
+            background: radial-gradient(105.75% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(image/models.svg) lightgray -175px 0px / 187.761% 100% no-repeat;
         }
 
         .new_cards_cart_content {
@@ -4631,7 +4631,7 @@
     }
 
     .new_dzn_model-item-main {
-        width: 100% !important;
+        width: 343px !important;
         height: auto !important;
         gap: 24px !important;
     }
@@ -4670,11 +4670,7 @@
         margin-bottom: 16px;
     }
 
-    .new_dzn_model-item-img-car img {
-        width: 100% !important;
-        height: 200px !important;
-        object-fit: contain;
-    }
+  
 
     .new_dzn_model-item-img-block-colors{
         margin-top: -30px !important;
@@ -4844,11 +4840,7 @@
         min-width: 140px;
     }
  
-.new_dzn_model-item-img-car img {
-    width: 343px !important;
-    height: 170px !important;
-    object-fit: contain;
-}
+
 .new_dzn_model-item-img-blocks {
     width: 100%;
 }
@@ -5193,47 +5185,61 @@
     }
 }
 
+/* Force-correct for very small screens: ensure car is centered and not cropped (<=375px) */
+@media (max-width: 375px) {
+    .new_dzn_model-item-img {
+        overflow: hidden !important;
+    }
+
+    .new_dzn_model-item-img-car {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 375px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(0) !important;
+        margin: 0 auto !important;
+        min-height: 0 !important;
+    }
+
+    .new_dzn_model-item-img-car img {
+        display: block !important;
+        width: 100% !important;
+        max-width: 375px !important;
+        height: auto !important;
+        object-fit: contain !important;
+        transform: none !important;
+        margin: 0 auto !important;
+    }
+
+    /* Ensure surrounding blocks don't push layout */
+    .new_dzn_model-item-img-blocks,
+    .new_dzn_model-item-img-block,
+    .new_dzn_model-item-main {
+        width: 100% !important;
+        max-width: 375px !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+}
+
       
 
 
 /*видеоблок */
 
 /* Увеличение изображения автомобиля на мобильных устройствах */
+
+
 @media (max-width: 480px) {
-    /* делаем картинку максимально широкой */
     .new_dzn_model-item-img-car {
+        width: 100%;
+        margin: 0 auto;
         position: relative !important;
-        width: 100vw !important;
-        max-width: none !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        margin: 0 !important;
-        min-height: 320px !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
     }
 
-    .new_dzn_model-item-img-car img {
-        width: 100% !important;
-     
-        max-height: none !important;
-        object-fit: cover !important;
-    }
-
-    /* убираем лишние ограничения у блоков-обёрток */
-    .new_dzn_model-item-img-block,
-    .new_dzn_model-item-img-blocks {
-        width: 100% !important;
-        max-width: none !important;
-    }
-
-    /* уменьшаем расстояние до цветов */
-    .new_dzn_model-item-img-block-colors {
-        margin-top: 0 !important;
-    }
-
-    /* снимаем ограничение ширины навигации, если оно мешает */
-    .new_dzn_model-item-navigation-wrapper {
-        max-width: none !important;
-    }
 }
 
         .video-comments-container {
@@ -6059,5 +6065,102 @@
     
     .model-tab.active h3 {
         font-size: 13px;
+    }
+}
+
+/* Ограничение для точной мобилки 375px: ничего не должно выходить за пределы */
+@media (max-width: 375px) {
+    /* сам контейнер секции — скрываем горизонтальный overflow и фиксируем ширину */
+    .new_dzn_model-item-img {
+        overflow: hidden !important;
+        width: 100vw !important;
+        max-width: 375px !important;
+        box-sizing: border-box !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin: 0 auto !important;
+        height: auto !important;
+    }
+
+    /* контейнер с изображением машины — не выходить за 100% контейнера */
+    .new_dzn_model-item-img-car {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 375px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        min-height: 300px !important;
+    }
+
+    /* само изображение — адаптируем под контейнер, не увеличиваем за его пределы */
+    .new_dzn_model-item-img-car img {
+        display: block !important;
+        width: 100% !important;
+        max-width: 375px !important;
+        height: auto !important;
+        object-fit: contain !important;
+        transform: none !important;
+    }
+
+    /* блоки вокруг — чтобы не тянулися шире */
+    .new_dzn_model-item-img-blocks,
+    .new_dzn_model-item-img-block {
+        width: 100% !important;
+        max-width: 375px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* цвета ближе к картинке */
+    .new_dzn_model-item-img-block-colors {
+        margin-top: 0 !important;
+        padding-bottom: 12px !important;
+    }
+
+    /* дополнительно обрезаем возможные внешние тени/смещения у родительских элементов */
+    .new_dzn_model-item-main,
+    .new_dzn_model-item-img {
+        overflow-x: hidden !important;
+    }
+}
+
+/* Финальный мобильный override: увеличиваем машину и уменьшаем отступ до цветов */
+@media (max-width: 480px) {
+    .new_dzn_model-item-img {
+        overflow: visible !important;
+        padding-bottom: 0 !important;
+        height: auto !important;
+    }
+
+    .new_dzn_model-item-img-car {
+        position: relative !important;
+        width: 120vw !important; /* делаем шире экрана для эффекта крупной машины */
+        max-width: none !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(-6%) !important; /* немного поднять */
+        margin: 0 !important;
+        min-height: 380px !important;
+    }
+
+    .new_dzn_model-item-img-car img {
+        width: 150% !important; /* увеличиваем изображение */
+        max-width: none !important;
+        height: auto !important;
+        object-fit: cover !important;
+        transform: translateY(-6%) scale(1.02) !important;
+        display: block !important;
+        clip-path: inset(0% 40% 0% 40% );
+    }
+
+    /* Подтянем блок с цветами ближе к картинке */
+    .new_dzn_model-item-img-block-colors {
+        margin-top: -20px !important;
+    }
+
+    /* Если есть фоновые блоки, уменьшить их высоту чтобы картинка доминировала */
+    .new_dzn_model-item-img-blocks,
+    .new_dzn_model-item-img-block {
+        width: 100% !important;
+        max-width: none !important;
     }
 }
