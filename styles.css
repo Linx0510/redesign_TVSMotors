@@ -819,6 +819,7 @@
             overflow: hidden;
             padding: 140px 120px;
             object-fit: cover;
+            background:  linear-gradient(270deg, rgba(59, 130, 246, 0.80) 0%, rgba(59, 130, 246, 0.00) 100%), url(image/Credit.svg) lightgray -1145px 0px / 250% 100% no-repeat;
         }
         @media(max-width: 768px) {
             .new_dzn-credit{
