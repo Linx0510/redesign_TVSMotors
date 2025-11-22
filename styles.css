@@ -24,7 +24,6 @@
             line-height: 1.6;
             color: #222;
             background-color: #fff;
-            padding-top: 160px;
         }
 
         img {
@@ -819,7 +818,8 @@
             background: #181c23;
             overflow: hidden;
             padding: 140px 120px;
-            background: url(image/Credit.svg) no-repeat center / cover;
+            background: linear-gradient(270deg, rgba(59, 130, 246, 0.80) 0%, rgba(59, 130, 246, 0.00) 100%), url(image/Credit.svg) lightgray -250px 0px / 132.222% 100%  no-repeat;
+            object-fit: cover;
         }
 
         .new_dzn-credit-bg-img {
@@ -1619,15 +1619,15 @@
         }
 
         .new_news_premer {
-            background-image: url(image/news_premer.svg);
+            background: radial-gradient(105.75% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(image/news_premer.svg) lightgray -175px 0px / 187.761% 100% no-repeat;
         }
 
         .new_news_action {
-            background-image: url(image/action.svg);
+            background: radial-gradient(105.75% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(image/action.svg) lightgray -175px 0px / 187.761% 100% no-repeat;
         }
 
         .new_model {
-            background-image: url(image/models.svg);
+            background: radial-gradient(105.75% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(image/models.svg) lightgray -175px 0px / 187.761% 100% no-repeat;
         }
 
         .new_cards_cart_content {

@@ -42,7 +42,7 @@ $(document).ready(function() {
         setInterval(function() {
             currentHeroBg = (currentHeroBg + 1) % heroBackgrounds.length;
             setHeroBg(currentHeroBg);
-        }, 5000); // Меняем каждые 5 секунд (увеличил с 1 до 5 секунд)
+        }, 4000); // Меняем каждые 5 секунд (увеличил с 1 до 5 секунд)
     }
     
  
@@ -108,6 +108,7 @@ $(document).ready(function() {
         $('.new_dzn-mobile-navigation .new_dzn-nav-item-with-dropdown').removeClass('active');
     }
 });
+
 
 //form1
    
