@@ -1,4 +1,4 @@
- $(document).ready(function() {
+$(document).ready(function() {
     // Фоны для главного блока
     const heroBackgrounds = [
         "image/Hero1.svg",
@@ -326,6 +326,322 @@
         $('#testDriveFormContent').hide();
         $('#testDriveSuccessContent').show().addClass('fade-in');
     }
+
+    // Карточки слайдер
+    var $cards = $('.new_cards_cart');
+    var $leftArrow = $('.new_arrow img').first();
+    var $rightArrow = $('.new_arrow img').last();
+    var $sliderContainer = $('.new_cards_content');
+    var currentIndex = 0;
+    var isAnimating = false;
+    var startX = 0;
+    var isDragging = false;
+    var swipeThreshold = 50;
+    var autoSlideInterval;
+
+    // Проверяем, является ли устройство мобильным
+    function isMobile() {
+        return $(window).width() <= 768;
+    }
+
+    // Инициализация слайдера
+    function initSlider() {
+        if (isMobile()) {
+            // Скрываем все карточки кроме активной
+            $cards.removeClass('active').css({
+                transform: 'translateX(100%)',
+                display: 'none',
+                transition: 'none'
+            });
+            
+            // Показываем активную карточку
+            $cards.eq(currentIndex).addClass('active').css({
+                transform: 'translateX(0)',
+                display: 'block'
+            });
+        } else {
+            // На десктопе показываем все карточки
+            resetSlider();
+        }
+    }
+
+    // Сброс слайдера для десктопного режима
+    function resetSlider() {
+        $cards.removeClass('active').css({
+            position: '',
+            transform: '',
+            display: 'block',
+            transition: ''
+        });
+    }
+
+    // Показать слайд
+    function showSlide(newIndex, direction) {
+        if (isAnimating || newIndex === currentIndex || !isMobile()) return;
+        
+        isAnimating = true;
+
+        var $current = $cards.eq(currentIndex);
+        var $next = $cards.eq(newIndex);
+
+        // Устанавливаем начальную позицию для следующего слайда
+        if (direction === 'next') {
+            $next.css({
+                transform: 'translateX(100%)',
+                display: 'block'
+            });
+        } else {
+            $next.css({
+                transform: 'translateX(-100%)',
+                display: 'block'
+            });
+        }
+
+        // Даем время для применения начальных стилей
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                // Анимация перехода
+                $current.css({
+                    transform: direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)',
+                    transition: 'transform 0.4s ease-in-out'
+                });
+
+                $next.css({
+                    transform: 'translateX(0)',
+                    transition: 'transform 0.4s ease-in-out'
+                });
+            });
+        });
+
+        // Завершение анимации
+        setTimeout(function() {
+            $current.removeClass('active').css({
+                display: 'none',
+                transform: 'translateX(100%)',
+                transition: 'none'
+            });
+            
+            $next.addClass('active').css({
+                transition: 'none'
+            });
+            
+            currentIndex = newIndex;
+            isAnimating = false;
+        }, 400);
+    }
+
+    // Следующий слайд
+    function nextSlide() {
+        if (!isMobile() || isAnimating) return;
+        var newIndex = (currentIndex + 1) % $cards.length;
+        showSlide(newIndex, 'next');
+    }
+
+    // Предыдущий слайд
+    function prevSlide() {
+        if (!isMobile() || isAnimating) return;
+        var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
+        showSlide(newIndex, 'prev');
+    }
+
+    // Обработчики событий для стрелок
+    $leftArrow.on('click', prevSlide);
+    $rightArrow.on('click', nextSlide);
+
+    // Обработчики для свайпа
+    $sliderContainer.on('touchstart', function(e) {
+        if (!isMobile() || isAnimating) return;
+        startX = e.originalEvent.touches[0].clientX;
+        isDragging = true;
+    });
+
+    $sliderContainer.on('touchmove', function(e) {
+        if (!isMobile() || !isDragging) return;
+        // Предотвращаем скролл страницы при свайпе
+        e.preventDefault();
+    });
+
+    $sliderContainer.on('touchend', function(e) {
+        if (!isMobile() || !isDragging || isAnimating) return;
+        
+        var endX = e.originalEvent.changedTouches[0].clientX;
+        var diffX = startX - endX;
+        
+        if (Math.abs(diffX) > swipeThreshold) {
+            if (diffX > 0) {
+                nextSlide(); 
+            } else {
+                prevSlide();
+            }
+        }
+        isDragging = false;
+    });
+
+    // Обработчики для клавиатуры
+    $(document).on('keydown', function(e) {
+        if (!isMobile() || isAnimating) return;
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                prevSlide();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                nextSlide();
+                break;
+        }
+    });
+
+    // Автопрокрутка
+    function startAutoSlide() {
+        if (!isMobile()) return;
+        
+        stopAutoSlide(); // Останавливаем предыдущий интервал
+        
+        autoSlideInterval = setInterval(function() {
+            if (!isAnimating && !isDragging) {
+                nextSlide();
+            }
+        }, 2000);
+    }
+    
+    function stopAutoSlide() {
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+        }
+    }
+    
+    // Обработчики для паузы автопрокрутки
+    function pauseAutoSlide() {
+        stopAutoSlide();
+    }
+    
+    function resumeAutoSlide() {
+        if (isMobile()) {
+            startAutoSlide();
+        }
+    }
+    
+    $sliderContainer.add($leftArrow).add($rightArrow)
+        .on('touchstart mouseenter', pauseAutoSlide)
+        .on('touchend mouseleave', resumeAutoSlide);
+
+    // Обработчик изменения размера окна
+    function handleResize() {
+        if (isMobile()) {
+            initSlider();
+            startAutoSlide();
+        } else {
+            resetSlider();
+            stopAutoSlide();
+        }
+    }
+
+    // Дебаунс для resize события
+    var resizeTimer;
+    $(window).on('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(handleResize, 250);
+    });
+
+    // Инициализация
+    initSlider();
+    if (isMobile()) {
+        startAutoSlide();
+    }
+
+    // Технологии безопасности слайдер
+    let currentSlide = 0;
+    let autoplayInterval;
+
+    const $techSliderContainer = $('.new_slider-container');
+    const $techSlides = $('.new_technology_security_content_cart');
+    const $indicators = $('.new_ikon_indikator');
+    const $mobileIndicators = $('.new_mobile_indicator');
+    const totalSlides = $techSlides.length;
+
+    const $lastSlideClone1 = $techSlides.eq(totalSlides - 1).clone();
+    const $lastSlideClone2 = $techSlides.eq(totalSlides - 2).clone();
+    $techSliderContainer.prepend($lastSlideClone2, $lastSlideClone1);
+
+    const $firstSlideClone1 = $techSlides.eq(0).clone();
+    const $firstSlideClone2 = $techSlides.eq(1).clone();
+    $techSliderContainer.append($firstSlideClone1, $firstSlideClone2);
+
+    const $allSlides = $('.new_technology_security_content_cart');
+    const totalAllSlides = $allSlides.length;
+
+    currentSlide = 2;
+
+    function updateSlider() {
+        const containerWidth = $('.new_technology_security_content').width();
+        const cardWidth = $techSlides.first().outerWidth(true);
+        const gap = 24;
+
+        const offset = (containerWidth / 2) - (cardWidth / 2) - (currentSlide * (cardWidth + gap));
+
+        $techSliderContainer.css('transform', `translateX(${offset}px)`);
+
+        $allSlides.removeClass('active');
+        $indicators.removeClass('active');
+        $mobileIndicators.removeClass('active');
+
+        let realIndex = (currentSlide - 2 + totalSlides) % totalSlides;
+        if (realIndex < 0) realIndex += totalSlides;
+
+        $allSlides.eq(currentSlide).addClass('active');
+        $indicators.eq(realIndex).addClass('active');
+        $mobileIndicators.eq(realIndex).addClass('active');
+    }
+
+    function nextTechSlide() {
+        currentSlide++;
+
+        if (currentSlide >= totalAllSlides - 2) {
+            $techSliderContainer.css('transition', 'none');
+            currentSlide = 2;
+            const containerWidth = $('.new_technology_security_content').width();
+            const cardWidth = $techSlides.first().outerWidth(true);
+            const gap = 24;
+            const offset = (containerWidth / 2) - (cardWidth / 2) - (currentSlide * (cardWidth + gap));
+            $techSliderContainer.css('transform', `translateX(${offset}px)`);
+    
+            setTimeout(() => {
+                $techSliderContainer.css('transition', 'transform 0.5s ease');
+            }, 50);
+        }
+
+        updateSlider();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index + 2;
+        updateSlider();
+        resetAutoplay();
+    }
+
+    function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        startAutoplay();
+    }
+
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextTechSlide, 2000);
+    }
+
+    updateSlider();
+    startAutoplay();
+
+    $indicators.on('click', function() {
+        goToSlide($(this).index());
+    });
+
+    $mobileIndicators.on('click', function() {
+        goToSlide($(this).index());
+    });
+
+    $(window).on('resize', updateSlider);
 });
 
 // Данные для моделей с цветами
@@ -635,105 +951,7 @@ function updateMobileCarImages() {
     }
 }
 
-// Остальной код для отзывов, карты, видеоотзывов и скролла остается без изменений
-// [Здесь должен быть ваш существующий код для отзывов, карты, видеоотзывов и скролла]
-// Инициализация второй секции - Отзывы клиентов
-const reviews = [
-    {
-        quote: "Выражаю благодарность сотрудникам автосалона и персонально менеджеру Бегалиеву Равилю за квалифицированную помощь в подборке и приобретении автомобиля Cherri Tiggo 7 pro max. Радует и помогает его индивидуальный подход к покупателям, профессионализм и скорость принятия решений. Также хочется отметить специалиста кредитного отдела Кузьмину Александру за подробное и понятное и терпеливое обьяснение всех условий. Всем огромное спасибо и успехов.",
-        author: "Виктор Гривко",
-        source: "Chery Tiggo 7 Pro Max",
-        sourceType: "car"
-    },
-    {
-        quote: "Приебрел второй автомобиль Cherry в автосалоне ТВС моторс в Оренбурге. Первый 3 года назад Cherry tiggo4 , отличный автомобиль проехал 90тыс. Км без нареканий решил попробовать Tiggo 7 pro сегодня приобрели. В автосалоне очень комфортно даже попал на розыгрыш среди покупателей в этом году, но не участвовал . Мое участие ждет меня через месяц и в конце года 🍋 . Обязательно приеду. Очень всем рекомендую. На автомобиль дали хорошую цену и скидку на новый и куча бесплатных допов( защита движка,решетки ,коврики и зимняя резина)",
-        author: "Андрей Пересыпкин",
-        source: "Яндекс Карты",
-        sourceType: "app"
-    },
-    {
-        quote: "Обожаю когда всё современно. Личный кабинет, где можно следить каждую манипуляцию с автомобилем. Связь с клиентской службой, где не только отвечают молниеносно но и перезванивают сразу. И не разговариваешь с роботом а с живым человеком. Да, цены на ТО. Но зато всё у официального дилера, всё в одном месте, без очередей. За всё можно спросить и устранить. Чем бегать по всему городу по автосервисам. А девушки просто милашки. Безумно красивая девочка на ресепшене работает на Нежинском шоссе. Приветливая улыбка. Красотка просто.",
-        author: "Юрий Морозов",
-        source: "Яндекс Карты",
-        sourceType: "app"
-    },
-    {
-        quote: "18.11.2023 г. приобрели автомобиль в автосалоне на Полтавской, 43. Оформление прошло в комфортной обстановке, оперативно, атмосфера в салоне доброжелательная. Отзывчивый и вежливый персонал. Особую благодарность выражаем Кирпичникову Егору за компетентное мнение. Получили от него доступную информацию об автомобиле и об условиях покупки. В этом салоне к условиям купли-продажи автомобиля к нам подошли индивидуально, учтя все наши требования, желания и предоставили максимальные скидки. Желаю салону больших продаж и процветания!",
-        author: "Татьяна П.",
-        source: "Яндекс Карты",
-        sourceType: "app"
-    },
-    {
-        quote: "Обожаю когда всё современно. Личный кабинет, где можно следить каждую манипуляцию с автомобилем. Связь с клиентской службой, где не только отвечают молниеносно но и перезванивают сразу. И не разговариваешь с роботом а с живым человеком. Да, цены на ТО. Но зато всё у официального дилера, всё в одном месте, без очередей. За всё можно спросить и устранить. Чем бегать по всему городу по автосервисам. А девушки просто милашки. Безумно красивая девочка на ресепшене работает на Нежинском шоссе. Приветливая улыбка. Красотка просто.",
-        author: "Андрей Пересыпкин",
-        source: "",
-        sourceType: ""
-    },
-    {
-        quote: "18.11.2023 г. приобрели автомобиль в автосалоне на Полтавской, 43. Оформление прошло в комфортной обстановке, оперативно, атмосфера в салоне доброжелательная. Отзывчивый и вежливый персонал. Особую благодарность выражаем Кирпичникову Егору за компетентное мнение. Получили от него доступную информацию об автомобиле и об условиях покупки. В этом салоне к условиям купли-продажи автомобиля к нам подошли индивидуально, учтя все наши требования, желания и предоставили максимальные скидки. Желаю салону больших продаж и процветания!",
-        author: "Татьяна П.",
-        source: "",
-        sourceType: ""
-    }
-];
 
-// Создание карточек отзывов
-document.addEventListener('DOMContentLoaded', function() {
-    const column1 = document.getElementById('column1');
-    const column2 = document.getElementById('column2');
-
-    // Разделяем отзывы на две группы
-    const firstHalf = reviews.slice(0, Math.ceil(reviews.length / 2));
-    const secondHalf = reviews.slice(Math.ceil(reviews.length / 2));
-
-    // Функция для создания карточки
-    function createCard(review) {
-        const card = document.createElement('div');
-        card.className = 'comment-card';
-        
-        // Определение класса для источника в зависимости от типа
-        let sourceClass = '';
-        if (review.sourceType === 'app') {
-            sourceClass = 'new_dzn-commets-content-style-name-app';
-        } else if (review.sourceType === 'car') {
-            sourceClass = 'new_dzn-commets-content-style-name-car';
-        } else {
-            sourceClass = 'new_dzn-commets-content-style-name';
-        }
-        
-        card.innerHTML = `
-            <div class="new_dzn-commets-content-style-title1">
-                <span class="new_dzn-commets-content-style-elms">"</span>
-                <p>${review.quote}</p>
-            </div>
-            <div class="new_dzn-commets-content-style-title2">
-                <h2>${review.author}</h2>
-                ${review.source ? `<span class="${sourceClass}">${review.source}</span>` : ''}
-            </div>
-        `;
-        
-        return card;
-    }
-
-    // Добавляем карточки в первую колонку
-    firstHalf.forEach(review => {
-        column1.appendChild(createCard(review));
-    });
-
-    // Добавляем карточки во вторую колонку
-    secondHalf.forEach(review => {
-        column2.appendChild(createCard(review));
-    });
-
-    // Дублируем контент для бесконечного скролла
-    function duplicateContentForScroll(column) {
-        const content = column.innerHTML;
-        column.innerHTML += content;
-    }
-
-    duplicateContentForScroll(column1);
-    duplicateContentForScroll(column2);
-});
 
 // Карта Яндекс
 function initYandexMap() {
@@ -767,221 +985,6 @@ $(document).ready(function() {
         initYandexMap();
     }
 });
-
-// Видео отзывы
-$(document).ready(function() {
-    let $cards = $('.video-comments-card');
-    let $leftArrow = $('.video-comments-nav .left-arrow');
-    let $rightArrow = $('.video-comments-nav .right-arrow');
-    let $wrapper = $('.video-comments-wrapper');
-    let currentIndex = 0;
-    let isAnimating = false;
-    let touchStartX = 0;
-    var touchEndX = 0;
-    var minSwipeDistance = 50;
-    
-    function isMobile() {
-        return $(window).width() <= 768;
-    }
-
-    function showSlide(newIndex, direction) {
-        if (!isMobile() || isAnimating || newIndex < 0 || newIndex >= $cards.length) return;
-        isAnimating = true;
-
-        var $current = $cards.eq(currentIndex);
-        var $next = $cards.eq(newIndex);
-        
-        var initialTransform = direction === 'next' ? 'translateX(50%)' : 'translateX(-150%)';
-
-        $next.removeClass('active').css({
-            transform: initialTransform,
-            opacity: 0,
-            zIndex: 3,
-            transition: 'none'
-        });
-        
-        void $next[0].offsetWidth;
-        
-        $next.css('transition', 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out');
-        
-        $current.removeClass('active').css({
-            transform: direction === 'next' ? 'translateX(-300%)' : 'translateX(50%)',
-            opacity: 0,
-            zIndex: 2
-        });
-
-        $next.addClass('active').css({
-            transform: 'translateX(-50%)',
-            opacity: 1
-        });
-
-        setTimeout(function() {
-            $cards.not($next).css({
-                zIndex: 1,
-                transform: 'translateX(-50%)',
-                opacity: 0
-            });
-            currentIndex = newIndex;
-            isAnimating = false;
-        }, 400);
-    }
-
-    function initSlider() {
-        if (isMobile()) {
-            $cards.removeClass('active').css({
-                opacity: 0,
-                transform: 'translateX(-50%)',
-                position: 'absolute'
-            });
-            $cards.eq(0).addClass('active').css('opacity', 1);
-            currentIndex = 0;
-        } else {
-            $cards.css({
-                opacity: 1,
-                transform: 'none',
-                position: 'relative'
-            });
-        }
-    }
-    
-    $leftArrow.on('click', function() {
-        var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
-        showSlide(newIndex, 'prev');
-    });
-
-    $rightArrow.on('click', function() {
-        var newIndex = (currentIndex + 1) % $cards.length;
-        showSlide(newIndex, 'next');
-    });
-
-    $wrapper.on('touchstart', function(e) {
-        if (!isMobile() || isAnimating) return;
-        touchStartX = e.originalEvent.touches[0].screenX;
-    });
-
-    $wrapper.on('touchend', function(e) {
-        if (!isMobile() || isAnimating) return;
-        touchEndX = e.originalEvent.changedTouches[0].screenX;
-        var diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > minSwipeDistance) {
-            if (diff > 0) {
-                var newIndex = (currentIndex + 1) % $cards.length;
-                showSlide(newIndex, 'next');
-            } else {
-                var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
-                showSlide(newIndex, 'prev');
-            }
-        }
-    });
-    
-    $(window).on('resize', function() {
-        initSlider();
-    });
-
-    initSlider();
-});
-
-// Блок со скроллом карточек
-document.addEventListener('DOMContentLoaded', function() {
-    const cardsContainer = document.querySelector('.new_croll-cards-container');
-    const arrowLeft = document.querySelector('.new_croll-arrow-left');
-    const arrowRight = document.querySelector('.new_croll-arrow-right');
-    const cards = document.querySelectorAll('.new_croll-card');
-    
-    if (!cardsContainer || !arrowLeft || !arrowRight) return;
-    
-    let isDragging = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    
-    function updateArrows() {
-        const container = cardsContainer;
-        const scrollLeft = container.scrollLeft;
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        
-        // Обновляем стрелки
-        arrowLeft.style.opacity = scrollLeft <= 10 ? '0.4' : '1';
-        arrowRight.style.opacity = scrollLeft >= maxScroll - 10 ? '0.4' : '1';
-    }
-    
-    function scrollToCard(direction) {
-        const container = cardsContainer;
-        const cardWidth = cards[0].offsetWidth + 20; // + gap
-        const currentScroll = container.scrollLeft;
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        
-        let targetScroll;
-        
-        if (direction === 'left') {
-            targetScroll = Math.max(0, currentScroll - cardWidth);
-        } else {
-            targetScroll = Math.min(maxScroll, currentScroll + cardWidth);
-        }
-        
-        container.scrollTo({
-            left: targetScroll,
-            behavior: 'smooth'
-        });
-        
-        // Обновляем стрелки после анимации
-        setTimeout(updateArrows, 300);
-    }
-    
-    // Обработчики для стрелок
-    arrowLeft.addEventListener('click', () => scrollToCard('left'));
-    arrowRight.addEventListener('click', () => scrollToCard('right'));
-    
-    // Свайп для десктопа
-    cardsContainer.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        cardsContainer.classList.add('grabbing');
-        startX = e.pageX - cardsContainer.offsetLeft;
-        scrollLeft = cardsContainer.scrollLeft;
-    });
-    
-    cardsContainer.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const x = e.pageX - cardsContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        cardsContainer.scrollLeft = scrollLeft - walk;
-    });
-    
-    function endDrag() {
-        isDragging = false;
-        cardsContainer.classList.remove('grabbing');
-        updateArrows();
-    }
-    
-    cardsContainer.addEventListener('mouseup', endDrag);
-    cardsContainer.addEventListener('mouseleave', endDrag);
-    
-    // Touch события для мобильных
-    cardsContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - cardsContainer.offsetLeft;
-        scrollLeft = cardsContainer.scrollLeft;
-    });
-    
-    cardsContainer.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        const x = e.touches[0].pageX - cardsContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        cardsContainer.scrollLeft = scrollLeft - walk;
-    });
-    
-    cardsContainer.addEventListener('touchend', updateArrows);
-    
-    // Обновление при изменении размера
-    window.addEventListener('resize', updateArrows);
-    
-    // Обновление при скролле
-    cardsContainer.addEventListener('scroll', updateArrows);
-    
-    // Инициализация
-    updateArrows();
-});
-
 // Дополнительные функции для модельного ряда
 function updateModelInfo(modelId) {
     // В реальном приложении здесь будет логика загрузки данных о модели
@@ -1061,3 +1064,532 @@ $(document).ready(function() {
         initYandexMap();
     }
 });
+const reviews = [
+            {
+                quote: "18.11.2023 г. приобрели автомобиль в автосалоне на Полтавской, 43. Оформление прошло в комфортной обстановке, оперативно, атмосфера в салоне доброжелательная. Отзывчивый и вежливый персонал. Особую благодарность выражаем Кирпичникову Егору за компетентное мнение. Получили от него доступную информацию об автомобиле и об условиях покупки. В этом салоне к условиям купли-продажи автомобиля к нам подошли индивидуально, учтя все наши требования, желания и предоставили максимальные скидки. Желаю салону больших продаж и процветания!",
+                author: "Татьяна П.",
+                source: "Яндекс Карты",
+                sourceType: "app"
+            },
+            {
+                quote: "Выражаю благодарность сотрудникам автосалона и персонально менеджеру Бегалиеву Равилю за квалифицированную помощь в подборке и приобретении автомобиля Cherri Tiggo 7 pro max. Радует и помогает его индивидуальный подход к покупателям, профессионализм и скорость принятия решений. Также хочется отметить специалиста кредитного отдела Кузьмину Александру за подробное и понятное и терпеливое обьяснение всех условий. Всем огромное спасибо и успехов.",
+                author: "Виктор Гривко",
+                source: "Chery Tiggo 7 Pro Max",
+                sourceType: "car"
+            },
+            {
+                quote: "Приебрел второй автомобиль Cherry в автосалоне ТВС моторс в Оренбурге. Первый 3 года назад Cherry tiggo4 , отличный автомобиль проехал 90тыс. Км без нареканий решил попробовать Tiggo 7 pro сегодня приобрели. В автосалоне очень комфортно даже попал на розыгрыш среди покупателей в этом году, но не участвовал . Мое участие ждет меня через месяц и в конце года 🍋 . Обязательно приеду. Очень всем рекомендую. На автомобиль дали хорошую цену и скидку на новый и куча бесплатных допов( защита движка,решетки ,коврики и зимняя резина)",
+                author: "Андрей Пересыпкин",
+                source: "Яндекс Карты",
+                sourceType: "app"
+            },
+            {
+                quote: "Обожаю когда всё современно. Личный кабинет, где можно следить каждую манипуляцию с автомобилем. Связь с клиентской службой, где не только отвечают молниеносно но и перезванивают сразу. И не разговариваешь с роботом а с живым человеком. Да, цены на ТО. Но зато всё у официального дилера, всё в одном месте, без очередей. За всё можно спросить и устранить. Чем бегать по всему городу по автосервисам. А девушки просто милашки. Безумно красивая девочка на ресепшене работает на Нежинском шоссе. Приветливая улыбка. Красотка просто.",
+                author: "Юрий Морозов",
+                source: "Яндекс Карты",
+                sourceType: "app"
+            },
+            {
+                quote: "Обожаю когда всё современно. Личный кабинет, где можно следить каждую манипуляцию с автомобилем. Связь с клиентской службой, где не только отвечают молниеносно но и перезванивают сразу. И не разговариваешь с роботом а с живым человеком. Да, цены на ТО. Но зато всё у официального дилера, всё в одном месте, без очередей. За всё можно спросить и устранить. Чем бегать по всему городу по автосервисам. А девушки просто милашки. Безумно красивая дегочка на ресепшене работает на Нежинском шоссе. Приветливая улыбка. Красотка просто.",
+                author: "Андрей Пересыпкин",
+                source: "",
+                sourceType: ""
+            },
+            {
+                quote: "18.11.2023 г. приобрели автомобиль в автосалоне на Полтавской, 43. Оформление прошло в комфортной обстановке, оперативно, атмосфера в салоне доброжелательная. Отзывчивый и вежливый персонал. Особую благодарность выражаем Кирпичникову Егору за компетентное мнение. Получили от него доступную информацию об автомобиле и об условиях покупки. В этом салоне к условиям купли-продажи автомобиля к нам подошли индивидуально, учтя все наши требования, желания и предоставили максимальные скидки. Желаю салону больших продаж и процветания!",
+                author: "Татьяна П.",
+                source: "",
+                sourceType: ""
+            }
+        ];
+
+        // Инициализация десктоп версии
+        function initDesktopComments() {
+            const column1 = document.getElementById('column1');
+            const column2 = document.getElementById('column2');
+            
+            if (!column1 || !column2) return;
+            
+            // Разделяем отзывы на две группы
+            const firstHalf = reviews.slice(0, Math.ceil(reviews.length / 2));
+            const secondHalf = reviews.slice(Math.ceil(reviews.length / 2));
+            
+            // Добавляем карточки в первую колонку
+            firstHalf.forEach(review => {
+                column1.appendChild(createDesktopCard(review));
+            });
+            
+            // Добавляем карточки во вторую колонку
+            secondHalf.forEach(review => {
+                column2.appendChild(createDesktopCard(review));
+            });
+            
+            // Дублируем контент для бесконечного скролла
+            duplicateContentForScroll(column1);
+            duplicateContentForScroll(column2);
+        }
+
+        // Инициализация мобильной версии
+        function initMobileComments() {
+            const mobileColumn = document.getElementById('mobileColumn');
+            const pagination = document.querySelector('.comments-mobile-pagination');
+            
+            if (!mobileColumn || !pagination) return;
+            
+            // Очищаем контейнеры
+            mobileColumn.innerHTML = '';
+            pagination.innerHTML = '';
+            
+            // Добавляем все карточки
+            reviews.forEach((review, index) => {
+                mobileColumn.appendChild(createMobileCard(review));
+                
+                // Создаем точки пагинации
+                const dot = document.createElement('div');
+                dot.className = `comments-mobile-dot ${index === 0 ? 'active' : ''}`;
+                dot.dataset.index = index;
+                pagination.appendChild(dot);
+            });
+            
+            // Добавляем обработчики для пагинации
+            initMobilePagination();
+            initMobileArrows();
+            
+            // Обновляем состояние стрелок при загрузке
+            updateMobileArrows();
+        }
+
+        // Создание карточки для десктопа
+        function createDesktopCard(review) {
+            const card = document.createElement('div');
+            card.className = 'comment-card';
+            
+            let sourceClass = 'new_dzn-commets-content-style-name';
+            if (review.sourceType === 'app') {
+                sourceClass = 'new_dzn-commets-content-style-name-app';
+            } else if (review.sourceType === 'car') {
+                sourceClass = 'new_dzn-commets-content-style-name-car';
+            }
+            
+            card.innerHTML = `
+                <div class="new_dzn-commets-content-style-title1">
+                    <span class="new_dzn-commets-content-style-elms">"</span>
+                    <p>${review.quote}</p>
+                </div>
+                <div class="new_dzn-commets-content-style-title2">
+                    <h2>${review.author}</h2>
+                    ${review.source ? `<span class="${sourceClass}">${review.source}</span>` : ''}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Создание карточки для мобильной версии
+        function createMobileCard(review) {
+            const card = document.createElement('div');
+            card.className = 'comment-mobile-card';
+            
+            let sourceClass = 'new_dzn-commets-content-style-name';
+            if (review.sourceType === 'app') {
+                sourceClass = 'new_dzn-commets-content-style-name-app';
+            } else if (review.sourceType === 'car') {
+                sourceClass = 'new_dzn-commets-content-style-name-car';
+            }
+            
+            card.innerHTML = `
+                <div class="new_dzn-commets-content-style-title1">
+                    <span class="new_dzn-commets-content-style-elms">"</span>
+                    <p>${review.quote}</p>
+                </div>
+                <div class="new_dzn-commets-content-style-title2">
+                    <h2>${review.author}</h2>
+                    ${review.source ? `<span class="${sourceClass}">${review.source}</span>` : ''}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Функция для дублирования контента (только для десктопа)
+        function duplicateContentForScroll(column) {
+            const content = column.innerHTML;
+            column.innerHTML += content;
+        }
+
+        // Инициализация мобильной пагинации
+        function initMobilePagination() {
+            const container = document.querySelector('.comments-mobile-container');
+            const dots = document.querySelectorAll('.comments-mobile-dot');
+            
+            if (!container || dots.length === 0) return;
+            
+            container.addEventListener('scroll', () => {
+                const scrollLeft = container.scrollLeft;
+                const cardWidth = container.querySelector('.comment-mobile-card').offsetWidth + 16;
+                const activeIndex = Math.round(scrollLeft / cardWidth);
+                
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                });
+                
+                // Обновляем состояние стрелок при скролле
+                updateMobileArrows();
+            });
+            
+            // Обработчики клика на точки
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const cardWidth = container.querySelector('.comment-mobile-card').offsetWidth + 16;
+                    container.scrollTo({
+                        left: index * cardWidth,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        }
+
+        // Инициализация мобильных стрелок
+        function initMobileArrows() {
+            const container = document.querySelector('.comments-mobile-container');
+            const arrowLeft = document.getElementById('arrowLeft');
+            const arrowRight = document.getElementById('arrowRight');
+            
+            if (!container || !arrowLeft || !arrowRight) return;
+            
+            arrowLeft.addEventListener('click', () => {
+                const cardWidth = container.querySelector('.comment-mobile-card').offsetWidth + 16;
+                container.scrollBy({
+                    left: -cardWidth,
+                    behavior: 'smooth'
+                });
+            });
+            
+            arrowRight.addEventListener('click', () => {
+                const cardWidth = container.querySelector('.comment-mobile-card').offsetWidth + 16;
+                container.scrollBy({
+                    left: cardWidth,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Обновление состояния мобильных стрелок
+        function updateMobileArrows() {
+            const container = document.querySelector('.comments-mobile-container');
+            const arrowLeft = document.getElementById('arrowLeft');
+            const arrowRight = document.getElementById('arrowRight');
+            
+            if (!container || !arrowLeft || !arrowRight) return;
+            
+            const scrollLeft = container.scrollLeft;
+            const scrollWidth = container.scrollWidth;
+            const clientWidth = container.clientWidth;
+            const cardWidth = container.querySelector('.comment-mobile-card').offsetWidth + 16;
+            const currentIndex = Math.round(scrollLeft / cardWidth);
+            const totalCards = reviews.length;
+            
+            // Левая стрелка активна, если мы не на первой карточке
+            arrowLeft.disabled = currentIndex === 0;
+            
+            // Правая стрелка активна, если мы не на последней карточке
+            arrowRight.disabled = currentIndex >= totalCards - 1;
+        }
+
+        // Основная инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            initDesktopComments();
+            initMobileComments();
+            
+            // Обновляем стрелки при ресайзе
+            window.addEventListener('resize', updateMobileArrows);
+        });
+
+        /*ВИДЕО-ОТЗЫВЫ ТОЛЬКО С IMG БЕЗ САМОГО ВИДЕО*/ 
+        document.addEventListener('DOMContentLoaded', function() {
+            // Данные карточек
+            const cardData = [
+                {
+                    image: './image/new_vide_img1.svg',
+                    title: 'Юрий Морозов',
+                    carName: 'Chery Tiggo 7 Pro'
+                },
+                {
+                    image: './image/new_vide_img2.svg',
+                    title: 'Андрей Пересыпкин',
+                    carName: 'Chery Arrizo 8'
+                },
+                {
+                    image: './image/new_vide_img3.svg',
+                    title: 'Андрей Пересыпкин',
+                    carName: 'Chery Arrizo 8'
+                },
+                {
+                    image: './image/new_vide_img1.svg',
+                    title: 'Андрей Пересыпкин',
+                    carName: 'Chery Arrizo 8'
+                },
+                {
+                    image: './image/new_vide_img2.svg',
+                    title: 'Андрей Пересыпкин',
+                    carName: 'Chery Arrizo 8'
+                },
+                {
+                    image: './image/new_vide_img3.svg',
+                    title: 'Татьяна П.',
+                    carName: 'Chery Tiggo 4 New'
+                },
+                {
+                    image: './image/new_vide_img1.svg',
+                    title: 'Татс Снега',
+                    carName: 'Chery Tiggo 7 Pro'
+                },
+                {
+                    image: './image/new_vide_img2.svg',
+                    title: 'Анна Иванова',
+                    carName: 'Chery Tiggo 8 Pro'
+                }
+            ];
+
+            // Элементы DOM
+            const videoGrid = document.getElementById('videoGrid');
+            const videoCarousel = document.getElementById('videoCarousel');
+            const leftArrow = document.querySelector('.left-arrow');
+            const rightArrow = document.querySelector('.right-arrow');
+            
+            let isMobile = window.innerWidth <= 768;
+            let currentIndex = 0;
+            let cardWidth = isMobile ? 343 : 400;
+            let gap = isMobile ? 16 : 24;
+
+            // Создание карточек
+            function createCards() {
+                videoGrid.innerHTML = '';
+                
+                // Создаем оригинальные карточки
+                cardData.forEach((card, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'video-comments-card';
+                    cardElement.style.backgroundImage = `linear-gradient(0deg, rgba(60, 60, 60, 0.5), rgba(60, 60, 60, 0.5)), url('${card.image}')`;
+                    cardElement.dataset.index = index;
+                    
+                    cardElement.innerHTML = `
+                        <div class="video-comments-play-container">
+                            <div class="video-comments-play-btn">
+                                <div class="video-comments-play-icon"></div>
+                            </div>
+                        </div>
+                        <div class="video-comments-text-container">
+                            <div class="text-content">
+                                <h4 class="video-comments-card-title">${card.title}</h4>
+                                <span class="video-comments-car-name">${card.carName}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    videoGrid.appendChild(cardElement);
+                });
+
+                // Настройка карусели
+                if (isMobile) {
+                    setupMobileCarousel();
+                } else {
+                    setupDesktopCarousel();
+                }
+            }
+
+            // Настройка мобильной версии
+            function setupMobileCarousel() {
+                cardWidth = 343;
+                gap = 16;
+                
+                // Центрируем контейнер
+                videoCarousel.style.display = 'flex';
+                videoCarousel.style.justifyContent = 'center';
+                
+                // Показываем только текущую карточку
+                const cards = videoGrid.querySelectorAll('.video-comments-card');
+                cards.forEach((card, index) => {
+                    card.style.display = index === currentIndex ? 'flex' : 'none';
+                });
+
+                // Настройка навигации
+                setupMobileNavigation();
+            }
+
+            // Настройка десктопной версии
+            function setupDesktopCarousel() {
+                cardWidth = 400;
+                gap = 24;
+                
+                // Клонируем карточки для бесконечного скролла
+                const cards = videoGrid.querySelectorAll('.video-comments-card');
+                
+                // Клонируем первые 4 карточки и добавляем в конец
+                for (let i = 0; i < 4; i++) {
+                    const clone = cards[i].cloneNode(true);
+                    videoGrid.appendChild(clone);
+                }
+                
+                // Клонируем последние 4 карточки и добавляем в начало
+                for (let i = cards.length - 4; i < cards.length; i++) {
+                    const clone = cards[i].cloneNode(true);
+                    videoGrid.insertBefore(clone, videoGrid.firstChild);
+                }
+
+                // Устанавливаем начальную позицию (настоящие первые карточки)
+                currentIndex = 4; // Потому что добавили 4 клона в начало
+                updateCardPosition();
+                
+                // Настройка drag & drop
+                setupDragHandlers();
+            }
+
+            // Обновление позиции карточек
+            function updateCardPosition() {
+                const transformValue = -currentIndex * (cardWidth + gap);
+                videoGrid.style.transform = `translateX(${transformValue}px)`;
+            }
+
+            // Переход к следующей карточке
+            function nextCard() {
+                if (isMobile) {
+                    // Для мобильной версии
+                    const cards = videoGrid.querySelectorAll('.video-comments-card');
+                    cards[currentIndex].style.display = 'none';
+                    
+                    currentIndex = (currentIndex + 1) % cardData.length;
+                    cards[currentIndex].style.display = 'flex';
+                } else {
+                    // Для десктопной версии
+                    currentIndex++;
+                    
+                    // Если достигли конца (оригинальные карточки + клоны в конце)
+                    if (currentIndex >= cardData.length + 4) {
+                        // Мгновенно переходим к началу оригинальных карточек
+                        currentIndex = 4;
+                        videoGrid.style.transition = 'none';
+                        updateCardPosition();
+                        // Возвращаем transition
+                        setTimeout(() => {
+                            videoGrid.style.transition = 'transform 0.3s ease';
+                        }, 50);
+                    } else {
+                        updateCardPosition();
+                    }
+                }
+            }
+
+            // Переход к предыдущей карточке
+            function prevCard() {
+                if (isMobile) {
+                    // Для мобильной версии
+                    const cards = videoGrid.querySelectorAll('.video-comments-card');
+                    cards[currentIndex].style.display = 'none';
+                    
+                    currentIndex = (currentIndex - 1 + cardData.length) % cardData.length;
+                    cards[currentIndex].style.display = 'flex';
+                } else {
+                    // Для десктопной версии
+                    currentIndex--;
+                    
+                    // Если достигли начала (клоны в начале)
+                    if (currentIndex < 0) {
+                        // Мгновенно переходим к концу оригинальных карточек
+                        currentIndex = cardData.length + 3;
+                        videoGrid.style.transition = 'none';
+                        updateCardPosition();
+                        // Возвращаем transition
+                        setTimeout(() => {
+                            videoGrid.style.transition = 'transform 0.3s ease';
+                        }, 50);
+                    } else {
+                        updateCardPosition();
+                    }
+                }
+            }
+
+            // Настройка навигации для мобильной версии
+            function setupMobileNavigation() {
+                if (leftArrow && rightArrow) {
+                    leftArrow.addEventListener('click', prevCard);
+                    rightArrow.addEventListener('click', nextCard);
+                }
+            }
+
+            // Drag & Drop для десктопа
+            function setupDragHandlers() {
+                let isDragging = false;
+                let startX = 0;
+                let startTranslate = 0;
+
+                videoCarousel.addEventListener('mousedown', startDrag);
+                videoCarousel.addEventListener('touchstart', startDrag);
+                
+                videoCarousel.addEventListener('mousemove', duringDrag);
+                videoCarousel.addEventListener('touchmove', duringDrag);
+                
+                videoCarousel.addEventListener('mouseup', endDrag);
+                videoCarousel.addEventListener('touchend', endDrag);
+                videoCarousel.addEventListener('mouseleave', endDrag);
+
+                function startDrag(e) {
+                    isDragging = true;
+                    startX = e.pageX || e.touches[0].pageX;
+                    startTranslate = -currentIndex * (cardWidth + gap);
+                    videoGrid.style.transition = 'none';
+                }
+
+                function duringDrag(e) {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    
+                    const x = e.pageX || e.touches[0].pageX;
+                    const walk = (x - startX);
+                    const currentTranslate = startTranslate + walk;
+                    
+                    videoGrid.style.transform = `translateX(${currentTranslate}px)`;
+                }
+
+                function endDrag() {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const endX = event.pageX || event.changedTouches[0].pageX;
+                    const diff = startX - endX;
+                    
+                    // Определяем направление свайпа
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            nextCard();
+                        } else {
+                            prevCard();
+                        }
+                    } else {
+                        // Возвращаем на место если свайп был маленьким
+                        updateCardPosition();
+                    }
+                    
+                    videoGrid.style.transition = 'transform 0.3s ease';
+                }
+            }
+
+            // Инициализация карусели
+            function initCarousel() {
+                createCards();
+            }
+
+            // Обработчик изменения размера окна
+            function handleResize() {
+                const wasMobile = isMobile;
+                isMobile = window.innerWidth <= 768;
+                
+                if (wasMobile !== isMobile) {
+                    createCards();
+                }
+            }
+
+            // Запускаем инициализацию
+            initCarousel();
+            window.addEventListener('resize', handleResize);
+        });
