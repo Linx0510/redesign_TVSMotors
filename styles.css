@@ -4843,14 +4843,10 @@
         flex-shrink: 0;
         min-width: 140px;
     }
-    .new_dzn_model-item-img-car img {
-    width: 343px;
-    height: 188px;
-    object-fit: contain;
-}
+ 
 .new_dzn_model-item-img-car img {
-    width: 343px;
-    height: 170px;
+    width: 343px !important;
+    height: 170px !important;
     object-fit: contain;
 }
 .new_dzn_model-item-img-blocks {
@@ -5201,6 +5197,44 @@
 
 
 /*видеоблок */
+
+/* Увеличение изображения автомобиля на мобильных устройствах */
+@media (max-width: 480px) {
+    /* делаем картинку максимально широкой */
+    .new_dzn_model-item-img-car {
+        position: relative !important;
+        width: 100vw !important;
+        max-width: none !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        min-height: 320px !important;
+    }
+
+    .new_dzn_model-item-img-car img {
+        width: 100% !important;
+     
+        max-height: none !important;
+        object-fit: cover !important;
+    }
+
+    /* убираем лишние ограничения у блоков-обёрток */
+    .new_dzn_model-item-img-block,
+    .new_dzn_model-item-img-blocks {
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    /* уменьшаем расстояние до цветов */
+    .new_dzn_model-item-img-block-colors {
+        margin-top: 0 !important;
+    }
+
+    /* снимаем ограничение ширины навигации, если оно мешает */
+    .new_dzn_model-item-navigation-wrapper {
+        max-width: none !important;
+    }
+}
 
         .video-comments-container {
             max-width: 1440px;
@@ -5926,10 +5960,7 @@
 
           }
           #modelMainImage{
-                margin-top: 40px;
-                object-fit: cover;
-                background-size: 200% auto;
-            
+
             }
           .new_dzn_model-item-img-car{
             margin-bottom: 0px;
