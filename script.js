@@ -1,49 +1,71 @@
 $(document).ready(function() {
     // Фоны для главного блока
-    const heroBackgrounds = [
-        "image/Hero1.svg",
-        "image/Hero2.svg", 
-       "image/Hero3.svg",
-        "image/Hero4.svg"
-    ];
-    let currentHeroBg = 0;
+const heroBackgrounds = [
+    "image/Hero1.svg",
+    "image/Hero2.svg", 
+    "image/Hero3.svg",
+    "image/Hero4.svg"
+];
+let currentHeroBg = 0;
 
-    function setHeroBg(idx) {
-        console.log('Setting background:', idx, heroBackgrounds[idx]);
-        
-        const $bg = $("#heroBg");
-        if ($bg.length) {
-            // Добавляем градиент к фону
-            $bg.css('background', 
-                `linear-gradient(263deg, rgba(0, 0, 0, 0.00) 22.51%, rgba(0, 0, 0, 0.80) 96.87%), 
-                 url('${heroBackgrounds[idx]}') lightgray 50% / cover no-repeat`
-            );
-        }
-        
-        // Обновляем активную точку
-        $('.new_dzn-hero-dot').removeClass('active');
-        $('.new_dzn-hero-dot[data-index="' + idx + '"]').addClass('active');
-        
-        currentHeroBg = idx;
-    }
-
-    // Инициализация фона при загрузке
-    setHeroBg(currentHeroBg);
-    
-    // Обработчики для точек переключения фона
-    $('.new_dzn-hero-dot').on('click', function() {
-        const index = parseInt($(this).data('index'));
-        console.log('Dot clicked:', index);
-        setHeroBg(index);
+// Предзагрузка изображений для избежания задержек
+function preloadImages() {
+    heroBackgrounds.forEach(src => {
+        const img = new Image();
+        img.src = src;
     });
+}
+preloadImages();
 
-    // Автопереключение фонов (РАСКОММЕНТИРОВАНО)
-    function startAutoSlide() {
-        setInterval(function() {
-            currentHeroBg = (currentHeroBg + 1) % heroBackgrounds.length;
-            setHeroBg(currentHeroBg);
-        }, 4000); // Меняем каждые 5 секунд (увеличил с 1 до 5 секунд)
+function setHeroBg(idx) {
+    console.log('Setting background:', idx, heroBackgrounds[idx]);
+    
+    const $bg = $("#heroBg");
+    if ($bg.length) {
+        // Плавное переключение с переходом
+        $bg.css('transition', 'background 0.5s ease-in-out');
+        $bg.css('background', 
+            `linear-gradient(263deg, rgba(0, 0, 0, 0.00) 22.51%, rgba(0, 0, 0, 0.80) 96.87%), 
+             url('${heroBackgrounds[idx]}') lightgray 50% / cover no-repeat`
+        );
     }
+    
+    // Обновляем активную точку
+    $('.new_dzn-hero-dot').removeClass('active');
+    $('.new_dzn-hero-dot[data-index="' + idx + '"]').addClass('active');
+    
+    currentHeroBg = idx;
+}
+
+// Инициализация фона при загрузке
+setHeroBg(currentHeroBg);
+
+// Обработчики для точек переключения фона
+$('.new_dzn-hero-dot').on('click', function() {
+    const index = parseInt($(this).data('index'));
+    console.log('Dot clicked:', index);
+    setHeroBg(index);
+});
+let nextHeroBg = (currentHeroBg + 1) % heroBackgrounds.length;
+
+function preloadNextBackground() {
+    const img = new Image();
+    img.src = heroBackgrounds[nextHeroBg];
+}
+
+// Вызывать после каждой смены фона
+preloadNextBackground();
+
+// Автопереключение фонов
+function startAutoSlide() {
+    setInterval(function() {
+        currentHeroBg = (currentHeroBg + 1) % heroBackgrounds.length;
+        setHeroBg(currentHeroBg);
+    }, 4000); // Меняем каждые 4 секунды
+}
+
+// Запускаем автопереключение
+startAutoSlide();
     
  
     startAutoSlide(); 

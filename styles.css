@@ -1505,7 +1505,6 @@
             border: 1px solid #e5e7eb;
             border-top: none;
             width: 100% !important;
-            max-width: 100vw;
         }
 
         .new_dzn-nav-item-with-dropdown .new_dzn-dropdown-menu {
@@ -1532,6 +1531,7 @@
             flex-direction: column;
             gap: 16px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .new_dzn-dropdown-columns {
@@ -3987,12 +3987,24 @@
                 font-size: 16px;
             }
 
-            .new_dzn-test-drive-timer-labels span {
+            .new_dzn-test-drive-timer-labels span {         
                 width: 60px;
             }
 
             .new_dzn-test-drive-card {
-                padding: 16px;
+                padding: 40px 16px;
+            }
+            .new_dzn-test-drive-card-content {
+                width: 100%;
+            }
+            .new_dzn-test-drive-form{
+                width: 100%
+            }
+            .new_dzn-test-drive-btn{
+                width: 100%;
+            }
+            .new_dzn-test-drive-card-title {
+                margin-bottom: 24px;
             }
             .new_dzn-test-drive-timer{
                 width: 100%;
