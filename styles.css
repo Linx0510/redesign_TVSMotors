@@ -12,6 +12,9 @@
   font-style: normal;
   font-display: swap;
 }
+:root {
+  --vh: 1vh;
+}
         /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
