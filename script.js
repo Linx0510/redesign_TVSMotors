@@ -1375,7 +1375,11 @@ const reviews = [
 
             // Создание карточек
             function createCards() {
+                console.log('createCards() called; window.innerWidth=', window.innerWidth);
                 videoGrid.innerHTML = '';
+                // Сбрасываем индекс при пересоздании карточек для мобильного режима,
+                // чтобы не осталось значения от десктопной логики (например currentIndex = 4)
+                if (window.innerWidth <= 768) currentIndex = 0;
                 
                 // Создаем оригинальные карточки
                 cardData.forEach((card, index) => {
@@ -1400,6 +1404,21 @@ const reviews = [
                     
                     videoGrid.appendChild(cardElement);
                 });
+
+                // Гарантируем видимость и сбрасываем трансформации для мобильной версии
+                try {
+                    if (window.innerWidth <= 768) {
+                        videoGrid.style.display = 'flex';
+                        videoGrid.style.transform = '';
+                    } else {
+                        videoGrid.style.display = '';
+                        videoGrid.style.transform = '';
+                    }
+                } catch (err) {
+                    console.warn('Failed to adjust videoGrid styles', err);
+                }
+
+                console.log('createCards(): appended', videoGrid.querySelectorAll('.video-comments-card').length, 'cards');
 
                 // Настройка карусели
                 if (isMobile) {
@@ -1602,5 +1621,74 @@ const reviews = [
 
             // Запускаем инициализацию
             initCarousel();
+            // Оставляем resize handler на случай обычного ресайза
             window.addEventListener('resize', handleResize);
+            // И добавляем listener для изменения media-query — срабатывает при переключении в DevTools device toolbar
+            try {
+                const mq = window.matchMedia('(max-width: 768px)');
+                if (mq && typeof mq.addEventListener === 'function') {
+                    mq.addEventListener('change', (e) => {
+                        const nowMobile = e.matches;
+                        if (nowMobile !== isMobile) {
+                            isMobile = nowMobile;
+                            createCards();
+                        }
+                    });
+                } else if (mq && typeof mq.addListener === 'function') {
+                    // backward compatibility
+                    mq.addListener((e) => {
+                        const nowMobile = e.matches;
+                        if (nowMobile !== isMobile) {
+                            isMobile = nowMobile;
+                            createCards();
+                        }
+                    });
+                }
+            } catch (err) {
+                console.warn('matchMedia listener not available', err);
+            }
+            
+            // Обработчики для секции актуальных предложений (стрелки прокрутки)
+            (function() {
+                const container = document.querySelector('.new_croll-cards-container');
+                const leftArrow = document.querySelector('.new_croll-arrow-left');
+                const rightArrow = document.querySelector('.new_croll-arrow-right');
+
+                if (!container || !leftArrow || !rightArrow) return;
+
+                function getStep() {
+                    const card = container.querySelector('.new_croll-card');
+                    if (!card) return Math.round(container.clientWidth * 0.8);
+                    const style = window.getComputedStyle(card);
+                    const marginRight = parseFloat(style.marginRight) || 0;
+                    return card.offsetWidth + marginRight;
+                }
+
+                function updateArrowsState() {
+                    const atStart = container.scrollLeft <= 5;
+                    const atEnd = (container.scrollWidth - container.clientWidth - container.scrollLeft) <= 5;
+                    leftArrow.classList.toggle('disabled', atStart);
+                    rightArrow.classList.toggle('disabled', atEnd);
+                    // Для доступности: блокируем кнопки
+                    leftArrow.setAttribute('aria-disabled', atStart ? 'true' : 'false');
+                    rightArrow.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
+                }
+
+                leftArrow.addEventListener('click', function() {
+                    const step = getStep();
+                    container.scrollBy({ left: -step, behavior: 'smooth' });
+                });
+
+                rightArrow.addEventListener('click', function() {
+                    const step = getStep();
+                    container.scrollBy({ left: step, behavior: 'smooth' });
+                });
+
+                // Обновляем состояние при ручной прокрутке и ресайзе
+                container.addEventListener('scroll', updateArrowsState);
+                window.addEventListener('resize', updateArrowsState);
+
+                // Инициализация состояния
+                setTimeout(updateArrowsState, 0);
+            })();
         });
