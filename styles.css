@@ -5302,8 +5302,17 @@
             left: 0px;
 
           }
+          #modelSecondaryImageRight{
+             width: 343px !important;
+            height: 170px ! important;
+          }
+          #modelSecondaryImageLeft{
+            display: none ! important;
+          }
           #modelMainImage{
-margin-top: 70px;
+            width: 343px !important;
+            height: 180px ! important;
+            margin-top: 70px;
             }
           .new_dzn_model-item-img-car{
             margin-bottom: 0px;
