@@ -1,613 +1,501 @@
-// Универсальный ready handler для всех браузеров
-function domReady(fn) {
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        setTimeout(fn, 1);
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-
-domReady(function() {
-    // Проверяем наличие jQuery
-    if (typeof jQuery === 'undefined') {
-        console.error('jQuery не загружен');
-        return;
-    }
-
-    // Фоны для главного блока
-    const heroBackgrounds = [
-        "image/Hero1.svg",
-        "image/Hero2.svg", 
-        "image/Hero3.svg",
-        "image/Hero4.svg"
-    ];
-
-    let currentHeroBg = 0;
-    let heroInterval;
-
-    // Улучшенная функция установки фона с поддержкой всех браузеров
-    function setHeroBg(idx) {
-        console.log('Setting background:', idx, heroBackgrounds[idx]);
-        
-        const bgElement = document.getElementById("heroBg");
-        if (bgElement) {
-            // Кросс-браузерное установление фона
-            bgElement.style.backgroundImage = `linear-gradient(263deg, rgba(0, 0, 0, 0.00) 22.51%, rgba(0, 0, 0, 0.80) 96.87%), url('${heroBackgrounds[idx]}')`;
-            bgElement.style.backgroundSize = 'cover';
-            bgElement.style.backgroundPosition = '50%';
-            bgElement.style.backgroundRepeat = 'no-repeat';
-            bgElement.style.backgroundColor = 'lightgray';
-        }
-        
-        $('.new_dzn-hero-dot').removeClass('active');
-        $(`.new_dzn-hero-dot[data-index="${idx}"]`).addClass('active');
-        
-        currentHeroBg = idx;
-    }
-
-    // Улучшенный автопереход с паузой при hover/touch
-    function startAutoSlide() {
-        stopAutoSlide();
-        heroInterval = setInterval(function() {
-            currentHeroBg = (currentHeroBg + 1) % heroBackgrounds.length;
-            setHeroBg(currentHeroBg);
-        }, 4000);
-    }
-
-    function stopAutoSlide() {
-        if (heroInterval) {
-            clearInterval(heroInterval);
-            heroInterval = null;
-        }
-    }
-
-    // Инициализация
-    setHeroBg(currentHeroBg);
+// Упрощенная версия с максимальной совместимостью для iOS
+(function() {
+    'use strict';
     
-    // Обработчики для главного блока
-    $('.new_dzn-hero-dot').on('click', function() {
-        const index = parseInt($(this).data('index'));
-        console.log('Dot clicked:', index);
-        setHeroBg(index);
-        stopAutoSlide();
-        startAutoSlide(); // Перезапускаем таймер после клика
+    // Универсальный ready handler
+    function domReady(fn) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    domReady(function() {
+        console.log('DOM loaded - iOS compatible version');
+        
+        // Проверяем jQuery
+        if (typeof window.jQuery === 'undefined') {
+            console.error('jQuery не загружен');
+            loadjQuery();
+            return;
+        }
+
+        initAll();
     });
 
-    // Пауза при взаимодействии (для десктопа и мобильных)
-    $('#heroBg').on('touchstart mouseenter', stopAutoSlide)
-                .on('touchend mouseleave', startAutoSlide);
+    function loadjQuery() {
+        var script = document.createElement('script');
+        script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        script.onload = initAll;
+        document.head.appendChild(script);
+    }
 
-    startAutoSlide();
-
-    // Улучшенный обработчик resize с debounce
-    let resizeTimeout;
-    function handleResize() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
+    function initAll() {
+        console.log('Initializing all components...');
+        
+        initHeroSlider();
+        initMobileMenu();
+        initForms();
+        initTimer();
+        initCardsSlider();
+        initModelSection();
+        
+        // Инициализация после полной загрузки
+        window.addEventListener('load', function() {
+            initYandexMap();
             updateMobileCarImages();
-            // Переинициализируем слайдеры при изменении размера
-            if (typeof initSlider === 'function') initSlider();
-            if (typeof updateSlider === 'function') updateSlider();
-        }, 250);
-    }
-
-    // Кросс-браузерное событие resize
-    window.addEventListener('resize', handleResize);
-
-    // Мобильное меню - улучшенная версия
-    function initMobileMenu() {
-        $('#mobileMainMenu .new_dzn-nav-item').on('click', function(e) {
-            e.preventDefault();
-            var menu = $(this).data('menu');
-            $('#mobileMainMenu').hide();
-            $('.new_dzn-mobile-submenu').removeClass('active');
-            $('#mobileSubMenu-' + menu).addClass('active');
-        });
-
-        $('.new_dzn-mobile-submenu .new_dzn-mobile-back').on('click', function(e) {
-            e.preventDefault();
-            $('.new_dzn-mobile-submenu').removeClass('active');
-            $('#mobileMainMenu').show();
-        });
-
-        $('.new_dzn-mobile-menu-btn').on('click', function(e) {
-            e.stopPropagation();
-            $('#mobileMenu').addClass('active');
-            $('body').addClass('menu-open');
-            // Предотвращаем скролл body на iOS
-            document.body.style.overflow = 'hidden';
-        });
-
-        $('#mobileMenuClose').on('click', function(e) {
-            e.stopPropagation();
-            closeMobileMenu();
-        });
-
-        // Улучшенный обработчик клика вне меню
-        $(document).on('click', function(e) {
-            if ($(e.target).closest('#mobileMenu').length === 0 && 
-                !$(e.target).hasClass('new_dzn-mobile-menu-btn')) {
-                closeMobileMenu();
-            }
-        });
-
-        // Обработчик Escape
-        $(document).on('keyup', function(e) {
-            if (e.key === 'Escape' || e.keyCode === 27) {
-                closeMobileMenu();
-            }
-        });
-
-        $(document).on('click', '.new_dzn-mobile-navigation .new_dzn-nav-item-with-dropdown > span', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var $parent = $(this).closest('.new_dzn-nav-item-with-dropdown');
-            $parent.toggleClass('active');
-            $('.new_dzn-mobile-navigation .new_dzn-nav-item-with-dropdown').not($parent).removeClass('active');
         });
     }
 
-    function closeMobileMenu() {
-        $('#mobileMenu').removeClass('active');
-        $('.new_dzn-mobile-menu-btn').removeClass('active');
-        $('body').removeClass('menu-open');
-        $('.new_dzn-mobile-navigation .new_dzn-nav-item-with-dropdown').removeClass('active');
-        // Восстанавливаем скролл
-        document.body.style.overflow = '';
-    }
+    // 1. ГЛАВНЫЙ СЛАЙДЕР
+    function initHeroSlider() {
+        const heroBackgrounds = [
+            "image/Hero1.svg",
+            "image/Hero2.svg", 
+            "image/Hero3.svg",
+            "image/Hero4.svg"
+        ];
 
-    // Универсальная функция форматирования телефона
-    function formatPhone(input) {
-        return input.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-    }
+        let currentHeroBg = 0;
+        let heroInterval;
 
-    // Универсальная функция валидации формы
-    function initForm(formConfig) {
-        const {
-            formId,
-            phoneInputId,
-            agreementCheckboxId,
-            phoneErrorId,
-            agreementErrorId,
-            formContentId,
-            successContentId
-        } = formConfig;
-
-        $(`#${phoneInputId}`).on('input', function(e) {
-            let x = formatPhone($(this).val());
-            if (x) {
-                $(this).val('+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : ''));
-            }
-        });
-
-        $(`#${formId}`).on('submit', function(e) {
-            e.preventDefault();
+        function setHeroBg(idx) {
+            const bgElement = document.getElementById("heroBg");
+            if (!bgElement) return;
             
-            const phoneInput = $(`#${phoneInputId}`);
-            const agreementCheckbox = $(`#${agreementCheckboxId}`);
-            const phoneError = $(`#${phoneErrorId}`);
-            const agreementError = $(`#${agreementErrorId}`);
-            let isValid = true;
-
-            const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/;
-            if (!phoneRegex.test(phoneInput.val())) {
-                phoneInput.addClass('error');
-                phoneError.show();
-                isValid = false;
-            } else {
-                phoneInput.removeClass('error');
-                phoneError.hide();
-            }
-
-            if (!agreementCheckbox.is(':checked')) {
-                agreementError.show();
-                isValid = false;
-            } else {
-                agreementError.hide();
-            }
-
-            if (isValid) {
-                showFormSuccessState(formContentId, successContentId);
-            }
-        });
-    }
-
-    function showFormSuccessState(formContentId, successContentId) {
-        $(`#${formContentId}`).hide();
-        $(`#${successContentId}`).show().addClass('fade-in');
-    }
-
-    // Инициализация всех форм
-    initForm({
-        formId: 'offerForm',
-        phoneInputId: 'phoneInput',
-        agreementCheckboxId: 'agreementCheckbox',
-        phoneErrorId: 'phoneError',
-        agreementErrorId: 'agreementError',
-        formContentId: 'formContent',
-        successContentId: 'successContent'
-    });
-
-    initForm({
-        formId: 'creditForm',
-        phoneInputId: 'creditPhoneInput',
-        agreementCheckboxId: 'creditAgreementCheckbox',
-        phoneErrorId: 'creditPhoneError',
-        agreementErrorId: 'creditAgreementError',
-        formContentId: 'creditFormContent',
-        successContentId: 'creditSuccessContent'
-    });
-
-    initForm({
-        formId: 'testDriveForm',
-        phoneInputId: 'testDrivePhoneInput',
-        agreementCheckboxId: 'testDriveAgreementCheckbox',
-        phoneErrorId: 'testDrivePhoneError',
-        agreementErrorId: 'testDriveAgreementError',
-        formContentId: 'testDriveFormContent',
-        successContentId: 'testDriveSuccessContent'
-    });
-
-    // Таймер обратного отсчета
-    function initTimer() {
-        function updateTimer() {
-            const daysElement = document.getElementById('days');
-            const hoursElement = document.getElementById('hours');
-            const minutesElement = document.getElementById('minutes');
-            const secondsElement = document.getElementById('seconds');
-
-            if (!daysElement || !hoursElement || !minutesElement || !secondsElement) return;
-
-            let days = parseInt(daysElement.textContent) || 0;
-            let hours = parseInt(hoursElement.textContent) || 0;
-            let minutes = parseInt(minutesElement.textContent) || 0;
-            let seconds = parseInt(secondsElement.textContent) || 0;
-
-            seconds--;
+            // Простой подход для iOS
+            bgElement.style.backgroundImage = `url('${heroBackgrounds[idx]}')`;
+            bgElement.style.backgroundSize = 'cover';
+            bgElement.style.backgroundPosition = 'center';
             
-            if (seconds < 0) {
-                seconds = 59;
-                minutes--;
-                
-                if (minutes < 0) {
-                    minutes = 59;
-                    hours--;
-                    
-                    if (hours < 0) {
-                        hours = 23;
-                        days--;
-                        
-                        if (days < 0) {
-                            days = 0;
-                            hours = 0;
-                            minutes = 0;
-                            seconds = 0;
-                        }
-                    }
-                }
-            }
-
-            daysElement.textContent = days.toString().padStart(2, '0');
-            hoursElement.textContent = hours.toString().padStart(2, '0');
-            minutesElement.textContent = minutes.toString().padStart(2, '0');
-            secondsElement.textContent = seconds.toString().padStart(2, '0');
-        }
-
-        setInterval(updateTimer, 1000);
-    }
-
-    // Карточки слайдер - улучшенная версия
-    function initCardsSlider() {
-        var $cards = $('.new_cards_cart');
-        var $leftArrow = $('.new_arrow img').first();
-        var $rightArrow = $('.new_arrow img').last();
-        var $sliderContainer = $('.new_cards_content');
-        var currentIndex = 0;
-        var isAnimating = false;
-        var startX = 0;
-        var isDragging = false;
-        var swipeThreshold = 50;
-        var autoSlideInterval;
-
-        // Проверяем, является ли устройство мобильным
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
-
-        // Инициализация слайдера
-        function initSlider() {
-            if (isMobile()) {
-                $cards.removeClass('active').css({
-                    transform: 'translateX(100%)',
-                    display: 'none',
-                    transition: 'none'
-                });
-                
-                $cards.eq(currentIndex).addClass('active').css({
-                    transform: 'translateX(0)',
-                    display: 'block'
-                });
-            } else {
-                resetSlider();
-            }
-        }
-
-        // Сброс слайдера для десктопного режима
-        function resetSlider() {
-            $cards.removeClass('active').css({
-                position: '',
-                transform: '',
-                display: 'block',
-                transition: ''
+            // Обновляем точки
+            document.querySelectorAll('.new_dzn-hero-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === idx);
             });
-        }
-
-        // Показать слайд
-        function showSlide(newIndex, direction) {
-            if (isAnimating || newIndex === currentIndex || !isMobile()) return;
             
-            isAnimating = true;
-
-            var $current = $cards.eq(currentIndex);
-            var $next = $cards.eq(newIndex);
-
-            // Используем requestAnimationFrame для плавной анимации
-            requestAnimationFrame(function() {
-                if (direction === 'next') {
-                    $next.css({
-                        transform: 'translateX(100%)',
-                        display: 'block'
-                    });
-                } else {
-                    $next.css({
-                        transform: 'translateX(-100%)',
-                        display: 'block'
-                    });
-                }
-
-                requestAnimationFrame(function() {
-                    $current.css({
-                        transform: direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)',
-                        transition: 'transform 0.4s ease-in-out'
-                    });
-
-                    $next.css({
-                        transform: 'translateX(0)',
-                        transition: 'transform 0.4s ease-in-out'
-                    });
-                });
-            });
-
-            // Завершение анимации
-            setTimeout(function() {
-                $current.removeClass('active').css({
-                    display: 'none',
-                    transform: 'translateX(100%)',
-                    transition: 'none'
-                });
-                
-                $next.addClass('active').css({
-                    transition: 'none'
-                });
-                
-                currentIndex = newIndex;
-                isAnimating = false;
-            }, 400);
+            currentHeroBg = idx;
         }
-
-        function nextSlide() {
-            if (!isMobile() || isAnimating) return;
-            var newIndex = (currentIndex + 1) % $cards.length;
-            showSlide(newIndex, 'next');
-        }
-
-        function prevSlide() {
-            if (!isMobile() || isAnimating) return;
-            var newIndex = (currentIndex - 1 + $cards.length) % $cards.length;
-            showSlide(newIndex, 'prev');
-        }
-
-        // Обработчики событий для стрелок
-        $leftArrow.on('click', prevSlide);
-        $rightArrow.on('click', nextSlide);
-
-        // Улучшенные обработчики для свайпа
-        function handleTouchStart(e) {
-            if (!isMobile() || isAnimating) return;
-            startX = e.originalEvent.touches[0].clientX;
-            isDragging = true;
-            // Предотвращаем скролл страницы
-            e.preventDefault();
-        }
-
-        function handleTouchMove(e) {
-            if (!isMobile() || !isDragging) return;
-            e.preventDefault();
-        }
-
-        function handleTouchEnd(e) {
-            if (!isMobile() || !isDragging || isAnimating) return;
-            
-            var endX = e.originalEvent.changedTouches[0].clientX;
-            var diffX = startX - endX;
-            
-            if (Math.abs(diffX) > swipeThreshold) {
-                if (diffX > 0) {
-                    nextSlide(); 
-                } else {
-                    prevSlide();
-                }
-            }
-            isDragging = false;
-        }
-
-        // Добавляем обработчики с пассивными событиями для производительности
-        const passiveOptions = { passive: false };
-        $sliderContainer[0].addEventListener('touchstart', handleTouchStart, passiveOptions);
-        $sliderContainer[0].addEventListener('touchmove', handleTouchMove, passiveOptions);
-        $sliderContainer[0].addEventListener('touchend', handleTouchEnd, passiveOptions);
-
-        // Обработчики для клавиатуры
-        $(document).on('keydown', function(e) {
-            if (!isMobile() || isAnimating) return;
-            
-            switch(e.key) {
-                case 'ArrowLeft':
-                    e.preventDefault();
-                    prevSlide();
-                    break;
-                case 'ArrowRight':
-                    e.preventDefault();
-                    nextSlide();
-                    break;
-            }
-        });
 
         function startAutoSlide() {
             stopAutoSlide();
-            if (isMobile()) {
-                autoSlideInterval = setInterval(nextSlide, 4000);
-            }
+            heroInterval = setInterval(function() {
+                currentHeroBg = (currentHeroBg + 1) % heroBackgrounds.length;
+                setHeroBg(currentHeroBg);
+            }, 4000);
         }
-        
+
         function stopAutoSlide() {
-            if (autoSlideInterval) {
-                clearInterval(autoSlideInterval);
-                autoSlideInterval = null;
+            if (heroInterval) {
+                clearInterval(heroInterval);
+                heroInterval = null;
             }
         }
-        
-        // Обработчики для паузы автопрокрутки
-        function pauseAutoSlide() {
-            stopAutoSlide();
-        }
-        
-        function resumeAutoSlide() {
-            if (isMobile()) {
-                startAutoSlide();
-            }
-        }
-        
-        $sliderContainer.add($leftArrow).add($rightArrow)
-            .on('touchstart mouseenter', pauseAutoSlide)
-            .on('touchend mouseleave', resumeAutoSlide);
 
         // Инициализация
-        initSlider();
-        if (isMobile()) {
-            startAutoSlide();
-        }
+        setHeroBg(0);
+        startAutoSlide();
 
-        // Возвращаем функции для внешнего использования
-        return {
-            initSlider: initSlider,
-            handleResize: function() {
-                if (isMobile()) {
-                    initSlider();
-                    startAutoSlide();
-                } else {
-                    resetSlider();
-                    stopAutoSlide();
-                }
-            }
-        };
+        // Обработчики
+        document.querySelectorAll('.new_dzn-hero-dot').forEach((dot, index) => {
+            dot.addEventListener('click', function() {
+                setHeroBg(index);
+                stopAutoSlide();
+                startAutoSlide();
+            });
+        });
+
+        // Пауза при взаимодействии
+        const heroBg = document.getElementById('heroBg');
+        if (heroBg) {
+            heroBg.addEventListener('touchstart', stopAutoSlide, { passive: true });
+            heroBg.addEventListener('touchend', startAutoSlide, { passive: true });
+        }
     }
 
-    // Инициализация всех компонентов
-    initMobileMenu();
-    initTimer();
-    
-    const cardsSlider = initCardsSlider();
-    
-    // Сохраняем ссылку на обработчик resize для слайдера карточек
-    window.cardsSliderHandleResize = cardsSlider.handleResize;
-});
+    // 2. МОБИЛЬНОЕ МЕНЮ ДЛЯ iOS
+    function initMobileMenu() {
+        const menuBtn = document.querySelector('.new_dzn-mobile-menu-btn');
+        const menuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (!menuBtn || !mobileMenu) return;
 
-// Глобальные функции для модельного ряда
-const modelsData = {
-    // ... (ваш существующий modelsData объект)
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            document.body.classList.add('menu-open');
+            // Фиксируем скролл для iOS
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            // Восстанавливаем скролл
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        }
+
+        // Обработчики
+        menuBtn.addEventListener('click', openMenu);
+        if (menuClose) menuClose.addEventListener('click', closeMenu);
+
+        // Закрытие по клику вне меню
+        document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !e.target.closest('.new_dzn-mobile-menu-btn')) {
+                closeMenu();
+            }
+        });
+
+        // Закрытие по Escape
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'Escape') closeMenu();
+        });
+
+        // Подменю
+        document.querySelectorAll('#mobileMainMenu .new_dzn-nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const menu = this.dataset.menu;
+                document.getElementById('mobileMainMenu').style.display = 'none';
+                document.getElementById('mobileSubMenu-' + menu).classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.new_dzn-mobile-submenu .new_dzn-mobile-back').forEach(back => {
+            back.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.new_dzn-mobile-submenu').forEach(sub => {
+                    sub.classList.remove('active');
+                });
+                document.getElementById('mobileMainMenu').style.display = 'block';
+            });
+        });
+    }
+
+    // 3. ФОРМЫ - ПРОСТАЯ ВАЛИДАЦИЯ
+    function initForms() {
+        // Форматирование телефона
+        function formatPhone(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.startsWith('7')) value = value.substring(1);
+            if (value.length > 0) value = '+7 (' + value;
+            if (value.length > 7) value = value.substring(0, 7) + ') ' + value.substring(7);
+            if (value.length > 12) value = value.substring(0, 12) + '-' + value.substring(12);
+            if (value.length > 15) value = value.substring(0, 15) + '-' + value.substring(15);
+            return value;
+        }
+
+        // Инициализация всех полей телефона
+        document.querySelectorAll('input[type="tel"]').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = formatPhone(this);
+            });
+            
+            // Для iOS - особый обработчик
+            input.addEventListener('blur', function() {
+                this.value = formatPhone(this);
+            });
+        });
+
+        // Общая функция отправки формы
+        function handleFormSubmit(formId, successId) {
+            const form = document.getElementById(formId);
+            const success = document.getElementById(successId);
+            
+            if (!form || !success) return;
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                const phoneInput = form.querySelector('input[type="tel"]');
+                const checkbox = form.querySelector('input[type="checkbox"]');
+                
+                // Валидация телефона
+                if (phoneInput) {
+                    const phoneValue = phoneInput.value.replace(/\D/g, '');
+                    if (phoneValue.length !== 11) {
+                        phoneInput.classList.add('error');
+                        isValid = false;
+                    } else {
+                        phoneInput.classList.remove('error');
+                    }
+                }
+                
+                // Валидация чекбокса
+                if (checkbox && !checkbox.checked) {
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                }
+            });
+        }
+
+        // Инициализация всех форм
+        handleFormSubmit('offerForm', 'successContent');
+        handleFormSubmit('creditForm', 'creditSuccessContent');
+        handleFormSubmit('testDriveForm', 'testDriveSuccessContent');
+    }
+
+    // 4. ТАЙМЕР
+    function initTimer() {
+        function updateTimer() {
+            const days = document.getElementById('days');
+            const hours = document.getElementById('hours');
+            const minutes = document.getElementById('minutes');
+            const seconds = document.getElementById('seconds');
+            
+            if (!days || !hours || !minutes || !seconds) return;
+            
+            let d = parseInt(days.textContent) || 0;
+            let h = parseInt(hours.textContent) || 0;
+            let m = parseInt(minutes.textContent) || 0;
+            let s = parseInt(seconds.textContent) || 0;
+            
+            s--;
+            if (s < 0) { s = 59; m--; }
+            if (m < 0) { m = 59; h--; }
+            if (h < 0) { h = 23; d--; }
+            if (d < 0) { d = h = m = s = 0; }
+            
+            days.textContent = d.toString().padStart(2, '0');
+            hours.textContent = h.toString().padStart(2, '0');
+            minutes.textContent = m.toString().padStart(2, '0');
+            seconds.textContent = s.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateTimer, 1000);
+    }
+
+    // 5. СЛАЙДЕР КАРТОЧЕК - УПРОЩЕННАЯ ВЕРСИЯ ДЛЯ iOS
+    function initCardsSlider() {
+        const cards = document.querySelectorAll('.new_cards_cart');
+        const leftArrow = document.querySelector('.new_arrow img:first-child');
+        const rightArrow = document.querySelector('.new_arrow img:last-child');
+        
+        if (cards.length === 0) return;
+        
+        let currentIndex = 0;
+        const isMobile = window.innerWidth <= 768;
+        
+        function showSlide(index) {
+            cards.forEach((card, i) => {
+                if (isMobile) {
+                    card.style.display = i === index ? 'block' : 'none';
+                } else {
+                    card.style.display = 'block';
+                }
+            });
+            currentIndex = index;
+        }
+        
+        function nextSlide() {
+            let nextIndex = (currentIndex + 1) % cards.length;
+            showSlide(nextIndex);
+        }
+        
+        function prevSlide() {
+            let prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+            showSlide(prevIndex);
+        }
+        
+        // Стрелки
+        if (leftArrow) leftArrow.addEventListener('click', prevSlide);
+        if (rightArrow) rightArrow.addEventListener('click', nextSlide);
+        
+        // Свайп для мобильных
+        if (isMobile) {
+            let startX = 0;
+            const slider = document.querySelector('.new_cards_content');
+            
+            if (slider) {
+                slider.addEventListener('touchstart', function(e) {
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+                
+                slider.addEventListener('touchend', function(e) {
+                    const endX = e.changedTouches[0].clientX;
+                    const diff = startX - endX;
+                    
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) nextSlide();
+                        else prevSlide();
+                    }
+                }, { passive: true });
+            }
+            
+            // Автопрокрутка
+            let slideInterval = setInterval(nextSlide, 4000);
+            
+            // Пауза при взаимодействии
+            slider.addEventListener('touchstart', function() {
+                clearInterval(slideInterval);
+            }, { passive: true });
+            
+            slider.addEventListener('touchend', function() {
+                slideInterval = setInterval(nextSlide, 4000);
+            }, { passive: true });
+        }
+        
+        showSlide(0);
+    }
+
+    // 6. МОДЕЛЬНЫЙ РЯД
+    function initModelSection() {
+        const modelTabs = document.querySelectorAll('.model-tab');
+        const colorCircles = document.querySelectorAll('.color-circle');
+        
+        if (modelTabs.length === 0) return;
+        
+        modelTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const modelId = this.dataset.model;
+                switchModel(modelId);
+            });
+        });
+        
+        colorCircles.forEach(circle => {
+            circle.addEventListener('click', function() {
+                const color = this.dataset.color;
+                switchColor(color);
+            });
+        });
+        
+        // Инициализация первой модели
+        switchModel('tiggo-7l');
+    }
+
+    function switchModel(modelId) {
+        const model = window.modelsData[modelId];
+        if (!model) return;
+        
+        window.currentModel = modelId;
+        
+        document.querySelectorAll('.model-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.model === modelId);
+        });
+        
+        const title = document.getElementById("modelTitle");
+        const price = document.getElementById("modelPrice");
+        if (title) title.textContent = model.title;
+        if (price) price.textContent = model.price;
+        
+        switchColor('white');
+    }
+
+    function switchColor(color) {
+        const model = window.modelsData[window.currentModel];
+        if (!model || !model.colors[color]) return;
+        
+        window.currentColor = color;
+        const colorData = model.colors[color];
+        
+        const mainImg = document.getElementById("modelMainImage");
+        const leftImg = document.getElementById("modelSecondaryImageLeft");
+        const rightImg = document.getElementById("modelSecondaryImageRight");
+        
+        if (mainImg) mainImg.src = colorData.main;
+        if (leftImg) leftImg.src = colorData.left;
+        if (rightImg) rightImg.src = colorData.right;
+        
+        // Обновляем активный цвет
+        document.querySelectorAll('.color-circle').forEach(circle => {
+            circle.classList.toggle('active', circle.dataset.color === color);
+        });
+    }
+
+    // 7. КАРТА
+    function initYandexMap() {
+        if (typeof ymaps === 'undefined') {
+            console.log('Yandex Maps not loaded');
+            return;
+        }
+        
+        ymaps.ready(function() {
+            const mapContainer = document.getElementById('carta-map-canvas');
+            if (!mapContainer) return;
+            
+            const map = new ymaps.Map('carta-map-canvas', {
+                center: [51.815934, 55.158308],
+                zoom: 16
+            });
+            
+            const placemark = new ymaps.Placemark([51.815934, 55.158308], {
+                hintContent: 'ТВС Моторс'
+            });
+            
+            map.geoObjects.add(placemark);
+        });
+    }
+
+    // 8. МОБИЛЬНЫЕ ИЗОБРАЖЕНИЯ
+    function updateMobileCarImages() {
+        if (window.innerWidth > 768) return;
+        
+        const model = window.modelsData[window.currentModel];
+        const color = window.currentColor;
+        
+        if (!model || !model.colors[color]) return;
+        
+        const mainImg = document.getElementById("modelMainImage");
+        if (mainImg) {
+            mainImg.src = model.colors[color].main;
+        }
+    }
+
+    // 9. ОБРАБОТЧИК RESIZE
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            updateMobileCarImages();
+        }, 250);
+    });
+
+})();
+
+// Глобальные переменные
+window.modelsData = {
+    "tiggo-7l": {
+        title: "CHERY TIGGO 7L",
+        price: "2 880 000 ₽",
+        mainImage: "./image/model.svg",
+        secondaryLeft: "./image/left-model.svg",
+        secondaryRight: "./images/Rectangle 13.png",
+        colors: {
+            white: { 
+                main: "./image/7L/T7 White/T7_studio_white_47 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
+            },
+            black: { 
+                main: "./image/7L/T7 Black/T7_studio_black_47 (1) 1.svg",
+                left: "./image/left_model.svg", 
+                right: "./image/right_model.svg"
+            }
+            // ... остальные цвета
+        }
+    }
+    // ... другие модели
 };
 
-let currentModel = "tiggo-7l";
-let currentColor = "white";
+window.currentModel = "tiggo-7l";
+window.currentColor = "white";
+window.mobileModelImages = {};
 
-// Улучшенная функция для мобильных изображений
-function updateMobileCarImages() {
-    if (window.innerWidth <= 768) {
-        const model = modelsData[currentModel];
-        const mainImage = document.getElementById("modelMainImage");
-        const leftImage = document.getElementById("modelSecondaryImageLeft");
-        const rightImage = document.getElementById("modelSecondaryImageRight");
-
-        if (!mainImage) return;
-
-        // Используем мобильные изображения если доступны
-        const mobileImages = mobileModelImages[currentModel];
-        if (mobileImages && mobileImages[currentColor]) {
-            mainImage.src = mobileImages[currentColor];
-        } else if (model && model.colors && model.colors[currentColor]) {
-            mainImage.src = model.colors[currentColor].main;
-        }
-
-        // Боковые изображения
-        if (leftImage && model && model.colors && model.colors[currentColor]) {
-            leftImage.src = model.colors[currentColor].left || model.secondaryLeft;
-            leftImage.style.display = 'block';
-        }
-
-        if (rightImage && model && model.colors && model.colors[currentColor]) {
-            rightImage.src = model.colors[currentColor].right || model.secondaryRight;
-        }
-    }
-}
-
-// Улучшенная инициализация карты
-function initYandexMap() {
-    if (typeof ymaps !== 'undefined') {
-        ymaps.ready(function () {
-            var dealerCoords = [51.815934, 55.158308];
-            var myMap = new ymaps.Map('carta-map-canvas', {
-                center: dealerCoords,
-                zoom: 16,
-                controls: ['zoomControl', 'fullscreenControl']
-            }, {
-                searchControlProvider: 'yandex#search'
-            });
-
-            var dealerPlacemark = new ymaps.Placemark(dealerCoords, {
-                hintContent: 'ТВС Моторс, официальный дилер CHERY',
-                balloonContent: 'Оренбургская область, п. Пригородный, Нежинское шоссе, 12-й км' 
-            }, {
-                preset: 'islands#redStretchyIcon' 
-            });
-
-            myMap.geoObjects.add(dealerPlacemark);
-        });
-    } else {
-        // Fallback если Яндекс Карты не загрузились
-        console.warn('Yandex Maps не загружены');
-    }
-}
-
-// Универсальная функция для загрузки скриптов
-function loadScript(src, callback) {
-    const script = document.createElement('script');
-    script.src = src;
-    script.onload = callback;
-    script.onerror = function() {
-        console.error('Ошибка загрузки скрипта:', src);
-    };
-    document.head.appendChild(script);
-}
-
-// Полифиллы для старых браузеров
+// Полифиллы для iOS
 if (!String.prototype.padStart) {
-    String.prototype.padStart = function padStart(targetLength, padString) {
+    String.prototype.padStart = function(targetLength, padString) {
         targetLength = targetLength >> 0;
         padString = String(padString || ' ');
-        if (this.length > targetLength) {
-            return String(this);
-        }
+        if (this.length > targetLength) return String(this);
         targetLength = targetLength - this.length;
         if (targetLength > padString.length) {
             padString += padString.repeat(targetLength / padString.length);
@@ -616,26 +504,7 @@ if (!String.prototype.padStart) {
     };
 }
 
-// Инициализация при полной загрузке страницы
-window.addEventListener('load', function() {
-    // Инициализация карты
-    if (document.getElementById('carta-map-canvas')) {
-        initYandexMap();
-    }
-    
-    // Обновляем мобильные изображения
-    updateMobileCarImages();
-    
-    // Инициализация отзывов если есть
-    if (typeof initDesktopComments === 'function') {
-        initDesktopComments();
-    }
-    if (typeof initMobileComments === 'function') {
-        initMobileComments();
-    }
-});
-
-// Предотвращаем масштабирование на iPhone при дабл-тапе
+// Предотвращение масштабирования на iOS
 document.addEventListener('touchstart', function(e) {
     if (e.touches.length > 1) {
         e.preventDefault();
@@ -644,17 +513,19 @@ document.addEventListener('touchstart', function(e) {
 
 let lastTouchEnd = 0;
 document.addEventListener('touchend', function(e) {
-    const now = (new Date()).getTime();
+    const now = Date.now();
     if (now - lastTouchEnd <= 300) {
         e.preventDefault();
     }
     lastTouchEnd = now;
-}, false);
+}, { passive: false });
 
-// Улучшенная обработка ошибок
-window.addEventListener('error', function(e) {
-    console.error('Global error:', e.error);
-});
+// Исправление viewport для iOS
+function setViewportForiOS() {
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    }
+}
 
-// Убедитесь что mobileModelImages объявлен
-const mobileModelImages = window.mobileModelImages || {};
+setViewportForiOS();
