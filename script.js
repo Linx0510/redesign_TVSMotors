@@ -514,28 +514,28 @@ if (!String.prototype.padStart) {
     };
 }
 
-// Предотвращение масштабирования на iOS
-document.addEventListener('touchstart', function(e) {
-    if (e.touches.length > 1) {
-        e.preventDefault();
-    }
-}, { passive: false });
 
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function(e) {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
-    }
-    lastTouchEnd = now;
-}, { passive: false });
-
-// Исправление viewport для iOS
-function setViewportForiOS() {
-    const viewport = document.querySelector('meta[name="viewport"]');
-    if (viewport && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
-        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+// Добавьте этот код
+function fixIOSScroll() {
+    if (/iPhone|iPad|iPod/.test(navigator.platform)) {
+        const container = document.querySelector('.models-container');
+        const wrapper = document.querySelector('.models-wrapper');
+        
+        if (container && wrapper) {
+            // Принудительно устанавливаем ширину
+            const items = wrapper.children;
+            let totalWidth = 0;
+            
+            for (let item of items) {
+                totalWidth += item.offsetWidth + 15; // + gap
+            }
+            
+            wrapper.style.width = totalWidth + 'px';
+            container.style.overflowX = 'scroll';
+        }
     }
 }
 
-setViewportForiOS();
+// Запускаем при загрузке и ресайзе
+document.addEventListener('DOMContentLoaded', fixIOSScroll);
+window.addEventListener('resize', fixIOSScroll);

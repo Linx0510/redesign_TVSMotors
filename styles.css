@@ -12,9 +12,7 @@
   font-style: normal;
   font-display: swap;
 }
-:root {
-  --vh: 1vh;
-}
+
         /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
@@ -6306,54 +6304,3 @@
                 height: 16px;
             }
         }
-
-
-        .models-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
-    scroll-snap-type: x mandatory; /* Опционально: привязка к элементам */
-    padding-bottom: 10px; /* Пространство для скроллбара */
-}
-
-/* Убедитесь, что контейнер не обрезает контент */
-.models-wrapper {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 15px;
-    padding: 0 15px;
-}
-
-.models-item {
-    flex: 0 0 auto;
-    scroll-snap-align: start; /* Опционально */
-}
-/* Исправление для горизонтального скролла на iOS */
-.models-scroll {
-    -webkit-overflow-scrolling: touch;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    width: 100%;
-}
-
-/* Убедитесь, что внутренний контейнер достаточно широк */
-.models-inner {
-    display: inline-flex;
-    gap: 15px;
-    padding: 0 15px;
-}
-
-
-/* Исправление для всех мобильных устройств */
-@media (max-width: 768px) {
-    .models-container {
-        -webkit-overflow-scrolling: touch;
-        overflow-x: auto;
-        overflow-y: hidden;
-    }
-    
-    /* Уберите любые transform, которые могут мешать */
-    .models-item {
-        transform: none !important;
-    }
-}
