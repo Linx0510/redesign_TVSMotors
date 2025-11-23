@@ -885,6 +885,8 @@ function switchColor(color) {
     if ($(window).width() <= 768) {
         // На мобильных используем мобильные изображения
         updateMobileCarImages();
+                
+
     } else {
         // На десктопе используем обычные изображения
         document.getElementById("modelMainImage").src = colorData.main;
@@ -923,9 +925,17 @@ function updateMobileCarImages() {
         const modelMobileMap = (typeof mobileModelImages !== 'undefined') ? mobileModelImages[currentModel] : null;
         if (model && modelMobileMap && modelMobileMap[currentColor]) {
             document.getElementById("modelMainImage").src = modelMobileMap[currentColor];
-            // Для боковых изображений оставляем стандартные маленькие (если нужно, можно расширить маппинг)
-            document.getElementById("modelSecondaryImageLeft").src = model.secondaryLeft || document.getElementById("modelSecondaryImageLeft").src;
-            document.getElementById("modelSecondaryImageRight").src = model.secondaryRight || document.getElementById("modelSecondaryImageRight").src;
+            // Для боковых изображений используем сначала цветное левое изображение, затем fallback
+            const colorLeft = (model && model.colors && model.colors[currentColor] && model.colors[currentColor].left)
+                ? model.colors[currentColor].left
+                : model.secondaryLeft;
+            const colorRight = (model && model.colors && model.colors[currentColor] && model.colors[currentColor].right)
+                ? model.colors[currentColor].right
+                : model.secondaryRight;
+            const secLeftEl = document.getElementById("modelSecondaryImageLeft");
+            const secRightEl = document.getElementById("modelSecondaryImageRight");
+            if (secLeftEl && colorLeft) { secLeftEl.src = colorLeft; secLeftEl.style.display = 'block'; }
+            if (secRightEl && colorRight) { secRightEl.src = colorRight; }
             return;
         }
 
@@ -934,12 +944,20 @@ function updateMobileCarImages() {
         if (model && mobileImages && mobileImages.length > 0) {
             const mainImageIndex = Object.keys(model.colors).indexOf(currentColor) % mobileImages.length;
             document.getElementById("modelMainImage").src = mobileImages[mainImageIndex];
-            
+
             const leftImageIndex = (mainImageIndex + 1) % mobileImages.length;
             const rightImageIndex = (mainImageIndex + 2) % mobileImages.length;
-            
-            document.getElementById("modelSecondaryImageLeft").src = mobileImages[leftImageIndex];
-            document.getElementById("modelSecondaryImageRight").src = mobileImages[rightImageIndex];
+
+            const colorLeft = (model && model.colors && model.colors[currentColor] && model.colors[currentColor].left)
+                ? model.colors[currentColor].left
+                : null;
+            const secLeftEl = document.getElementById("modelSecondaryImageLeft");
+            const secRightEl = document.getElementById("modelSecondaryImageRight");
+            if (secLeftEl) {
+                secLeftEl.src = colorLeft || mobileImages[leftImageIndex];
+                secLeftEl.style.display = 'block';
+            }
+            if (secRightEl) secRightEl.src = mobileImages[rightImageIndex];
         }
     }
 }

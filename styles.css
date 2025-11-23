@@ -5303,7 +5303,7 @@
 
           }
           #modelMainImage{
-
+margin-top: 70px;
             }
           .new_dzn_model-item-img-car{
             margin-bottom: 0px;
@@ -5481,7 +5481,7 @@
 
     /* Подтянем блок с цветами ближе к картинке */
     .new_dzn_model-item-img-block-colors {
-        margin-top: -20px !important;
+        margin-top: -40px !important;
     }
 
     /* Если есть фоновые блоки, уменьшить их высоту чтобы картинка доминировала */
