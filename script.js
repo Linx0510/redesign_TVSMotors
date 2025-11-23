@@ -444,18 +444,7 @@ $(document).ready(function() {
         }
     });
 
-    // Автопрокрутка
-    function startAutoSlide() {
-        if (!isMobile()) return;
-        
-        stopAutoSlide(); // Останавливаем предыдущий интервал
-        
-        autoSlideInterval = setInterval(function() {
-            if (!isAnimating && !isDragging) {
-                nextSlide();
-            }
-        }, 2000);
-    }
+
     
     function stopAutoSlide() {
         if (autoSlideInterval) {
