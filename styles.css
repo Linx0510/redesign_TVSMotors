@@ -3581,7 +3581,7 @@
             }
 
             .new_dzn-header {
-                width: 375px;
+                width: 100%;
                 z-index: 1000;
             }
 
@@ -5308,7 +5308,7 @@
           }
           #modelSecondaryImageLeft{
             display: none ! important;
-          }
+           }
           #modelMainImage{
             width: 343px !important;
             height: 180px ! important;
