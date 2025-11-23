@@ -7,37 +7,7 @@ $(document).ready(function() {
         "image/Hero4.svg"
     ];
 
-    // Массив для мобильных изображений автомобилей
-    const mobileCarImages = {
-        "tiggo-4-pro": [
-            "image/22 1.svg",
-             "image/22 1.svg"
-        ],
-        "tiggo-4-new": [
-            "image/22 1.svg",
-             "image/22 1.svg"
-        ],
-        "tiggo-7-pro-max": [
-            "image/mobile/tiggo-7-pro-max-mobile-1.jpg",
-            "image/mobile/tiggo-7-pro-max-mobile-2.jpg"
-        ],
-        "tiggo-7l": [
-            "image/mobile/tiggo-7l-mobile-1.jpg",
-            "image/mobile/tiggo-7l-mobile-2.jpg"
-        ],
-        "tiggo-8-pro-max": [
-            "image/22 1.svg",
-            "image/22 1.svg"
-        ],
-        "tiggo-9": [
-            "image/mobile/tiggo-9-mobile-1.jpg",
-            "image/mobile/tiggo-9-mobile-2.jpg"
-        ],
-        "arrizo-8": [
-            "image/mobile/arrizo-8-mobile-1.jpg",
-            "image/mobile/arrizo-8-mobile-2.jpg"
-        ]
-    };
+    
 
     let currentHeroBg = 0;
 
@@ -59,26 +29,7 @@ $(document).ready(function() {
         currentHeroBg = idx;
     }
 
-    // Функция для обновления изображений на мобильных устройствах
-    function updateMobileCarImages() {
-        if ($(window).width() <= 768) {
-            const model = modelsData[currentModel];
-            const mobileImages = mobileCarImages[currentModel];
-            
-            if (model && mobileImages && mobileImages.length > 0) {
-                // Используем мобильные изображения
-                const mainImageIndex = Object.keys(model.colors).indexOf(currentColor) % mobileImages.length;
-                document.getElementById("modelMainImage").src = mobileImages[mainImageIndex];
-                
-                // Для боковых изображений можно использовать другие мобильные картинки
-                const leftImageIndex = (mainImageIndex + 1) % mobileImages.length;
-                const rightImageIndex = (mainImageIndex + 2) % mobileImages.length;
-                
-                document.getElementById("modelSecondaryImageLeft").src = mobileImages[leftImageIndex];
-                document.getElementById("modelSecondaryImageRight").src = mobileImages[rightImageIndex];
-            }
-        }
-    }
+    
 
     // Инициализация
     setHeroBg(currentHeroBg);
@@ -645,6 +596,38 @@ $(document).ready(function() {
 });
 
 // Данные для моделей с цветами
+// Массив для мобильных изображений автомобилей (fallback)
+
+
+// Явная карта мобильных изображений по модели и цвету (файлы в image/model_mobile)
+const mobileModelImages = {
+    "tiggo-7l": {
+        secondaryLeft: "./images/tiggo-4-pro-left.png",
+        white: "image/model_mobile/7L_mobile/T7 White/T7_studio_white_47 1 (1).svg",
+        black: "image/model_mobile/7L_mobile/T7 Black/T7_studio_black_47 (1).svg",
+        blue: "image/model_mobile/7L_mobile/T7 Blue/T7_studio_blue_47 (1).svg",
+        red: "image/model_mobile/7L_mobile/T7 Red/T7_studio_red_47 1 (1).svg",
+        techgray: "image/model_mobile/7L_mobile/T7 Tech grey/T7_studio_tech grey_47 1 (1).svg",
+        phantom: "image/model_mobile/7L_mobile/T7 Phantom/T7_studio_phantom_47 1 (1).svg",
+        silver: "image/model_mobile/7L_mobile/T7 Silver/T7_studio_silver_47 1 (1).svg"
+    },
+    "tiggo-8-pro-max": {
+        secondaryLeft: "./images/tiggo-4-pro-left.png",
+        purple: "image/model_mobile/8 Pro max_mobile/8 Purple/purple_47 (1).svg",
+        silver: "image/model_mobile/8 Pro max_mobile/8 Silver/silver_47.svg",
+        white: "image/model_mobile/8 Pro max_mobile/8 White/white_47 (4).svg"
+    },
+    "tiggo-9": {
+        secondaryLeft: "./images/tiggo-4-pro-left.png",
+        white: "image/model_mobile/9_mobile/9 White/white_47.svg",
+        black: "image/model_mobile/9_mobile/9 Black/black_47 (1).svg",
+        blue: "image/model_mobile/9_mobile/9 Blue/blue_47 (1).svg",
+        green: "image/model_mobile/9_mobile/9 Green/green_47.svg",
+        techgray: "image/model_mobile/9_mobile/9 Techno grey/grey_tech_47.svg",
+        gray: "image/model_mobile/9_mobile/9 Grey/grey_47.svg"
+    }
+};
+
 const modelsData = {
     "tiggo-4-pro": {
         title: "CHERY TIGGO 4 PRO",
@@ -936,8 +919,18 @@ function updateColorCircles(availableColors) {
 function updateMobileCarImages() {
     if ($(window).width() <= 768) {
         const model = modelsData[currentModel];
+        // Сначала пытаемся взять специализированную картинку для модели+цвета
+        const modelMobileMap = (typeof mobileModelImages !== 'undefined') ? mobileModelImages[currentModel] : null;
+        if (model && modelMobileMap && modelMobileMap[currentColor]) {
+            document.getElementById("modelMainImage").src = modelMobileMap[currentColor];
+            // Для боковых изображений оставляем стандартные маленькие (если нужно, можно расширить маппинг)
+            document.getElementById("modelSecondaryImageLeft").src = model.secondaryLeft || document.getElementById("modelSecondaryImageLeft").src;
+            document.getElementById("modelSecondaryImageRight").src = model.secondaryRight || document.getElementById("modelSecondaryImageRight").src;
+            return;
+        }
+
+        // Если нет явной мобильной картинки, используем запасные массивы mobileCarImages
         const mobileImages = mobileCarImages[currentModel];
-        
         if (model && mobileImages && mobileImages.length > 0) {
             const mainImageIndex = Object.keys(model.colors).indexOf(currentColor) % mobileImages.length;
             document.getElementById("modelMainImage").src = mobileImages[mainImageIndex];

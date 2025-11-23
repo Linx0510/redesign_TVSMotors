@@ -4252,7 +4252,7 @@
     .new_dzn-credit-success,
     .new_dzn2-test-drive-success {
         flex-direction: column;
-        text-align: center;
+        
         gap: 16px;
     }
 
@@ -4898,16 +4898,7 @@
         min-height: 0 !important;
     }
 
-    .new_dzn_model-item-img-car img {
-        display: block !important;
-        width: 100% !important;
-        max-width: 375px !important;
-        height: auto !important;
-        object-fit: contain !important;
-        transform: none !important;
-        margin: 0 auto !important;
-    }
-
+ 
     /* Ensure surrounding blocks don't push layout */
     .new_dzn_model-item-img-blocks,
     .new_dzn_model-item-img-block,
@@ -5442,7 +5433,7 @@
     /* само изображение — адаптируем под контейнер, не увеличиваем за его пределы */
     .new_dzn_model-item-img-car img {
         display: block !important;
-        width: 100% !important;
+        width: auto !important;
         max-width: 375px !important;
         height: auto !important;
         object-fit: contain !important;
@@ -5480,23 +5471,13 @@
 
     .new_dzn_model-item-img-car {
         position: relative !important;
-        width: 120vw !important; /* делаем шире экрана для эффекта крупной машины */
-        max-width: none !important;
-        left: 50% !important;
-        transform: translateX(-50%) translateY(-6%) !important; /* немного поднять */
-        margin: 0 !important;
-        min-height: 380px !important;
+   
     }
 
     .new_dzn_model-item-img-car img {
-        width: 150% !important; /* увеличиваем изображение */
-        max-width: none !important;
-        height: auto !important;
-        object-fit: cover !important;
-        transform: translateY(-6%) scale(1.02) !important;
-        display: block !important;
-        clip-path: inset(0% 40% 0% 40% );
+      
     }
+
 
     /* Подтянем блок с цветами ближе к картинке */
     .new_dzn_model-item-img-block-colors {
@@ -6044,7 +6025,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start;
+            text-align: center;
             gap: 8px;
         }
 
@@ -6106,7 +6087,6 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(0deg, rgba(60, 60, 60, 0.5), rgba(60, 60, 60, 0.5));
             z-index: 1;
         }
 
@@ -6234,6 +6214,7 @@
 
             .video-comments-header {
                 width: 343px;
+                text-align: left;
                 height: 84px;
                 gap: 8px;
                 margin-bottom: 20px;
